@@ -54,7 +54,7 @@ $lista = $objCtrlProducto->buscar($param);
                 <h6 class="card-text txt-secondary"><?php echo $objProducto->getProdetalle(); ?></h6>
                 <h4 class="card-text text-primary font-weight-bold"><?php echo $objProducto->getPrecio(); ?>$</h4>
                 <h6 class="text-success font-weight-bold"><?php echo $objProducto->getProcantstock(); ?> disponibles</h6>
-                <a href="#" class="btn btn-warning font-weight-bold">Agregar</a>
+                <a href="../login/index.php" class="btn btn-warning font-weight-bold">Agregar</a>
             </div>
         </div>
     <?php } ?>
