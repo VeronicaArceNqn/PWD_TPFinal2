@@ -23,7 +23,7 @@ include_once '../../configuracion.php';
                     <tr>
                         <th scope="col">ID Usuario</th>
                         <th scope="col">Nombre y Apellido</th>
-                        <th scope="col">Contraseña</th>
+                        <!--<th scope="col">Contraseña</th>-->
                         <th scope="col">Correo Electrónico</th>
                         <th scope="col">Hab/Deshabilitado</th>
                         <!--
@@ -40,8 +40,8 @@ include_once '../../configuracion.php';
                         <th scope="row">'.$objUsuario->getidusuario().'</th>';
                         echo '
                         <td>'.$objUsuario->getusnombre().'</td>';
-                        echo '
-                        <td>'.$objUsuario->getuspass().'</td>';
+                       /* echo '
+                        <td>'.$objUsuario->getuspass().'</td>';*/
                         echo '
                         <td>'.$objUsuario->getusmail().'</td>';
                         echo '
