@@ -54,7 +54,7 @@ echo $mensajeError;
   "> 
 	</div>
 	<div class="easyui-panel" style="padding:5px; background-color:#0d6efd;color:white; width:100%;text-decoration:none;">
-		<a href="../home/paginaSegura.php" class="easyui-linkbutton"  style="padding:5px; background-color:#212529;color:white;" data-options="plain:true">Home</a>
+		<a href="../home/paginaSegura.php" class="easyui-linkbutton"  style="padding:5px; background-color:#0d6efd;color:white;" data-options="plain:true">Home</a>
 		<a href="../home/paginaSegura.php?tipo=Camaras" class="easyui-linkbutton"  style="padding:5px; background-color:#0d6efd;color:white;"data-options="plain:true">C&aacute;maras</a>
 		<a href="../home/paginaSegura.php?tipo=Equipos" class="easyui-linkbutton"  style="padding:5px; background-color:#0d6efd;color:white;" data-options="plain:true">Equipos</a>
 		<a href="../home/paginaSegura.php?tipo=Accesorios" class="easyui-linkbutton"   style="padding:5px; background-color:#0d6efd;color:white;" data-options="plain:true">Accesorios</a>

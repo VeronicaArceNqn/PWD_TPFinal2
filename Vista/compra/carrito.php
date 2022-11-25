@@ -121,7 +121,7 @@ include ($dir."../estructura/headerSeguro.php");
             <div class="col-md-12 col-lg-4">
                 <div class="summary">
                     <h3>Resumen</h3>
-                    <div class="summary-item"><span class="text">Subtotal</span><span class="price">$360</span></div>
+                    <div class="summary-item"><span class="text">Subtotal</span><span class="price">$91000</span></div>
                   
                     
                     <button type="button" class="btn btn-primary btn-lg btn-block">Comprar</button>
