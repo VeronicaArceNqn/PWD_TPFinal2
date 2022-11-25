@@ -11,7 +11,7 @@
 /*$ROOT =$_SERVER['DOCUMENT_ROOT']."/$PROYECTO/";
 
 include_once($ROOT.'util/funciones.php');*/
-$GLOBALS['ROOT'] =$_SERVER['DOCUMENT_ROOT'] ."/PWD_TPFinal/";
+$GLOBALS['ROOT'] =$_SERVER['DOCUMENT_ROOT'] ."/PWD_TPFinal2/";
 include_once("util/funciones.php");
 //include_once($ROOT.'modelo/');
 //include_once($ROOT.'utiles/vendor/autoload.php');
