@@ -35,16 +35,33 @@ include ($dir."../estructura/header.php");
 function crearPedido()
 {
   var jqxhr = $.post( "accion/crear_pedido.php", function() {
-  alert( "success" );
+  //alert( "success" );
   })
-  .done(function() {
-    alert( "second success" );
-  })
-  .fail(function() {
-    alert( "error" );
-  })
+  .done(function(result){
+                        var result = eval('('+result+')');
+                        if (!result.respuesta){
+                            $.messager.alert({
+                                title: 'Error',
+                                msg: result.errorMsg
+                            });
+                        } else {
+                          $.messager.alert({
+                                title: 'Mensaje',
+                                msg: "Se registro correctamente-> true:"+result.respuesta
+                            });
+
+                        }         
+                      })
+  .fail(function(){
+  
+  $.messager.alert({
+                            title: 'Error',
+                            msg: "No se pudo ejecutar"
+                        });
+
+                    })
   .always(function() {
-    alert( "finished" );
+   // alert( "finished" );
   });
  
 // Perform other work here ...
@@ -58,16 +75,35 @@ jqxhr.always(function() {
 function cambiarEstado()
 {
   var jqxhr = $.post( "accion/agregar_estado.php", function() {
-  alert( "success" );
+  //alert( "success" );
   })
-  .done(function() {
-    alert( "second success" );
-  })
-  .fail(function() {
-    alert( "error" );
-  })
+  .done(function(result){
+                        var result = eval('('+result+')');
+                        if (!result.respuesta){
+                            $.messager.alert({
+                                title: 'Error',
+                                msg: result.errorMsg
+                            });
+                        } else {
+                          $.messager.alert({
+                                title: 'Mensaje',
+                                msg: "Se registro correctamente-> true:"+result.respuesta
+                            });
+
+                        }         
+                      })
+  .fail(
+    function(){
+  
+      $.messager.alert({
+                                title: 'Error',
+                                msg: "No se pudo ejecutar"
+                            });
+
+                        }
+  )
   .always(function() {
-    alert( "finished" );
+   // alert( "finished" );
   });
  
 // Perform other work here ...
