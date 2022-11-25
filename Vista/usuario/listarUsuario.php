@@ -1,7 +1,7 @@
 <?php
 $dir="../";
 $titulo = "Lista Usuarios";
-include_once $dir."../Vista/estructura/header.php";
+include_once $dir."../Vista/estructura/headerSeguro.php";
 include_once '../../configuracion.php';
 
 ?>

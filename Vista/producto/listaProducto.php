@@ -1,7 +1,7 @@
 <?php 
 $dir="";
 $titulo ="Gestión de producto";
-include_once $dir."../estructura/header.php";
+include_once $dir."../estructura/headerSeguro.php";
 ?>
 
 

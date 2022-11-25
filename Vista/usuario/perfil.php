@@ -1,7 +1,7 @@
 <?php
 $titulo =".: Perfil :.";
 $dir="";
-include ($dir."../estructura/header.php");
+include ($dir."../estructura/headerSeguro.php");
 ?>
 <div  style="text-align:center;">
 <h2>Perfil de usuario</h2>
