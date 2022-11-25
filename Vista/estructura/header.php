@@ -46,12 +46,7 @@ $dir="";
 		<a href="../home/index.php?tipo=Accesorios" class="easyui-linkbutton"   style="padding:5px; background-color:#0d6efd;color:white;" data-options="plain:true">Accesorios</a>
 		<a href="../usuario/registrarseB.php" class="easyui-linkbutton"  style="padding:5px; background-color:#0d6efd;color:white;" data-options="plain:true">Registrarse</a>
 		<a href="../login/index.php" class="easyui-linkbutton"  style="padding:5px; background-color:#0d6efd;color:white;" data-options="plain:true">Loguearse</a>
-		<!--<a href="#" class="easyui-menubutton"   style="padding:5px; background-color:#212529;color:white;" data-options="menu:'#mm4'">Mi perfil</a>
-        <a href="#" class="easyui-menubutton"   style="padding:5px; background-color:#212529;color:white;width:140px;" data-options="menu:'#mm5'">Administrar</a>
-		<a href="#" class="easyui-menubutton"   style="padding:5px; background-color:#212529;color:white;width:140px;" data-options="menu:'#mm6'">Deposito</a>-->
-		<a href="../compra/carrito.php" class="easyui-linkbutton"  style="padding:5px; background-color:#212529;color:white;" data-options="plain:true"><i class="bi bi-cart4"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart4" viewBox="0 0 16 16">
-  <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
-</svg> </i>Carrito</a>
+		
 		<!--<div id="cantProductos"style="float:right;font-size:27px;">0</div>-->
 	</div>
 	<div id="mm1" style="width:150px;">
@@ -60,29 +55,7 @@ $dir="";
 	</div>
 	<div id="mm3">
      </div>
-	<!--<div id="mm4">
-		<div href="../usuario/perfil.php">Mis datos</div>
-		<div href="../usuario/cambiardatos.php">Cambiar Datos</div>
-		<div href="../compra/miscompras.php">Mis compras</div>
-		
-	</div>
-    <div id="mm5">
-       
-        <div href="../menu/listaMenu.php"> Gestion de Menu
-	</div>
-	<div href="../menu/permisosMenu.php"> Gestion permisos paginas
-	</div>
-	<div  href="../usuario/listarUsuario.php">Gestion de Usuario	</div>
-	   
-		
-	</div>
-
-
-	<div id="mm6">
-	<div href="../producto/listaProducto.php">Gestion de Producto</div>
-	<div href="../compra/listaCompras.php">Supervisar compras</div>-->
-	
-        
+	       
 </div>
     </div>
 	<!--<div data-options="region:'west',split:true,title:'West'" style="width:150px;padding:10px;">west content</div>-->
