@@ -55,13 +55,16 @@ echo $mensajeError;
 	</div>
 	<div class="easyui-panel" style="padding:5px; background-color:#0d6efd;color:white; width:100%;text-decoration:none;">
 		<a href="../home/paginaSegura.php" class="easyui-linkbutton"  style="padding:5px; background-color:#212529;color:white;" data-options="plain:true">Home</a>
-		<a href="../home/paginaSegura.php?tipo=Camaras" class="easyui-linkbutton"  style="padding:5px; background-color:#0d6efd;color:white;"data-options="plain:true">Camaras</a>
+		<a href="../home/paginaSegura.php?tipo=Camaras" class="easyui-linkbutton"  style="padding:5px; background-color:#0d6efd;color:white;"data-options="plain:true">C&aacute;maras</a>
 		<a href="../home/paginaSegura.php?tipo=Equipos" class="easyui-linkbutton"  style="padding:5px; background-color:#0d6efd;color:white;" data-options="plain:true">Equipos</a>
 		<a href="../home/paginaSegura.php?tipo=Accesorios" class="easyui-linkbutton"   style="padding:5px; background-color:#0d6efd;color:white;" data-options="plain:true">Accesorios</a>
 		<!--<a href="../usuario/registrarseB.php" class="easyui-linkbutton"  style="padding:5px; background-color:#0d6efd;color:white;" data-options="plain:true">Registrarse</a>-->
 		<a href="#" class="easyui-menubutton"   style="padding:5px; background-color:#212529;color:white;" data-options="menu:'#mm4'">Mi perfil</a>
         <a href="#" class="easyui-menubutton"   style="padding:5px; background-color:#212529;color:white;width:140px;" data-options="menu:'#mm5'">Administrar</a>
-		<a href="#" class="easyui-menubutton"   style="padding:5px; background-color:#212529;color:white;width:140px;" data-options="menu:'#mm6'">Deposito</a>
+		<a href="#" class="easyui-menubutton"   style="padding:5px; background-color:#212529;color:white;width:140px;" data-options="menu:'#mm6'">Dep&oacute;sito</a>
+		<a href="../compra/carrito.php" class="easyui-linkbutton"  style="padding:5px; background-color:#212529;color:white;" data-options="plain:true"><i class="bi bi-cart4"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart4" viewBox="0 0 16 16">
+  <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
+</svg> </i>Carrito</a>
 		<a href="../login/accion.php?accion=cerrar" class="easyui-linkbutton"  style="padding:5px; background-color:#212529;color:white;" data-options="plain:true"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4m7 14l5-5l-5-5m5 5H9"/></svg>
                             Salir
                         </a>
@@ -81,18 +84,18 @@ echo $mensajeError;
 	</div>
     <div id="mm5">
        
-        <div href="../menu/listaMenu.php"> Gestion de Menu
+        <div href="../menu/listaMenu.php"> Gesti&oacute;n de Men&uacute;
 	</div>
-	<div href="../menu/permisosMenu.php"> Gestion permisos paginas
+	<div href="../menu/permisosMenu.php"> Gesti&oacute;n permisos p&aacute;ginas
 	</div>
-	<div  href="../usuario/listarUsuario.php">Gestion de Usuario	</div>
+	<div  href="../usuario/listarUsuario.php">Gesti&oacute;n de Usuario	</div>
 	   
 		
 	</div>
 
 
 	<div id="mm6">
-	<div href="../producto/listaProducto.php">Gestion de Producto</div>
+	<div href="../producto/listaProducto.php">Gesti&oacute;n de Producto</div>
 	<div href="../compra/listaCompras.php">Supervisar compras</div>
 	
         
