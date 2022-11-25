@@ -1,0 +1,31 @@
+#header {
+       background-color:#F8F9FB;
+ 
+    display: flex;
+    align-items: center;
+
+    width: auto;
+    height: 180px;
+}
+.cabecera{   background-color:#F8F9FB;
+ 
+    display: flex;
+    align-items: center;
+
+    width: auto;
+    height: 180px;}
+.principal{
+    min-height: 800px;
+    width: auto;
+    height: auto;
+}
+#subfooter
+{
+    background-color:BLACK;
+}
+#logo{
+    margin:10px auto;
+  
+    width:350px;  
+    height:150px;
+}

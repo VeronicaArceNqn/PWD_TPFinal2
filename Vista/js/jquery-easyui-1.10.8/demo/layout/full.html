@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Full Layout - jQuery EasyUI Demo</title>
+	<link rel="stylesheet" type="text/css" href="../../themes/default/easyui.css">
+	<link rel="stylesheet" type="text/css" href="../../themes/icon.css">
+	<link rel="stylesheet" type="text/css" href="../demo.css">
+	<script type="text/javascript" src="../../jquery.min.js"></script>
+	<script type="text/javascript" src="../../jquery.easyui.min.js"></script>
+</head>
+<body class="easyui-layout">
+
+		<div data-options="region:'north',border:false" style="height:200px;background:#fff;padding:10px">
+	
+     <div ="logo" align="center"style="width: 100%;height: 180px;background-image: url('../../images/logo-sis-text-2-(800p).png');
+  background-repeat: no-repeat;
+  background-size: contain;
+   background-position: center center;
+  border: 0px solid black;
+  text-align: center;
+  "> 
+	</div></div>
+	<!--<div data-options="region:'west',split:true,title:'West'" style="width:150px;padding:10px;">west content</div>-->
+	<div data-options="region:'east',split:false,collapsed:true,title:'LOGIN'" style="width:200px;padding:20px;">Iniciar sesion</div>
+	<div data-options="region:'south',border:false" style="height:50px;background:#212529;color:white;padding:10px;text-align:center;">© 2022 Copyright: PWD - Grupo Nº7</div>
+	<div data-options="region:'center',title:''">
+	
+	
+	<div class="easyui-panel" style="padding:5px; background-color:#0d6efd;color:white;">
+		<a href="#" class="easyui-linkbutton"  style="padding:5px; background-color:#0d6efd;color:white;" data-options="plain:true">Home</a>
+		<a href="#" class="easyui-menubutton"  style="padding:5px; background-color:#0d6efd;color:white;"data-options="menu:'#mm1'">Camaras</a>
+		<a href="#" class="easyui-menubutton"  style="padding:5px; background-color:#0d6efd;color:white;" data-options="menu:'#mm2'">Equipos</a>
+		<a href="#" class="easyui-menubutton"   style="padding:5px; background-color:#0d6efd;color:white;" data-options="menu:'#mm3'">Accesorios</a>
+		<div id="cantProductos"style="float:right;font-size:27px;">0</div>
+	</div>
+	<div id="mm1" style="width:150px;">
+		
+		<div class="menu-sep"></div>
+	
+		<div>Dahua</div>
+		<div>Hikvision</div>
+		<!--<div class="menu-sep"></div>
+		<div>
+			<span>Toolbar</span>
+			<div>
+				<div>Address</div>
+				<div>Link</div>
+			
+			</div>
+		</div>
+			<div data-options="iconCls:'icon-remove'">Delete</div>
+		<div>Select All</div>
+		-->
+	
+	</div>
+	<div id="mm2" style="width:100px;">
+		<div>DVR</div>
+		<div>NVR</div>
+		<div></div>
+	</div>
+	<div id="mm3">
+		<div>Discos duros</div>
+		<div>Cables</div>
+		<div>Conectores</div>
+	</div>
+		
+	<div style="margin:20px 0; padding-left:30px;">
+	<div class="easyui-panel" title="Registrar Usuario" style="width:100%;max-width:440px;padding:30px 60px; background-size: contain;
+   background-position: center center;">
+		<form id="ff" class="easyui-form" method="post" data-options="novalidate:true">
+			<div style="margin-bottom:20px">
+				<input class="easyui-textbox" name="name" style="width:100%" data-options="label:'Usuario:',required:true">
+			</div>
+			
+			<div style="margin-bottom:20px">
+				<input class="easyui-textbox" name="subject" style="width:100%" data-options="label:'Password:',required:true">
+			</div>
+			<div style="margin-bottom:20px">
+				<input class="easyui-textbox" name="email" style="width:100%" data-options="label:'Email:',required:true,validType:'email'">
+			</div>
+			<div style="margin-bottom:20px">
+				<select class="easyui-combobox" name="estado" label="Estado" style="width:100%">
+				<option value="ar">Habilitado</option><option value="bg">Deshabilitado</option></select></div>
+		</form>
+		<div style="text-align:center;padding:5px 0">
+			<a href="javascript:void(0)" class="easyui-linkbutton" onclick="submitForm()" style="width:80px">Submit</a>
+			<a href="javascript:void(0)" class="easyui-linkbutton" onclick="clearForm()" style="width:80px">Clear</a>
+		</div>
+	</div>
+
+	</div>
+	<script>
+		function submitForm(){
+			$('#ff').form('submit',{
+				onSubmit:function(){
+					return $(this).form('enableValidation').form('validate');
+				}
+			});
+		}
+		function clearForm(){
+			$('#ff').form('clear');
+		}
+	</script>
+	
+	</div>
+	
+	<!-- Cuerpo del formulario-->
+
+	<!-- -->
+	
+		<script>
+		function setalign(align){
+			$('a.easyui-menubutton').menubutton({
+				menuAlign: left
+			})
+		}
+	</script>
+	
+</body>
+</html>
