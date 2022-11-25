@@ -97,12 +97,12 @@ class ABMcompra{
      }
      public function alta($param){
         //print_r($param);
-        $resp = false;
+        $resp = null;
         $param['idcompra']=null;
 
         $elObjcompra = $this->cargarObjeto($param);
         if ($elObjcompra!=null and $elObjcompra->insertar()){
-            $resp = true;
+            $resp = $elObjcompra;
         }
         return $resp;
      }

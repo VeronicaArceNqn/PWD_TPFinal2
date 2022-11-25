@@ -70,7 +70,7 @@ class ABMcompraestado{
         $objCet->setIdcompraestadotipo($param['idcompraestadotipo']);
         $objCet->cargar();
 
-            $obj->setear($param['idcompraestado'], $objCompra, $objCet, $param['cefechaini'], $param['cefechaini']);
+            $obj->setear($param['idcompraestado'], $objCompra, $objCet, $param['cefechaini'], $param['cefechafin']);
         }
         //print_r($obj);
         return $obj;

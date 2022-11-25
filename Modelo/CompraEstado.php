@@ -120,7 +120,7 @@ public function setear($idcompraestado, $objCompra, $objCompraEstadoTipo, $cefec
 public function cargar() {
     $resp = false;
     $base = new BaseDatos();
-    $sql = "SELECT * FROM compraestado WHERE idcompraestado = '".$this->getIdcompraestado()."'";
+    $sql = "SELECT * FROM compraestado WHERE idcompraestado = ".$this->getIdcompraestado()."";
     if ($base->Iniciar()) {
       $res = $base->Ejecutar($sql);
       if ($res > -1) {
@@ -132,9 +132,9 @@ public function cargar() {
           $objcompra->cargar();
 
           $objCompraEstadoTipo = new CompraEstadoTipo();
-          $objCompraEstadoTipo->setIdcompraestadotipo($row['compraestadotipo']);
+          $objCompraEstadoTipo->setIdcompraestadotipo($row['idcompraestadotipo']);
           $objCompraEstadoTipo->cargar();
-
+           
           $this->setear($row['idcompraestado'], $objcompra, $objCompraEstadoTipo, $row['cefechaini'], $row['cefechafin']);
         }
       }
@@ -169,7 +169,7 @@ public function cargar() {
       idcompra = ".$this->getObjCompra()->getIdCompra().",
       idcompraestadotipo = ".$this->getObjcompraestadotipo()->getIdcompraestadotipo().",
       cefechaini = '".$this->getCeFechaIni()."',
-      cefechafin=" . (($this->getCeFechaFin() == '') ? "NULL" : "'{$this->getCeFechaFin()}'") . "
+      cefechafin=" . (($this->getCeFechaFin() == null) ? "NULL" : "'{$this->getCeFechaFin()}'") . "
       WHERE idcompraestado = '".$this->getIdCompraEstado()."'";
 
     // echo $sql;
@@ -196,9 +196,9 @@ public function cargar() {
     $base = new BaseDatos();
     $sql = "SELECT * FROM compraestado ";
     if ($parametro != "") {
-      $sql .= " WHERE ".$parametro;
+      $sql .= " WHERE {$parametro}";
     }
-   //echo $sql;
+    // echo $sql;
     $res = $base->Ejecutar($sql);
     if ($res > -1) {
       if ($res > 0) {

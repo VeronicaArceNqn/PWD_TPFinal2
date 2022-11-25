@@ -101,12 +101,12 @@ class ABMcompraitem{
      }
      public function alta($param){
         //print_r($param);
-        $resp = false;
+        $resp = null;
         $param['idcompraitem']=null;
 
         $elObjcitem = $this->cargarObjeto($param);
         if ($elObjcitem!=null and $elObjcitem->insertar()){
-            $resp = true;
+            $resp = $elObjcitem;
         }
         return $resp;
      }
