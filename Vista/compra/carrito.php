@@ -1,7 +1,7 @@
 <?php
 $titulo =".: Carrito compras :.";
 $dir="";
-include ($dir."../estructura/header.php");
+include ($dir."../estructura/headerSeguro.php");
 
 
 ?> 	<section class="shopping-cart dark">
