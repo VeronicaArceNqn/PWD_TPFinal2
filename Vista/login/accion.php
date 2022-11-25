@@ -13,12 +13,12 @@ if (isset($datos['accion'])){
         $objTrans = new Session();
         $resp = $objTrans->iniciar($datos['usnombre'],$datos['uspass']);
         if($resp) {
-            echo"se logueo correctamente\n";
+           // echo"se logueo correctamente\n";
           //  header("Location: '../home/index.php'");
            // header("location:../home/index.php");
             echo("<script>location.href = '../home/paginaSegura.php';</script>");
         } else {
-            echo"no se logueo correctamente\n";
+            //echo"no se logueo correctamente\n";
             $mensaje ="Error, vuelva a intentarlo";
             echo("<script>location.href = '../login/index.php?msg=".$mensaje."';</script>");
         }
