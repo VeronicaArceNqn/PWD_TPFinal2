@@ -6,7 +6,7 @@ include_once $dir.'../estructura/header.php';
 $datos = data_submitted();
 
       if(isset($datos) && isset($datos['msg']) && $datos['msg']!=null) {
-        echo $datos['msg'];
+        //echo $datos['msg'];
       }
         
      ?>
