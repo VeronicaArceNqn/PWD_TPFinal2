@@ -79,12 +79,12 @@ class ABMUsuario{
     }
     
     public function alta($param){
-        $resp = false;
+        $resp = null;
         $param['idusuario'] =null;
-        $elObjtTabla = $this->cargarObjeto($param);
+        $elObjtUsuario = $this->cargarObjeto($param);
 //        verEstructura($elObjtTabla);
-        if ($elObjtTabla!=null and $elObjtTabla->insertar()){
-            $resp = true;
+        if ($elObjtUsuario!=null and $elObjtUsuario->insertar()){
+            $resp = $elObjtUsuario;
             
         }
         return $resp;
