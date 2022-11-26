@@ -34,10 +34,11 @@ $mensajeError="no se pudo concretar";
 $objTrans = new Session();
 $resp = $objTrans->validar();
 if($resp) {
-   $mensajeError="se creo";
-	//echo("<script>location.href = '../home/index.php';</script>");
-} 
-echo $mensajeError;
+   //echo("<script>location.href = '../home/index.php';</script>");
+} else {
+    $mensaje ="Error, vuelva a intentarlo";
+    echo("<script>location.href = '../login/index.php?msg=".$mensaje."';</script>");
+}
 
 
 ?>
