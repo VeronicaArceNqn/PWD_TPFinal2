@@ -3,6 +3,20 @@
 include_once ("../../configuracion.php");
 $dir="";
 $mensajeError="no se pudo concretar";
+$objTrans = new Session();
+
+$resp = $objTrans->validar();
+if($resp) {
+   //echo("<script>location.href = '../home/index.php';</script>");
+} else {
+    $mensaje ="Error, vuelva a intentarlo";
+    echo("<script>location.href = '../login/index.php?msg=".$mensaje."';</script>");
+}
+$urlcompleto = $_SERVER['PHP_SELF'];
+$urlMenu = (explode('/', $urlcompleto, 4));
+// urlMenu[3] guarda los datos de la página
+
+//$permisosOk = $objTrans->tengoPermisos($urlMenu[3]);
 ?>
 
 
@@ -29,19 +43,7 @@ $mensajeError="no se pudo concretar";
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/md5.js"></script>
 
 </head>
-<?php
 
-$objTrans = new Session();
-$resp = $objTrans->validar();
-if($resp) {
-   //echo("<script>location.href = '../home/index.php';</script>");
-} else {
-    $mensaje ="Error, vuelva a intentarlo";
-    echo("<script>location.href = '../login/index.php?msg=".$mensaje."';</script>");
-}
-
-
-?>
 <body class="easyui-layout">
 <div data-options="region:'north',border:false" style="min-height:250px;height:280px;background:#fff;padding:10px">
 	
@@ -50,9 +52,7 @@ if($resp) {
   background-size: contain;
    background-position: center center;
   border: 0px solid black;
-  text-align: center;
-
-  "> 
+  text-align: center;"> 
 	</div>
 	<div class="easyui-panel" style="padding:5px; background-color:#0d6efd;color:white; width:100%;text-decoration:none;">
 		<a href="../home/paginaSegura.php" class="easyui-linkbutton"  style="padding:5px; background-color:#0d6efd;color:white;" data-options="plain:true">Home</a>

@@ -68,6 +68,7 @@ class Session{
                 $usuario = $resultado[0];
             }
         }
+        
         return $usuario;
     }
 
@@ -80,10 +81,13 @@ class Session{
             $obj = new ABMUsuario();
              $param['idusuario']=$_SESSION['idusuario'];
              $resultado = $obj->darRoles($param);
+             echo "<br>cantidad de roles encontrados</br> ".count($resultado);
             if(count($resultado) > 0){
                 $list_rol = $resultado;
             }
         }
+        echo "<br> ROL OK </br>";
+        print_r($list_rol);
         return $list_rol;
 
     }
@@ -95,6 +99,52 @@ class Session{
         $resp = true;
         session_destroy();
        // $_SESSION['idusuario']=null;
+        return $resp;
+    }
+
+    //recibo la URL de cada página (sin ../)
+    public function tengoPermisos($url){
+        
+        $resp = false;
+        // concateno para logra la URL como está guardada en la BD
+        $urlMenu['medescripcion'] = "../".$url;
+        //creo un Objeto Usuario para usar el método getUsuario de la clase sesión y así obtener el id del usuario validado
+        $objUsuvalido = new Usuario();
+        $objUsuvalido = $this->getUsuario();
+        echo "<br>USUARIO LOGUEADO </br>";
+        // del Objeto Usuario encotrado obtengo el idusuari
+        $idusuvalido = $objUsuvalido->getIdUsuario();
+        echo "<br>idusuario: </br>";
+        print_r($idusuvalido);
+        
+        // el método getRol de sesion devuelve un objeto UsuarioRol por eso creo un Objeto UsuarioRol para guardar los datos. Devuelve 1, 2 o 3 roles
+        $objUsuroles = new UsuarioRol();
+        
+        $objUsuroles = $this->getRol();       
+        //$objetoidrol = $objUsuroles->getobjRol(); DA ERROR
+       
+        $objAbmMenu = new AbmMenu();
+        //echo " envio de url ";
+        //print_r($urlMenu);
+
+        // creo un Objeto AbmMenu para buscar la URL ingresada
+        $menuOk = $objAbmMenu->buscar($urlMenu);   
+        //$menuOkfinal = $objAbmMenu->getObjMenu();  DA ERROR
+        echo "<br> MENU OK </br>";
+        print_r($menuOk);
+        //si encuentra la página creo un objeto ABMmenurol para buscar si esa página tenen los permisos según sus roles
+        if ($menuOk!=null){
+            
+            $objAbmmenu = new ABMmenurol();
+
+           
+                //$param=$objAbmMenu->Buscar($objetoidrol);
+            //if ($param == $menuOk['medescripcion']){
+                $resp=true;
+            //}
+            
+        }
+        echo $resp;
         return $resp;
     }
    
