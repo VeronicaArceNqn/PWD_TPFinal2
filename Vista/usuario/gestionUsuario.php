@@ -4,7 +4,7 @@ $titulo ="Gestión de Usuarios";
 include_once $dir."../estructura/headerSeguro.php";
 ?>
 
-             <?php 
+<?php 
 
 $objControl = new ABMusuario();
 $List_Usuario = $objControl->buscar(null);
@@ -32,12 +32,12 @@ $combo .='</select>';
             <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newUsuario()">Nuevo Usuario </a>
             <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editUsuario()">Editar Usuario</a>
             <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyUsuario()">Baja Usuario</a>
-            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="editrol()">Cambiar Rol</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editrol()">Cambiar Rol</a>
         </div>
             
         <div id="dlg" class="easyui-dialog" style="width:600px" data-options="closed:true,modal:true,border:'thin',buttons:'#dlg-buttons'">
             <form id="fm" method="post" novalidate style="margin:0;padding:20px 50px">
-                <h3>Menu Informacion</h3>
+                <h3>Informacion del Usuario</h3>
                 <div style="margin-bottom:10px">     
                     <input name="idusuario" id="idusuario"  class="easyui-textbox" hidden="true" label="ID menu:" style="width:100%;" readonly>
                 </div>
@@ -60,7 +60,7 @@ $combo .='</select>';
             </form>
         </div>
             <div id="dlg-buttons">
-                <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveMenu()" style="width:90px">Aceptar</a>
+                <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveUsuario()" style="width:90px">Aceptar</a>
                 <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')" style="width:90px">Cancelar</a>
             </div>
 </div>
@@ -78,11 +78,11 @@ $combo .='</select>';
                     $('#dlg').dialog('open').dialog('center').dialog('setTitle','Editar Usuario');
                     //carga los datos de la fila seleccionada del datag
                     $('#fm').form('load',row);
-                    url = 'accion/edit_usuario.php'
+                    url = 'accion/edit_usuario.php';
                 }
             }
-            function saveMenu(){
-            	alert(" Accion");
+            function saveUsuario(){
+            	alert("Accion");
                 $('#fm').form('submit',{
                     
                     url: url,
