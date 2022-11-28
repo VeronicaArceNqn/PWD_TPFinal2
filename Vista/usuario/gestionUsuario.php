@@ -18,74 +18,71 @@ $combo .='</select>';
 ?>
 
 <div style="padding-left:20px;padding-right:25px;padding-top:40px">
-<table id="dg" title="Administrador de item menu" class="easyui-datagrid" style="width:100%;height:auto;"
-    url="accion/listar_menu.php" toolbar="#toolbar" pagination="true"rownumbers="true" fitColumns="true" singleSelect="true">
-            <thead>
+    <table id="dg" title="Administrador de Usuarios" class="easyui-datagrid" style="width:100%;height:auto;" url="accion/listar_usuario.php" toolbar="#toolbar" pagination="true"rownumbers="true" fitColumns="true" singleSelect="true">
+        <thead>
             <tr>
-            <th field="idusuario" width="8">ID</th>
-            <th field="usnombre" width="50">Nombre</th>
-            <th field="usmail" width="50">Correo</th>
-            <th field="medeshabilitado" width="25">Deshabilitado</th>
+                <th field="idusuario" width="8">ID</th>
+                <th field="usnombre" width="50">Nombre</th>
+                <th field="usmail" width="50">Correo</th>
+                <th field="medeshabilitado" width="25">Deshabilitado</th>
             </tr>
-            </thead>
-            </table>
-            <div id="toolbar">
-            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newMenu()">Nuevo Usuario </a>
-            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editMenu()">Editar Usuario</a>
-            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyMenu()">Baja Usuario</a>
-            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyMenu()">Cambiar Rol</a>
-            </div>
-            
-            <div id="dlg" class="easyui-dialog" style="width:600px" data-options="closed:true,modal:true,border:'thin',buttons:'#dlg-buttons'">
-            <form id="fm" method="post" novalidate style="margin:0;padding:20px 50px">
-            <h3>Menu Informacion</h3>
-            <div style="margin-bottom:10px">
-            
-                      
-            <input name="idusuario" id="idusuario"  class="easyui-textbox" hidden="true" label="ID menu:" style="width:100%;" readonly>
-            </div>
-            <div style="margin-bottom:10px">
-            
-                      
-            <input name="usnombre" id="usnombre"  class="easyui-textbox" required="true" label="Nombre:" style="width:100%">
-            </div>
-            <div style="margin-bottom:10px">
-            <input  name="usmail" id="usmail"  class="easyui-textbox" required="true" label="Descripcion:" style="width:100%">
-            </div>
-            <div style="margin-bottom:10px">
-            <?php 
-                echo $combo;
-            ?>
-             
-            </div>
-              <div style="margin-bottom:10px">
-            <input class="easyui-checkbox" name="medeshabilitado" value="null" label="Des-Habilitar:">
+        </thead>
+    </table>
+        <div id="toolbar">
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newUsuario()">Nuevo Usuario </a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editUsuario()">Editar Usuario</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyUsuario()">Baja Usuario</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="editrol()">Cambiar Rol</a>
         </div>
+            
+        <div id="dlg" class="easyui-dialog" style="width:600px" data-options="closed:true,modal:true,border:'thin',buttons:'#dlg-buttons'">
+            <form id="fm" method="post" novalidate style="margin:0;padding:20px 50px">
+                <h3>Menu Informacion</h3>
+                <div style="margin-bottom:10px">     
+                    <input name="idusuario" id="idusuario"  class="easyui-textbox" hidden="true" label="ID menu:" style="width:100%;" readonly>
+                </div>
+                <div style="margin-bottom:10px">
+                     <input name="usnombre" id="usnombre"  class="easyui-textbox" required="true" label="Nombre:" style="width:100%">
+                </div>
+                <div style="margin-bottom:10px">
+                    <input  name="usmail" id="usmail"  class="easyui-textbox" required="true" label="Correo:" style="width:100%">
+                </div>
+                <!--div style="margin-bottom:10px">
+
+                    //<?php 
+                      //  echo $combo;
+                    //?>
+                
+                </div>
+                <div style="margin-bottom:10px">
+                     <input class="easyui-checkbox" name="medeshabilitado" value="null" label="Des-Habilitar:">
+                </div>-->
             </form>
-            </div>
+        </div>
             <div id="dlg-buttons">
-            <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveMenu()" style="width:90px">Aceptar</a>
-            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')" style="width:90px">Cancelar</a>
+                <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveMenu()" style="width:90px">Aceptar</a>
+                <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')" style="width:90px">Cancelar</a>
             </div>
 </div>
-            <script type="text/javascript">
+
+    <script type="text/javascript">
             var url;
-            function newMenu(){
-                $('#dlg').dialog('open').dialog('center').dialog('setTitle','Nuevo Menu');
+            function newUsuario(){
+                $('#dlg').dialog('open').dialog('center').dialog('setTitle','Nuevo Usuario');
                 $('#fm').form('clear');
-                url = 'accion/alta_menu.php';
+                url = 'accion/alta_usuario.php';
             }
-            function editMenu(){
+            function editUsuario(){
                 var row = $('#dg').datagrid('getSelected');
                 if (row){
-                    $('#dlg').dialog('open').dialog('center').dialog('setTitle','Editar Menu');
+                    $('#dlg').dialog('open').dialog('center').dialog('setTitle','Editar Usuario');
                     //carga los datos de la fila seleccionada del datag
                     $('#fm').form('load',row);
-                    url = 'accion/edit_menu.php'
+                    url = 'accion/edit_usuario.php'
                 }
             }
             function saveMenu(){
-            	//alert(" Accion");
+            	alert(" Accion");
                 $('#fm').form('submit',{
                     
                     url: url,
@@ -95,7 +92,7 @@ $combo .='</select>';
                     success: function(result){
                         var result = eval('('+result+')');
 
-                      //  alert("Volvio Serviodr"); 
+                        alert("Volvio Servidor"); 
                         //recorremos el array resultante
                        /* $.each(result, function(key, value){
             alert(key + ": " + value);
@@ -142,7 +139,7 @@ $combo .='</select>';
                     $('#dlg').dialog('open').dialog('center').dialog('setTitle','Asignar rol');
                     //carga los datos de la fila seleccionada del datag
                     $('#fm').form('load',row);
-                    url = '../rol/accion/asignar_rol.php'
+                    url = 'accion/asignar_rol.php'
                 }
             }
             </script>
