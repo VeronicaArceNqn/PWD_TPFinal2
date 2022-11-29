@@ -3,7 +3,7 @@ $titulo = ".: Carrito compras :.";
 $dir = "";
 include($dir . "../estructura/header.php");
 
-$idusuario=2;
+$idusuario=3;
 $param["idusuario"]=$idusuario;
 $param["idcompraestadotipo"] = 0;
 $param["cefechafin"]="null";
@@ -11,9 +11,11 @@ $objCntrlCE= new ABMcompraestado();
 $arreCE=$objCntrlCE->buscar($param);
 //print_r($arreCE);
 $idcompra=-1;
+$idcompraestado="";
 if(count($arreCE)==1)
 {
   $idcompra=$arreCE[0]->getObjCompra()->getIdcompra();
+  $idcompraestado=$arreCE[0]->getIdcompraestado();
   $objCntrlCI= new ABMcompraitem(); 
   $datositem["idcompra"]=$idcompra;
   $items=$objCntrlCI->buscar($datositem);
@@ -71,7 +73,8 @@ if(count($arreCE)==1)
             </div>
             <div class="summary">
               <h3>Resumen</h3>
-              <label> Compra:</label> <input type="text" id="idcompra" name="idcompra"value="<?php echo $idcompra;?>" readonly>
+              <label>ID Compra:</label> <input type="text" id="idcompra" name="idcompra"value="<?php echo $idcompra;?>" readonly>
+              <label>ID Compra Estado:</label> <input type="text" id="idcompraestado" name="idcompraestado"value="<?php echo $idcompraestado;?>" readonly>
               <div class="summary-item"><span class="text">Subtotal</span><span class="price">$360</span></div>
 
 

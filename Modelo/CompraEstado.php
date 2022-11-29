@@ -176,10 +176,10 @@ public function cargar() {
     $base = new BaseDatos();
     $fecha=date("Y-m-d H:i:s");
     $sql = "UPDATE compraestado SET 
-           cefechafin= '$fecha') 
+           cefechafin= '$fecha' 
       WHERE idcompraestado = ".$this->getIdCompraEstado()."";
 
-    
+    echo $sql;
     if ($base->Iniciar()) {
 
       if ($base->Ejecutar($sql)) {
