@@ -85,6 +85,44 @@ foreach($lista as $objProducto)
 
 </div>
 </div>
+<script type="text/javascript">
+ function enviarDatos() {
+    var jqx = $.post("../compra/accion/envio_datos.php?idproducto=7&cicantidad=6", function() {
+        //alert( "success" );
+      })
+      .done(function(result) {
+        var result = eval('(' + result + ')');
+        if (!result.respuesta) {
+          $.messager.alert({
+            title: 'Error',
+            msg: result.errorMsg
+          });
+        } else {
+          $.messager.alert({
+            title: 'Mensaje',
+            msg: "true:" + result.respuesta+" idproducto="+result.idproducto+" cantidad"+result.cicantidad
+          });
+
+        }
+      })
+      .fail(
+        function() {
+
+          $.messager.alert({
+            title: 'Error',
+            msg: "No se pudo ejecutar"
+          });
+
+        }
+      )
+      .always(function() {
+        // alert( "finished" );
+      });
+
+    
+  }
+
+</script>
 <?php
 
 include($dir . "../estructura/footer.php");

@@ -118,7 +118,7 @@ $combo .='</select>';
                 if (row){
                     $.messager.confirm('Confirm','Seguro que desea eliminar el menu?', function(r){
                         if (r){
-                            $.post('accion/eliminar_menu.php?idmenu='+row.idmenu,{idmenu:row.id},
+                            $.post('accion/eliminar_menu.php?idmenu='+row.idmenu,
                                function(result){
                                	 alert("Volvio Serviodr");   
                                  if (result.respuesta){

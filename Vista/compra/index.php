@@ -1,17 +1,21 @@
 <?php
 $titulo = ".: Carrito compras :.";
 $dir = "";
-include($dir . "../estructura/header.php");
+include($dir . "../estructura/headerSeguro.php");
 
-$idusuario=3;
-$param["idusuario"]=$idusuario;
+if(isset($_SESSION['idusuario']))
+{
+  $idusuario=$_SESSION['idusuario'];
+}
+$param["idusuario"]=$_SESSION['idusuario'];
 $param["idcompraestadotipo"] = 0;
 $param["cefechafin"]="null";
 $objCntrlCE= new ABMcompraestado();
 $arreCE=$objCntrlCE->buscar($param);
-//print_r($arreCE);
+
 $idcompra=-1;
 $idcompraestado="";
+$items=[];
 if(count($arreCE)==1)
 {
   $idcompra=$arreCE[0]->getObjCompra()->getIdcompra();
@@ -19,7 +23,7 @@ if(count($arreCE)==1)
   $objCntrlCI= new ABMcompraitem(); 
   $datositem["idcompra"]=$idcompra;
   $items=$objCntrlCI->buscar($datositem);
- // print_r($items);
+  //print_r($items);
 
 }
 
@@ -27,14 +31,17 @@ if(count($arreCE)==1)
   <div class="container">
     <div class="block-heading">
       <h2>Carrito de compras</h2>
-      
+      <?php echo "idusuario:".$_SESSION['idusuario']; ?>
     </div>
     <div class="content">
     <div class="row">
             <div class="col-md-12 col-lg-8">
                 <div class="items">
                  
-                  
+                  <?php 
+                  if(count($items)>0)
+                  {
+                  ?>
                     <div class="product">
                         <div class="row">
                             <div class="col-md-3 d-flex">
@@ -68,7 +75,7 @@ if(count($arreCE)==1)
                             </div>
                         </div>
                     </div>
-                   
+                   <?php }?>
                 </div>
             </div>
             <div class="summary">
@@ -81,6 +88,8 @@ if(count($arreCE)==1)
               <button type="button" onclick="agregarProducto()" class="btn btn-primary btn-lg btn-block">Agregar producto</button>
 
               <button type="button" onclick="cambiarEstado()" class="btn btn-warning btn-lg btn-block">Cambiar estado</button>
+              <button type="button" onclick="enviarDatos()" class="btn btn-warning btn-lg btn-block">Enviar datos</button>
+              
             </div>
           </div>
         </div>
@@ -177,14 +186,31 @@ if(count($arreCE)==1)
         // alert( "finished" );
       });
 
-    // Perform other work here ...
-
-    // Set another completion function for the request above
-    /*
-    jqxhr.always(function() {
-      alert( "second finished" );
-    });*/
+    
   }
+  function enviarDatos(){
+                //var row = $('#dg').datagrid('getSelected');
+           
+                    $.messager.confirm('Confirm','Seguro que desea eliminar el menu?', function(r){
+                        if (r){
+                            $.post('accion/envio_datos.php?idproducto='+3,
+                               function(result){
+                               	 alert("Volvio Serviodr");  
+
+                                if (result.respuesta){
+                                   	 alert("se pudo enviar, idproducto"+result.idproducto);
+                                    //$('#dg').datagrid('reload');    // reload the  data
+                                } else {
+                                    $.messager.show({    // show error message
+                                        title: 'Error',
+                                        msg: result.errorMsg
+                                  });
+                                }
+                            },'json');
+                        }
+                    });
+               
+            }
 </script>
 <?php
 include($dir . "../estructura/footer.php"); ?>

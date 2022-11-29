@@ -1,13 +1,17 @@
 <?php
 include_once "../../../configuracion.php";
-$idusuario = 3;
+$idusuario = 2;
 $idproducto = 1;
 $cantidad = 1;
-        
+//datos recibidos        
 $data["idusuario"] = $idusuario;
+$data["idproducto"]=$idproducto;
+$data["cicantidad"]=$cantidad;
+//----------------//
+
 $hoy = date("Y-m-d H:i:s");
 $data["cofecha"] = $hoy;
-$data["idproducto"]=$idproducto;
+
 ///datos del producto
 
 $respuesta = false;
@@ -39,13 +43,13 @@ if (isset($data['idusuario'])) {
         if (count($arreProd) == 1) {
              $cantStock=$arreProd[0]->getProcantstock();
   
-             if ($cantidad<=$cantStock) {
+             if ($data["cicantidad"]<=$cantStock) {
                 //se agrega el item al carrito
                  
                 $datositem["idcompra"]= $idcompra;
                 $datositem["idproducto"]=$data["idproducto"];
-                $datositem["cicantidad"]=$cantidad;
-                $cantStock=$cantStock-$cantidad;
+                $datositem["cicantidad"]=$data["cicantidad"];
+                $cantStock=$cantStock-$datositem["cicantidad"];
                 $param["idproducto"]= $idproducto;
                 $param["procantstock"]=$cantStock;
                 $objCtrlProd->modificacion($param);
