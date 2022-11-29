@@ -120,13 +120,38 @@ class Session{
         // el método getRol de sesion devuelve un objeto UsuarioRol por eso creo un Objeto UsuarioRol para guardar los datos. Devuelve 1, 2 o 3 roles
         $objUsuroles = new UsuarioRol();
         
-        $objUsuroles = $this->getRol();       
-        //$objetoidrol = $objUsuroles->getobjRol(); DA ERROR
+        $objUsuroles = $this->getRol();  
+        $arrayroles=[];
+        $i=0;
+        $encontrado=false;
+        while($i<count($objUsuroles)&&!$encontrado){
+            $idrol =  $objUsuroles[$i]->getobjrol();
+                $j=0;
+               /* while($i<count($arraymenusrol)&&!$encontrado)
+                {
+                    
+                   if($idrol==idrolmenu)
+                    $encontrado=true;
+                }*/
+           // $arrayroles[$i]=$objetoidrol;
+            $i++;
+        }
+        
+        /*
+        $i=0;
+
+        foreach($objUsuroles as $objusrol)
+        {
+            $objetoidrol =   $objusrol->getobjrol();
+            $arrayroles[$i]=$objetoidrol;
+            $i++;
+        } */    
+        //$objetoidrol = $objUsuroles->getobjrol();// DA ERROR
        
         $objAbmMenu = new AbmMenu();
         //echo " envio de url ";
         //print_r($urlMenu);
-
+          
         // creo un Objeto AbmMenu para buscar la URL ingresada
         $menuOk = $objAbmMenu->buscar($urlMenu);   
         //$menuOkfinal = $objAbmMenu->getObjMenu();  DA ERROR
