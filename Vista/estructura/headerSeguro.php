@@ -5,18 +5,20 @@ $dir="";
 $mensajeError="no se pudo concretar";
 $objTrans = new Session();
 
-$resp = $objTrans->validar();
-if($resp) {
-   //echo("<script>location.href = '../home/index.php';</script>");
-} else {
-    $mensaje ="Error, vuelva a intentarlo";
-    echo("<script>location.href = '../login/index.php?msg=".$mensaje."';</script>");
-}
 $urlcompleto = $_SERVER['PHP_SELF'];
 $urlMenu = (explode('/', $urlcompleto, 4));
 // urlMenu[3] guarda los datos de la página
 
-//$permisosOk = $objTrans->tengoPermisos($urlMenu[3]);
+$resp = $objTrans->validar();
+$permisosOk = $objTrans->tengoPermisos($urlMenu[3]);
+
+if($resp && $permisosOk) {
+   //echo("<script>location.href = '../home/index.php';</script>");
+} else {
+    $mensaje ="Error, no tiene permisos para ingresar en la página";
+    echo("<script>location.href = '../login/index.php?msg=".$mensaje."';</script>");
+}
+
 ?>
 
 
