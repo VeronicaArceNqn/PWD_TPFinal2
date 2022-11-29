@@ -1,6 +1,7 @@
 <?php
 include_once "../../../configuracion.php";
-$idusuario=8;
+$idusuario=2;
+$idcompraestadotipo=0;
 $hoy = date("Y-m-d H:i:s");   
 $datos["idcompra"]=7;
 $datos["idcompraestadotipo"]=0;
@@ -11,10 +12,14 @@ $datos["idcompraestadotipo"]=0;
 
 
 $respuesta=false;
+$seactualizo=false;
 if (isset($datos['idcompra'])){
 
              
         $objCtrlCE=new ABMcompraestado();
+        
+        $seactualizo = $objCtrlCE->modificacion($datos);
+        //agregamos el nuevo estado
         $respuesta = $objCtrlCE->alta($datos);
         
     //$respuesta=true;

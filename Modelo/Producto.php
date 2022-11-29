@@ -113,7 +113,6 @@ class Producto extends BaseDatos{
 
         //$usdeshab="null";
         $sql="INSERT INTO producto(pronombre, prodetalle, procantstock,tipo, precio,urlimagen) VALUES ('".$this->getPronombre()."','".$this->getProdetalle()."',".$this->getProcantstock().", '".$this->getTipo()."',".$this->getPrecio().",'".$this->getUrlimagen()."');";
-       echo "Este es el sql para insertar <br>".$sql;
         if ($base->Iniciar()) {
             if ($elid = $base->Ejecutar($sql)){
                 $this->setIdproducto($elid);
@@ -128,13 +127,12 @@ class Producto extends BaseDatos{
         return $resp;
     }
     
-    public function modificar(){
+    public function modificar($tipo=""){
        // print_r($tipo);
         $resp = false;
         $base = new BaseDatos();
       
-            $sql = "UPDATE producto SET pronombre = '".$this->getPronombre()."',prodetalle = '".$this->getProdetalle()."',procantstock = '".$this->getProcantstock()."' WHERE idproducto = ". $this->getIdproducto()."";
-           // echo "<br> este es el UPDATE Contraseña ". $sql;
+            $sql = "UPDATE producto SET pronombre = '".$this->getPronombre()."',prodetalle = '".$this->getProdetalle()."',procantstock = ".$this->getProcantstock()." WHERE idproducto = ". $this->getIdproducto()."";
         
         if ($base->Iniciar()){
             if ($base->Ejecutar($sql)){
@@ -157,13 +155,13 @@ class Producto extends BaseDatos{
         $base=new BaseDatos();
         $sql = "SELECT * FROM producto ";
         //echo $sql . " y el Parámetro es ";
-        //print_r($parametro);
+       // print_r($parametro);
         if ($parametro!=""){
             $sql.='WHERE '.$parametro;
         }
         //echo $sql . " estoy en listar";
         $res = $base->Ejecutar($sql);
-        if ($res>-1){
+         if ($res>-1){
             if ($res>0){
                 while ($row = $base->Registro()){
                     $obj = new Producto();
@@ -175,7 +173,7 @@ class Producto extends BaseDatos{
         }else{
            // $this->setmensajeoperacion("usuarios->listar: ". $base->getError());
         }
-        //print_r($arreglo);
+  
         return $arreglo;
     }
     /**

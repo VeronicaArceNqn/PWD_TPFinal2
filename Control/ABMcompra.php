@@ -4,14 +4,14 @@ class ABMcompra{
     public function abm($datos){
         $resp = false;
         if($datos['accion']=='editar'){
-            if($this->modificacion($datos)){
+           /* if($this->modificacion($datos)){
                 $resp = true;
-            }
+            }*/
         }
         if($datos['accion']=='borradoLogico'){
-            if($this->bajaLogica($datos)){
+            /*if($this->bajaLogica($datos)){
                 $resp =true;
-            }
+            }*/
         }
         if ($datos['accion'] == 'nuevo') {
             $objAbmcompra=null;
@@ -111,7 +111,8 @@ class ABMcompra{
      * @param array $param
      * @return boolean
      */
-    
+    /*
+
     public function bajaLogica($param){
         $resp = false;
         if ($this->seteadosCamposClaves($param)){
@@ -121,12 +122,13 @@ class ABMcompra{
             }
         }
         return $resp;
-    }
+    }*/
      /**
      * permite modificar un objeto
      * @param array $param
      * @return boolean
      */
+    /*
     public function modificacion($param){
         $resp = false;
         if($this->seteadosCamposClaves ($param)){
@@ -137,7 +139,7 @@ class ABMcompra{
             }
         }
         return $resp;
-    }
+    }*/
     /**
      * permite buscar un objeto
      * @param array $param

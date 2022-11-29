@@ -149,6 +149,28 @@ class Usuario extends BaseDatos
         return $arreglo;
     }
     
+    public function buscar($idusuario)
+    {
+      $base = new BaseDatos();
+      $consulta = "Select * from usuario where idusuario=". $idusuario."";
+      $resp = false;
+      if ($base->Iniciar()) {
+        if ($base->Ejecutar($consulta)) {
+          if ($row2 = $base->Registro()) {
+            $this->setidusuario($row2['idusuario']);
+            $this->cargar();
+            
+            $resp = true;
+          }
+        } else {
+          $this->setmensajeoperacion($base->getError());
+        }
+      } else {
+        $this->setmensajeoperacion($base->getError());
+      }
+      return $resp;
+    }
+  
 }
 
 

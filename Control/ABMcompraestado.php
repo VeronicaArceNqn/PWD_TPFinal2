@@ -59,7 +59,7 @@ class ABMcompraestado{
     private function cargarObjeto($param){
         $obj = null;
 
-        if (array_key_exists('idcompraestado', $param) and array_key_exists('idcompra', $param) and array_key_exists('idcompraestadotipo', $param) and array_key_exists('cefechaini', $param) and array_key_exists('cefechafin', $param) ){
+        if (array_key_exists('idcompraestado', $param) and array_key_exists('idcompra', $param) and array_key_exists('idcompraestadotipo', $param)and array_key_exists('cefechaini', $param)and array_key_exists('cefechafin', $param)and array_key_exists('idusuario', $param)){
             $obj = new CompraEstado();
 
             $objCompra = new Compra();
@@ -70,7 +70,11 @@ class ABMcompraestado{
         $objCet->setIdcompraestadotipo($param['idcompraestadotipo']);
         $objCet->cargar();
 
-            $obj->setear($param['idcompraestado'], $objCompra, $objCet, $param['cefechaini'], $param['cefechafin']);
+        $objusuario=new Usuario();
+        $objusuario->setidusuario($param['idusuario']);
+        $objusuario->cargar();
+
+            $obj->setear($param['idcompraestado'], $objCompra, $objCet, $param['cefechaini'], $param['cefechafin'],$objusuario);
         }
         //print_r($obj);
         return $obj;
@@ -85,7 +89,7 @@ class ABMcompraestado{
         $obj = null;
         if(isset($param['idcompraestado'])){
             $obj = new CompraEstado();
-            $obj->setear($param['idcompraestado'], null, null, null,null);
+            $obj->setear($param['idcompraestado'], null, null, null,null,null);
         }
         return $obj;
     }
@@ -150,7 +154,7 @@ class ABMcompraestado{
      * @param array $param
      * @return array
      */
-    public function buscar($param){
+    public function buscar($param=null){
         $where = " true ";
        //echo "Este dato ingresa a Buscar en ABMusuario";
         
@@ -158,6 +162,8 @@ class ABMcompraestado{
         //echo "<br>";
         //print_r ($param['idcompraestado']);
         if($param<>NULL){
+            
+            
             if(isset($param['idcompraestado'])) 
                 $where.=" and idcompraestado = ".$param['idcompraestado'];
             if(isset($param['idcompra'])) 
@@ -166,12 +172,15 @@ class ABMcompraestado{
                 $where.=" and idcompraestadotipo =".$param['idcompraestadotipo'];
             if(isset($param['cefechaini'])) 
                 $where.=" and cefechaini ='".$param['cefechaini']."'";
-            if(isset($param['idcompra'])) 
-                $where.=" and cefechaini ='".$param['cefechaini']."'";    
+            if(isset($param['cefechafin'])) 
+                $where.=" and cefechafin is ".$param['cefechafin']."";    
+            
+            if(isset($param['idusuario'])) 
+               $where.=" and idusuario = ".$param['idusuario'];
             
             
         }
-        //print_r($where);
+        print_r($where);
         //echo "<br>";
         $arreglo = CompraEstado::listar($where);
         //echo "Estoy en buscar \n";

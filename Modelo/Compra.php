@@ -83,7 +83,7 @@ class Compra extends BaseDatos{
  public function cargar() {
    $resp = false;
    $base = new BaseDatos();
-   $sql = "SELECT * FROM compra WHERE idcompra = '".$this->getIdcompra()."'";
+   $sql = "SELECT * FROM compra WHERE idcompra = ".$this->getIdcompra()."";
    if ($base->Iniciar()) {
      $res = $base->Ejecutar($sql);
      if ($res > -1) {
@@ -120,7 +120,7 @@ class Compra extends BaseDatos{
    }
    return $resp;
  }
-
+/*
  public function modificar() {
    $resp = false;
    $base = new BaseDatos();
@@ -136,7 +136,7 @@ class Compra extends BaseDatos{
    }
    return $resp;
  }
-
+*/
  public function eliminar() {
    $resp = false;
    $base = new BaseDatos();
@@ -180,6 +180,28 @@ class Compra extends BaseDatos{
 
    return $arreglo;
  }
+
+ public function buscar($idcompra)
+ {
+   $base = new BaseDatos();
+   $consulta = "Select * from compra where idcompra=". $idcompra."";
+   $resp = false;
+   if ($base->Iniciar()) {
+     if ($base->Ejecutar($consulta)) {
+       if ($row2 = $base->Registro()) {
+        $this->setIdcompra($row2['idcompra']);
+        $this->cargar();
+        $resp = true;
+       }
+     } else {
+       $this->setmensajeoperacion($base->getError());
+     }
+   } else {
+     $this->setmensajeoperacion($base->getError());
+   }
+   return $resp;
+ }
+
 }
 
 
