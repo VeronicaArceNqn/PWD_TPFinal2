@@ -27,8 +27,10 @@ include($dir . "../estructura/header.php");
             title: 'Error',
             msg: result.errorMsg
           });
+
         } else {
           alert("se registro correctamente")
+
           $('#ff').form('clear');
           //$('#dlg').dialog('close');        // close the dialog
           //$('#dg').datagrid('reload');    // reload 
@@ -40,25 +42,7 @@ include($dir . "../estructura/header.php");
   function clearForm() {
     $('#ff').form('clear');
   }
-  /*
-  function registrar()
-  {
-  var password = document.getElementById("password").value;
-  //alert(password);
-  var passhash = CryptoJS.MD5(password).toString();
-  // alert(passhash);
-  document.getElementById("uspass").value = passhash;
-  document.getElementById("password").value ="";    
-  submitForm(); 
-  }
-   function submitForm(){
-       $('#ff').form('submit',{
-           onSubmit:function(){
-               return $(this).form('enableValidation').form('validate');
-           }
-       });
-   }
-   */
+ 
 </script>
 <div class="d-flex justify-content-center align-items-center">
   <div class="container pt-4">

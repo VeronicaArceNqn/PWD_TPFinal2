@@ -41,48 +41,55 @@ if(count($arreCE)==1)
                   <?php 
                   if(count($items)>0)
                   {
+                    $suma=0;
+                    foreach($items as $item)
+                    {
                   ?>
                     <div class="product">
                         <div class="row">
                             <div class="col-md-3 d-flex">
-                            <img class="img-fluid mx-auto d-flex image" src="https://i.ibb.co/V2TFP2R/C6.webp" >
+                            <img src="<?php echo $item->getObjProducto()->getUrlimagen();?>" class="img-fluid mx-auto d-flex image">
                             </div>
                             <div class="col-md-8">
                                 <div class="info">
                                     <div class="row">
                                         <div class="col-md-5 product-name">
                                             <div class="product-name">
-                                                <a href="#">Camara dahua 5mpx</a>
+                                                <a href="#"><?php echo $item->getObjProducto()->getProdetalle();?></a>
                                                 <div class="product-info">
-                                                    <div>Marca: <span class="value">Dahua</span></div>
-                                                    <div>Disponibles: <span class="value">9</span></div>
+                                                    <div>Marca: <span class="value"><?php echo $item->getObjProducto()->getPronombre();?></span></div>
+                                                    
+                                                    <div>Disponibles: <span class="value"><?php echo $item->getObjProducto()->getProcantstock()?></span></div>
                                                     
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-md-3 quantity">
                                             <label for="quantity">Cantidad:</label>
-                                            <input id="quantity" type="number" value ="1" class="form-control quantity-input">
+                                            <input id="quantity" type="number" value ="<?php echo $item->getCicantidad();?>" class="form-control quantity-input">
                                         </div>
                                         <div class="col-md-2 price">
-                                            <span>$32000</span>
+                                            <span><?php echo $item->getObjProducto()->getPrecio(); ?></span>
                                         </div>
                                         <div class="col-md-2 pl-2">
-                                            <button class="btn btn-danger">Eliminar</button>
+                                            <button class="btn btn-danger" onclick="eliminarItem(<?php echo  $item->getObjProducto()->getIdproducto(); ?>,<?php echo  $item->getIdcompraitem(); ?>)">Eliminar</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                   <?php }?>
+                   <?php 
+                   $suma=$suma+ $item->getObjProducto()->getPrecio();
+                    }
+                  }?>
                 </div>
             </div>
             <div class="summary">
               <h3>Resumen</h3>
               <label>ID Compra:</label> <input type="text" id="idcompra" name="idcompra"value="<?php echo $idcompra;?>" readonly>
               <label>ID Compra Estado:</label> <input type="text" id="idcompraestado" name="idcompraestado"value="<?php echo $idcompraestado;?>" readonly>
-              <div class="summary-item"><span class="text">Subtotal</span><span class="price">$360</span></div>
+              <div class="summary-item"><span class="text">Subtotal</span><h3><?php echo $suma;?></h3></div>
 
 
               <button type="button" onclick="agregarProducto()" class="btn btn-primary btn-lg btn-block">Agregar producto</button>
@@ -199,6 +206,29 @@ if(count($arreCE)==1)
 
                                 if (result.respuesta){
                                    	 alert("se pudo enviar, idproducto"+result.idproducto);
+                                    //$('#dg').datagrid('reload');    // reload the  data
+                                } else {
+                                    $.messager.show({    // show error message
+                                        title: 'Error',
+                                        msg: result.errorMsg
+                                  });
+                                }
+                            },'json');
+                        }
+                    });
+               
+            }
+            function eliminarItem(idproducto,idcompraitem){
+                //var row = $('#dg').datagrid('getSelected');
+           
+                    $.messager.confirm('Confirm','Seguro que desea eliminar el menu?', function(r){
+                        if (r){
+                            $.post('accion/envio_datos.php?idproducto='+idproducto+'&idcompraitem='+idcompraitem,
+                               function(result){
+                               	 alert("Volvio Serviodr");  
+
+                                if (result.respuesta){
+                                   	 alert("se pudo enviar, idproducto:"+result.idproducto +" y su idcompraitem es"+result.idcompraitem);
                                     //$('#dg').datagrid('reload');    // reload the  data
                                 } else {
                                     $.messager.show({    // show error message

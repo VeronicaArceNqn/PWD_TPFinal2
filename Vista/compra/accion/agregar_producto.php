@@ -1,6 +1,6 @@
 <?php
 include_once "../../../configuracion.php";
-$idcompra = 5;
+$idcompra = 1;
 //$idusuario = 3;
 $idproducto = 4;
 $cantidad = 1;

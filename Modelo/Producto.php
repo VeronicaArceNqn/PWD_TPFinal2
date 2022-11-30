@@ -42,7 +42,7 @@ class Producto extends BaseDatos{
     public function setPronombre($valor){
         $this->pronombre = $valor;
     }
-    public function getProdetalle  (){
+    public function getProdetalle(){
         return $this->prodetalle;
         
     }
