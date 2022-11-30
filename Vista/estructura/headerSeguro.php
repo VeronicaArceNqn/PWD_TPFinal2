@@ -120,7 +120,8 @@ if ($resp && $permisosOk) {
 			    //    echo "<br><br><br><br>";
                
 				}
-				
+				$idusuario=$objTrans->getUsuario()->getIdusuario();
+				$nombre=$objTrans->getUsuario()->getUsnombre();
          ?>
 		<!--<div id="mm1" style="width:150px;">
 			</div>
@@ -142,7 +143,7 @@ if ($resp && $permisosOk) {
 
 			<!--
 			<a href="#" class="easyui-linkbutton" style="padding:5px; background-color:#212529;color:white;" data-options="plain:true">Mi perfil</a>-->
-			<a href="javascript:void(0)" class="easyui-linkbutton" style="padding:5px; background-color:#212529;color:white;" data-options="plain:true" onclick="cerrarSesion()"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
+			<a href="javascript:void(0)" class="easyui-linkbutton" style="padding:5px; background-color:#212529;color:white;" data-options="plain:true" onclick="cerrarSesion()"><?php echo $nombre;?> <svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
 					<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4m7 14l5-5l-5-5m5 5H9" />
 				</svg>
 				Salir
@@ -176,7 +177,7 @@ if ($resp && $permisosOk) {
 	<?php 
 	
 	
-$idusuario=$objTrans->getUsuario()->getIdusuario();
+
 $param["idusuario"]=$idusuario;
 $param["idcompraestadotipo"] = 0;
 $param["cefechafin"]="null";
@@ -184,9 +185,9 @@ $objCntrlCE= new ABMcompraestado();
 $arreCE=$objCntrlCE->buscar($param);
 
 $idcompra=-1;
-$idcompraestado="";
+$idcompraestado=0;
 $items=[];
-
+print_r($arreCE);
 if(count($arreCE)==1)
 {
   $idcompra=$arreCE[0]->getObjCompra()->getIdcompra();
@@ -197,6 +198,7 @@ if(count($arreCE)==1)
 }
 	?>
 	<input type="text" id="idcompra" name="idcompra"value="<?php echo $idcompra;?>" readonly>
+	<input type="text" id="idcompraestado" name="idcompraestado"value="<?php echo $idcompraestado;?>" readonly>
 	<!--<div data-options="region:'west',split:true,title:'West'" style="width:150px;padding:10px;">west content</div>-->
 	<!--<div data-options="region:'east',split:false,collapsed:true,title:'Perfil'" style="width:200px;padding:10px;height: auto;"> Datos de usuario</div>-->
 

@@ -57,14 +57,15 @@
               <h2  class="text-start fs-4" class="">Resumen</h2>
               <!--<label>ID Compra:</label>-->
               <h3  class="text-start">ID Compra:<?php echo $datos["idcompra"];?></h3>
+              <h3  class="text-start">ID Estado compra:<?php echo $datos["idcompraestado"];?></h3>
               <div class="summary-item"><p  class="text-start fs-4">Total: <span  class="text-start text-success fs-4"><?php echo $suma;?>$</span></p></div>
+                    
 
-
-              <button type="button" onclick="agregarProducto()" class="btn btn-primary btn-lg btn-block">Agregar producto</button>
-
+              <button type="button" onclick="cambiarEstado('La compra se realizo correctamente!',1,<?php echo $datos['idusuario']; ?>)" class="btn btn-primary btn-lg btn-block">Comprar</button>
+              <!--
               <button type="button" onclick="cambiarEstado()" class="btn btn-warning btn-lg btn-block">Cambiar estado</button>
               <button type="button" onclick="enviarDatos()" class="btn btn-warning btn-lg btn-block">Enviar datos</button>
-              
+                -->
             </div>
                 </div>
             </div>

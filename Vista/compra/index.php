@@ -17,10 +17,11 @@ $suma=0;
 </section>
 <script type="text/javascript">
   cargarCarrito();
+  
   function  cargarCarrito()
   {
-  		$("#contenido").load('accion/cargar_carrito.php?idcompra='+$("#idcompra").val())
-  }
+  		$("#contenido").load('accion/cargar_carrito.php?idcompra='+$("#idcompra").val()+'&idcompraestado='+$("#idcompraestado").val()+'&idusuario='+<?php echo $idusuario;?>)
+  }/*
       function agregarProducto() {
     var idcompra=$("#idcompra").val();
     alert(idcompra);
@@ -71,14 +72,14 @@ $suma=0;
       .always(function() {
         // alert( "finished" );
       });
-      /*
+      
     jqxhr.always(function() {
       alert( "second finished" );
-    });*/
+    });
   }
-
-  function cambiarEstado() {
-    var jqxhr = $.post("accion/agregar_estado.php", function() {
+ */
+  function cambiarEstado(mensaje,idcompraestadotipo,idusuario) {
+    var jqxhr = $.post('accion/agregar_estado.php?idcompra='+$("#idcompra").val()+"&idcompraestado="+$("#idcompraestado").val()+"&idcompraestadotipo="+idcompraestadotipo+"&idusuario="+idusuario, function() {
         //alert( "success" );
       })
       .done(function(result) {
@@ -91,7 +92,7 @@ $suma=0;
         } else {
           $.messager.alert({
             title: 'Mensaje',
-            msg: "Se registro correctamente-> true:" + result.respuesta
+            msg: mensaje + result.respuesta+" se cambio estado true:"+result.seactualizo
           });
 
         }

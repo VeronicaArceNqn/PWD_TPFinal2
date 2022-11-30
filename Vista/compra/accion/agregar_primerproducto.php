@@ -29,7 +29,7 @@ if (isset($data['idusuario'])) {
         $datos["idcompra"] = $idcompra;
         $datos["idcompraestadotipo"] = 0;
         $datos["idusuario"] = $data["idusuario"];
-        $datos["cefechaini"] = date("Y-m-d H:i:s");
+        $datos["cefechaini"] = $data["cofecha"] ;
         $datos["cefechafin"] = "null";
         //creamos compra estado "en confeccion"
         $objCtrlCE = new ABMcompraestado();
@@ -38,7 +38,7 @@ if (isset($data['idusuario'])) {
         //verificamos stock
         
         $objCtrlProd = new ABMproducto();
-        $arrayAsoc["idproducto"] = $idproducto;
+        $arrayAsoc["idproducto"] = $data["idproducto"];
         $arreProd = $objCtrlProd->buscar($arrayAsoc);
         $respuesta = true;
         if (count($arreProd) == 1) {
@@ -51,7 +51,7 @@ if (isset($data['idusuario'])) {
                 $datositem["idproducto"]=$data["idproducto"];
                 $datositem["cicantidad"]=$data["cicantidad"];
                 $cantStock=$cantStock-$datositem["cicantidad"];
-                $param["idproducto"]= $idproducto;
+                $param["idproducto"]= $data["idproducto"];
                 $param["procantstock"]=$cantStock;
                 $objCtrlProd->modificacion($param);
 

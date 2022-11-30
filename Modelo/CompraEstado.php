@@ -124,6 +124,7 @@ public function cargar() {
     $resp = false;
     $base = new BaseDatos();
     $sql = "SELECT * FROM compraestado WHERE idcompraestado = ".$this->getIdcompraestado()."";
+    
     if ($base->Iniciar()) {
       $res = $base->Ejecutar($sql);
       if ($res > -1) {
@@ -157,7 +158,8 @@ public function cargar() {
     $fechainicio="'{$this->getCefechaini()}'";
     $base = new BaseDatos();
     $sql = "INSERT INTO compraestado (idcompra, idcompraestadotipo, cefechaini, cefechafin,idusuario) VALUES (".$this->getObjcompra()->getIdcompra().",". $this->getObjcompraestadotipo()->getIdcompraestadotipo().",{$fechainicio},{$this->getCefechafin()},{$this->getObjUsuario()->getidusuario()})";
-
+ 
+ //   echo $sql;
     if ($base->Iniciar()) {
       if ($id = $base->Ejecutar($sql)) {
         $this->setIdcompraestado($id);
@@ -174,12 +176,13 @@ public function cargar() {
   public function modificar() {
     $resp = false;
     $base = new BaseDatos();
-    $fecha=date("Y-m-d H:i:s");
+    $hoy=date("Y-m-d H:i:s");
+    //$fecha="'$hoy'";
     $sql = "UPDATE compraestado SET 
-           cefechafin= '$fecha' 
-      WHERE idcompraestado = ".$this->getIdCompraEstado()."";
+           cefechafin= '$hoy'  
+      WHERE idcompraestado = ".$this->getIdCompraestado()."";
 
-    echo $sql;
+    //echo $sql;
     if ($base->Iniciar()) {
 
       if ($base->Ejecutar($sql)) {
