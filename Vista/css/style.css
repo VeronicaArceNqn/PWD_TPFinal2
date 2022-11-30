@@ -85,7 +85,7 @@
 .shopping-cart .summary h3{
 	text-align: center;
 	font-size: 1.3em;
-	font-weight: 600;
+	font-weight: 300;
 	padding-top: 20px;
 	padding-bottom: 20px;
 }
@@ -97,7 +97,7 @@
 }
 
 .shopping-cart .summary .text{
-	font-size: 1em;
+	font-size: 1.3em;
 	font-weight: 600;
 }
 

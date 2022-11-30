@@ -36,7 +36,7 @@ if ($resp && $permisosOk) {
 	<link rel="stylesheet" type="text/css" href="../js/jquery-easyui-1.10.8/themes/color.css">
 	<link rel="stylesheet" type="text/css" href="../js/jquery-easyui-1.10.8/demo/demo.css">
 
-	<script type="text/javascript" src="../js/bootstrap.bundle.js"></script>
+	<script type="text/javascript" src="../js/bootstrap.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="../css/bootstrap.css">
 
 	<script type="text/javascript" src="../js/jquery-easyui-1.10.8/jquery.min.js"></script>
@@ -105,9 +105,10 @@ if ($resp && $permisosOk) {
 					//	echo "es padre<br>";
 				      }
 					   else{
-						
+						//convertimos los nombres de los menus a mayuscula
+						$nombre=mb_strtoupper($objMenu->getMenombre(),'utf-8');
                           if($objMenu->getMedescripcion()!="#")
-						{echo '<a href="'.$objMenu->getMedescripcion().'" class="easyui-linkbutton" style="padding:5px; background-color:#0d6efd;color:white;" data-options="plain:true">'.$objMenu->getMenombre().'</a>'; 
+						{echo '<a href="'.$objMenu->getMedescripcion().'" class="easyui-linkbutton" style="padding:5px; background-color:#0d6efd;color:white;" data-options="plain:true">'.$nombre.'</a>'; 
 						
 					    }
 					   }
@@ -146,6 +147,7 @@ if ($resp && $permisosOk) {
 				</svg>
 				Salir
 			</a>
+			
 			<!--
 			<a href="#" class="easyui-menubutton" style="padding:5px; background-color:#212529;color:white;width:140px;" data-options="menu:'#mm5'">Administrar</a>
 			<div id="mm5">
@@ -171,6 +173,30 @@ if ($resp && $permisosOk) {
 		</div>
 
 	</div>
+	<?php 
+	
+	
+$idusuario=$objTrans->getUsuario()->getIdusuario();
+$param["idusuario"]=$idusuario;
+$param["idcompraestadotipo"] = 0;
+$param["cefechafin"]="null";
+$objCntrlCE= new ABMcompraestado();
+$arreCE=$objCntrlCE->buscar($param);
+
+$idcompra=-1;
+$idcompraestado="";
+$items=[];
+
+if(count($arreCE)==1)
+{
+  $idcompra=$arreCE[0]->getObjCompra()->getIdcompra();
+  $idcompraestado=$arreCE[0]->getIdcompraestado();
+ 
+  //print_r($items);
+
+}
+	?>
+	<input type="text" id="idcompra" name="idcompra"value="<?php echo $idcompra;?>" readonly>
 	<!--<div data-options="region:'west',split:true,title:'West'" style="width:150px;padding:10px;">west content</div>-->
 	<!--<div data-options="region:'east',split:false,collapsed:true,title:'Perfil'" style="width:200px;padding:10px;height: auto;"> Datos de usuario</div>-->
 
@@ -180,6 +206,7 @@ if ($resp && $permisosOk) {
 
 	<div data-options="region:'center',title:''" style="height:auto;">
 	<script type="text/javascript">
+		
   function cerrarSesion(){
                 //var row = $('#dg').datagrid('getSelected');
            
@@ -208,3 +235,5 @@ if ($resp && $permisosOk) {
  
  
 </script>
+
+
