@@ -41,7 +41,7 @@ if (isset($data['idcompra'])) {
             }
         }
 }
-
+$retorno['idcompra'] = $data["idcompra"];
 
 $retorno['respuesta'] = $respuesta;
 $retorno['seagrego'] = $seagrego;

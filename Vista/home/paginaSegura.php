@@ -89,7 +89,7 @@ foreach($lista as $objProducto)
 <script type="text/javascript">
          function agregarProducto(idproducto,idusuario) {
     var idcompra=$("#idcompra").val();
-    alert(idcompra);
+    //alert(idcompra);
     var urldatos= "";
     if(parseInt($("#idcompra").val())==-1)
     {
@@ -100,17 +100,18 @@ foreach($lista as $objProducto)
     //  alert("entro agregar producto al carrito")
       urldatos= "../compra/accion/agregar_producto.php?idproducto="+idproducto+"&cicantidad=1&idcompra="+$("#idcompra").val();
     }
-    alert(urldatos);
+    //alert(urldatos);
     var jqxhr = $.post(urldatos, function() {
         //alert( "success" );
       })
       .done(function(result) {
         var result = eval('(' + result + ')');
         if (!result.respuesta) {
-          $.messager.alert({
+         /* $.messager.alert({
             title: 'Error',
             msg: result.errorMsg
-          });
+          });*/
+          $("#idcompra").val(result.idcompra);
         } else {
           var res;
           if(result.seagrego)
@@ -123,7 +124,7 @@ foreach($lista as $objProducto)
             title: 'Mensaje',
             msg: "Se registro correctamente-> true:" + result.respuesta+""+res 
           });
-          cargarCarrito();
+          
         }
       })
       .fail(function() {

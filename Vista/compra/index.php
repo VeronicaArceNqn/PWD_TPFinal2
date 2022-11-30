@@ -9,8 +9,7 @@ $suma=0;
   <div class="container">
     <div class="block-heading">
       <h2>Carrito de compras</h2>
-      <?php echo "idusuario:".$idusuario; ?>
-    </div>
+     </div>
     <div id="contenido"class="content">
     
     </div>
@@ -20,7 +19,7 @@ $suma=0;
   
   function  cargarCarrito()
   {
-  		$("#contenido").load('accion/cargar_carrito.php?idcompra='+$("#idcompra").val()+'&idcompraestado='+$("#idcompraestado").val()+'&idusuario='+<?php echo $idusuario;?>)
+  		$("#contenido").load('accion/cargar_carrito.php?idcompra='+$("#idcompra").val()+'&idcompraestado='+$("#idcompraestado").val()+'&idusuario='+<?php echo $idusuario;?>);
   }/*
       function agregarProducto() {
     var idcompra=$("#idcompra").val();
@@ -94,7 +93,7 @@ $suma=0;
             title: 'Mensaje',
             msg: mensaje + result.respuesta+" se cambio estado true:"+result.seactualizo
           });
-
+          window.location.href = window.location.href;
         }
       })
       .fail(

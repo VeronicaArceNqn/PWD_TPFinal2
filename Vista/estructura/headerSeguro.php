@@ -187,7 +187,7 @@ $arreCE=$objCntrlCE->buscar($param);
 $idcompra=-1;
 $idcompraestado=0;
 $items=[];
-print_r($arreCE);
+//print_r($arreCE);
 if(count($arreCE)==1)
 {
   $idcompra=$arreCE[0]->getObjCompra()->getIdcompra();
