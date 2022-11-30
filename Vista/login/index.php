@@ -5,9 +5,7 @@ $titulo = ".: Iniciar sesión :.";
 include_once $dir.'../estructura/header.php';
 $datos = data_submitted();
 
-      if(isset($datos) && isset($datos['msg']) && $datos['msg']!=null) {
-        //echo $datos['msg'];
-      }
+    
         
      ?>
   <br>
@@ -18,8 +16,8 @@ $datos = data_submitted();
           <div class="col-12 col-md-8 col-lg-6">
             <div class="card bg-white">
               <div class="card-body p-5">
-                <form class="mb-3 mt-md-4" method="post" action="accion.php" name="formulario" id="formulario">
-                <input id="accion" name ="accion" value="login" type="hidden">
+                <form id="ff" class="mb-3 mt-md-4">
+                
                   <h5 class="fw-bold mb-2 text-uppercase text-center">Iniciar sesi&oacute;n</h5>
                  
                   <div class="mb-3">
@@ -37,10 +35,9 @@ $datos = data_submitted();
                     <input type="hidden" class="form-control" id="usdeshabilitado" name="usdeshabilitado" value="null">
                     <input type="password" class="form-control" id="password" name="password" placeholder="*******">
                   </div>
-                 
                   <div class="d-grid">
-                  <input type="button" class="btn btn-primary btn-block" value="Validar" onclick="formSubmit()">
-                  </div>
+                <button class="btn btn-outline-dark" type="button" onclick="iniciarSesion()">Enviar</button>
+              </div>
                   
                 </form>
                 <div>
@@ -56,21 +53,50 @@ $datos = data_submitted();
 
 <a href="../home/index.php">Volver</a>
 
-<script>
-
-function formSubmit()
-{
+<script type="text/javascript">
+  function iniciarSesion() {
     var password = document.getElementById("password").value;
-    //alert(password);
+    ;
     var passhash = CryptoJS.MD5(password).toString();
-    //alert(passhash);
+   
     document.getElementById("uspass").value = passhash;
+    document.getElementById("password").value = "";
+    //document.getElementById("usmail").value ="";  
 
-    setTimeout(function(){ 
-        document.getElementById("formulario").submit();
+    $('#ff').form('submit', {
+      //url:'accion/alta_usuario.php',
+      url: 'accion/accionSesion.php',
+      onSubmit: function() {
+        return $(this).form('validate');
+      },
+      success: function(result) {
+        var result = eval('(' + result + ')');
+      
+        if (!result.respuesta) {
+          $.messager.show({
+            title: 'Error',
+            msg: result.errorMsg
+          });
+          location.href = '../login/index.php?msg='+result.errorMsg;
+        } else {
+          $.messager.show({
+            title: 'Mensaje',
+            msg: "se registro correctamente"
+          });
+          location.href = '../home/paginaSegura.php';
 
-	}, 500);
-}
+          $('#ff').form('clear');
+          //$('#dlg').dialog('close');        // close the dialog
+          //$('#dg').datagrid('reload');    // reload 
+        }
+      }
+    });
+  }
+
+  function clearForm() {
+    $('#ff').form('clear');
+  }
+ 
 </script>
 </div>
 </div>

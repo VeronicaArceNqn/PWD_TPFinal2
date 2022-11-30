@@ -81,13 +81,13 @@ class Session{
             $obj = new ABMUsuario();
              $param['idusuario']=$_SESSION['idusuario'];
              $resultado = $obj->darRoles($param);
-             echo "<br>cantidad de roles encontrados</br> ".count($resultado);
+          //   echo "<br>cantidad de roles encontrados</br> ".count($resultado);
             if(count($resultado) > 0){
                 $list_rol = $resultado;
             }
         }
-        echo "<br> ROL OK </br>";
-        print_r($list_rol);
+      //  echo "<br> ROL OK </br>";
+      //  print_r($list_rol);
         return $list_rol;
 
     }
@@ -111,11 +111,11 @@ class Session{
         //creo un Objeto Usuario para usar el método getUsuario de la clase sesión y así obtener el id del usuario validado
         $objUsuvalido = new Usuario();
         $objUsuvalido = $this->getUsuario();
-        echo "<br>USUARIO LOGUEADO </br>";
+    //    echo "<br>USUARIO LOGUEADO </br>";
         // del Objeto Usuario encotrado obtengo el idusuari
         $idusuvalido = $objUsuvalido->getIdUsuario();
-        echo "<br>idusuario: </br>";
-        print_r($idusuvalido);
+      //  echo "<br>idusuario: </br>";
+       // print_r($idusuvalido);
         
         // el método getRol de sesion devuelve un objeto UsuarioRol por eso creo un Objeto UsuarioRol para guardar los datos. Devuelve 1, 2 o 3 roles
        // $objUsuroles = new UsuarioRol();
