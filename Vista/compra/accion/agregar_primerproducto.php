@@ -1,12 +1,13 @@
 <?php
 include_once "../../../configuracion.php";
-$idusuario = 2;
+/*$idusuario = 2;
 $idproducto = 1;
-$cantidad = 1;
+$cantidad = 1;*/
+$data=data_submitted();
 //datos recibidos        
-$data["idusuario"] = $idusuario;
+/*$data["idusuario"] = $idusuario;
 $data["idproducto"]=$idproducto;
-$data["cicantidad"]=$cantidad;
+$data["cicantidad"]=$cantidad;*/
 //----------------//
 
 $hoy = date("Y-m-d H:i:s");

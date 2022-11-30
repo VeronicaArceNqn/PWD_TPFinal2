@@ -1,14 +1,15 @@
 <?php
 include_once "../../../configuracion.php";
-$idcompra = 1;
+/*$idcompra = 1;
 //$idusuario = 3;
-$idproducto = 4;
+$idproducto = 3;
 $cantidad = 1;
   ///datos recibidos
 $data["idcompra"] = $idcompra;
 $data["cicantidad"] = $cantidad;
 $data["idproducto"]=$idproducto;
-
+*/
+$data=data_submitted();
 //print_r($data);
 
 $seagrego = false;

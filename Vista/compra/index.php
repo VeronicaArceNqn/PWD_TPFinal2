@@ -16,8 +16,12 @@ $suma=0;
     </div>
 </section>
 <script type="text/javascript">
+  cargarCarrito();
+  function  cargarCarrito()
+  {
   		$("#contenido").load('accion/cargar_carrito.php?idcompra='+$("#idcompra").val())
-  function agregarProducto() {
+  }
+      function agregarProducto() {
     var idcompra=$("#idcompra").val();
     alert(idcompra);
     var urldatos= "";
@@ -53,7 +57,7 @@ $suma=0;
             title: 'Mensaje',
             msg: "Se registro correctamente-> true:" + result.respuesta+""+res 
           });
-
+          cargarCarrito();
         }
       })
       .fail(function() {

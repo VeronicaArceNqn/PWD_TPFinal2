@@ -7,11 +7,11 @@
                   include_once "../../../configuracion.php";
                   $datos=data_submitted();
                   $objCntrlCI= new ABMcompraitem(); 
-                 
+                  $suma=0;
                   $items=$objCntrlCI->buscar($datos);
                   if(count($items)>0)
                   {
-                    $suma=0;
+                    
                     foreach($items as $item)
                     {
                   ?>
@@ -39,7 +39,7 @@
                                             <input id="quantity" type="number" value ="<?php echo $item->getCicantidad();?>" class="form-control quantity-input">
                                         </div>
                                         <div class="col-md-2 price">
-                                            <span><?php echo $item->getObjProducto()->getPrecio(); ?></span>
+                                            <span><?php echo $item->getObjProducto()->getPrecio(); ?>$</span>
                                         </div>
                                         <div class="col-md-2 pl-2">
                                             <button class="btn btn-danger" onclick="eliminarItem(<?php echo  $item->getObjProducto()->getIdproducto(); ?>,<?php echo  $item->getIdcompraitem(); ?>)">Eliminar</button>
@@ -54,10 +54,10 @@
                     }
                   }?>
                        <div class="summary">
-              <h2>Resumen</h2>
+              <h2  class="text-start fs-4" class="">Resumen</h2>
               <!--<label>ID Compra:</label>-->
-              <label class="text">ID Compra:<?php echo $datos["idcompra"];?></label>
-              <div class="summary-item"><h2>Total</h2><h2><?php echo $suma;?>$</h2></div>
+              <h3  class="text-start">ID Compra:<?php echo $datos["idcompra"];?></h3>
+              <div class="summary-item"><p  class="text-start fs-4">Total: <span  class="text-start text-success fs-4"><?php echo $suma;?>$</span></p></div>
 
 
               <button type="button" onclick="agregarProducto()" class="btn btn-primary btn-lg btn-block">Agregar producto</button>
