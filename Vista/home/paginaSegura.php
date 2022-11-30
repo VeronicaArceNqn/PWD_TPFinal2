@@ -107,10 +107,10 @@ foreach($lista as $objProducto)
       .done(function(result) {
         var result = eval('(' + result + ')');
         if (!result.respuesta) {
-         /* $.messager.alert({
+         $.messager.alert({
             title: 'Error',
             msg: result.errorMsg
-          });*/
+          });
           $("#idcompra").val(result.idcompra);
         } else {
           var res;

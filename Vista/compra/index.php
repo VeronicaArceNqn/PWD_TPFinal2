@@ -74,8 +74,8 @@ $suma=0;
       
     jqxhr.always(function() {
       alert( "second finished" );
-    });
-  }
+    //});
+  //}
  */
   function cambiarEstado(mensaje,idcompraestadotipo,idusuario) {
     var jqxhr = $.post('accion/agregar_estado.php?idcompra='+$("#idcompra").val()+"&idcompraestado="+$("#idcompraestado").val()+"&idcompraestadotipo="+idcompraestadotipo+"&idusuario="+idusuario, function() {
@@ -93,6 +93,7 @@ $suma=0;
             title: 'Mensaje',
             msg: mensaje + result.respuesta+" se cambio estado true:"+result.seactualizo
           });
+          //cargarCarrito();
           window.location.href = window.location.href;
         }
       })
