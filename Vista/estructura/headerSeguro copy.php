@@ -72,45 +72,34 @@ if ($resp && $permisosOk) {
 				foreach($arraymenusrol as $objmenurol)
 				{  
 					//obtenemos un objmenu que es el padre del menu				   
-					$objPadre=$objmenurol->getObjMenu()->getObjMenu();
-                    
-					$objMenu=$objmenurol->getObjMenu(); 
+					$objMenu=$objmenurol->getObjMenu()->getObjMenu();
+                  
 				   $idpadre=0;
 				   //le pedimos su idmenu al objmenu
 				   $idmenu=$objmenurol->getObjMenu()->getIdmenu();
 				   //si su padre no es null
-				   if($objPadre!=null)
+				   if($objMenu!=null)
 				   {
 					//obtiene el idpadre
 					$idpadre=$objMenu->getIdmenu();
-				
-							
+				      echo "se obtuvo".$idpadre;
 				   }
-				   
-
-				
 				 
 					 $objCtrlMenu = new ABMmenu();
 		              $param['idpadre']=$idpadre;
 				      //filtramos la lista de menus por idpadre
 		              $arremenus= $objCtrlMenu->buscar($param);
-					  
 				      if(count($arremenus)>0)
 				      {//agregamos  sub menus
                         
 						foreach($arremenus as $objmenu)
 						{
-							
+                           
 						}
 					//	echo "es padre<br>";
 				      }
-					   else{
-						
-                          if($objMenu->getMedescripcion()!="#")
-						{echo '<a href="'.$objMenu->getMedescripcion().'" class="easyui-linkbutton" style="padding:5px; background-color:#0d6efd;color:white;" data-options="plain:true">'.$objMenu->getMenombre().'</a>'; 
-						
-					    }
-					   }
+					  else{
+                        
 
 					  }
 				    
@@ -119,7 +108,7 @@ if ($resp && $permisosOk) {
 			    //    echo "<br><br><br><br>";
                
 				}
-				
+				}
          ?>
 		<!--<div id="mm1" style="width:150px;">
 			</div>
@@ -128,25 +117,23 @@ if ($resp && $permisosOk) {
 			<div id="mm3">
 			</div>
 			-->
-			<!--<a href="../home/paginaSegura.php" class="easyui-linkbutton" style="padding:5px; background-color:#0d6efd;color:white;" data-options="plain:true">Home</a>
+			<a href="../home/paginaSegura.php" class="easyui-linkbutton" style="padding:5px; background-color:#0d6efd;color:white;" data-options="plain:true">Home</a>
 			<a href="../home/paginaSegura.php?tipo=Camaras" class="easyui-linkbutton" style="padding:5px; background-color:#0d6efd;color:white;" data-options="plain:true">C&aacute;maras</a>
 			<a href="../home/paginaSegura.php?tipo=Equipos" class="easyui-linkbutton" style="padding:5px; background-color:#0d6efd;color:white;" data-options="plain:true">Equipos</a>
 			<a href="../home/paginaSegura.php?tipo=Accesorios" class="easyui-linkbutton" style="padding:5px; background-color:#0d6efd;color:white;" data-options="plain:true">Accesorios</a>
-			-->
+			<!--<a href="../usuario/registrarseB.php" class="easyui-linkbutton"  style="padding:5px; background-color:#0d6efd;color:white;" data-options="plain:true">Registrarse</a>-->
 		
-			<a href="../compra/carrito.php" class="easyui-linkbutton" style="padding:5px; background-color:#212529;color:white;" data-options="plain:true"><i class="bi bi-cart4"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart4" viewBox="0 0 16 16">
-						<path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
-					</svg> </i>Carrito</a>
-		 
+			
 
-			<!--
-			<a href="#" class="easyui-linkbutton" style="padding:5px; background-color:#212529;color:white;" data-options="plain:true">Mi perfil</a>-->
-			<a href="javascript:void(0)" class="easyui-linkbutton" style="padding:5px; background-color:#212529;color:white;" data-options="plain:true" onclick="cerrarSesion()"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
-					<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4m7 14l5-5l-5-5m5 5H9" />
-				</svg>
-				Salir
-			</a>
-			<!--
+
+		
+			<a href="#" class="easyui-menubutton" style="padding:5px; background-color:#212529;color:white;" data-options="plain:true">Mi perfil</a>
+			<!--<div id="mm4">
+				<div href="../usuario/perfil.php">Mis datos</div>
+				<div href="../usuario/cambiardatos.php">Cambiar Datos</div>
+				<div href="../compra/miscompras.php">Mis compras</div>
+
+			</div>-->
 			<a href="#" class="easyui-menubutton" style="padding:5px; background-color:#212529;color:white;width:140px;" data-options="menu:'#mm5'">Administrar</a>
 			<div id="mm5">
 
@@ -166,7 +153,14 @@ if ($resp && $permisosOk) {
 
 
 			</div>
-			-->
+			<a href="../compra/carrito.php" class="easyui-linkbutton" style="padding:5px; background-color:#212529;color:white;" data-options="plain:true"><i class="bi bi-cart4"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart4" viewBox="0 0 16 16">
+						<path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z" />
+					</svg> </i>Carrito</a>
+			<a href="javascript:void(0)" class="easyui-linkbutton" style="padding:5px; background-color:#212529;color:white;" data-options="plain:true" onclick="cerrarSesion()"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
+					<path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4m7 14l5-5l-5-5m5 5H9" />
+				</svg>
+				Salir
+			</a>
 			<!--<div id="cantProductos"style="float:right;font-size:27px;">0</div>-->
 		</div>
 
@@ -187,7 +181,7 @@ if ($resp && $permisosOk) {
                         if (r){
                             $.post('../login/accion/cerrarSesion.php',
                                function(result){
-                             //  	 alert("Volvio Serviodr");  
+                               	 alert("Volvio Serviodr");  
 
                                 if (result.respuesta){
                                    	
