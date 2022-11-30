@@ -42,7 +42,7 @@
                                             <span><?php echo $item->getObjProducto()->getPrecio(); ?>$</span>
                                         </div>
                                         <div class="col-md-2 pl-2">
-                                            <button class="btn btn-danger" onclick="eliminarItem(<?php echo  $item->getObjProducto()->getIdproducto(); ?>,<?php echo  $item->getIdcompraitem(); ?>)">Eliminar</button>
+                                            <button class="btn btn-danger" onclick="eliminarItem(<?php echo  $item->getObjProducto()->getIdproducto(); ?>,<?php echo  $item->getIdcompraitem(); ?>,<?php echo $item->getCicantidad();?>)">Eliminar</button>
                                         </div>
                                     </div>
                                 </div>

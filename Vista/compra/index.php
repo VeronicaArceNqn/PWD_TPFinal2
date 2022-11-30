@@ -120,7 +120,7 @@ $suma=0;
                         if (r){
                             $.post('accion/envio_datos.php?idproducto='+3,
                                function(result){
-                               	 alert("Volvio Serviodr");  
+                            //   	 alert("Volvio Serviodr");  
 
                                 if (result.respuesta){
                                    	 alert("se pudo enviar, idproducto"+result.idproducto);
@@ -136,17 +136,23 @@ $suma=0;
                     });
                
             }
-            function eliminarItem(idproducto,idcompraitem){
+            function eliminarItem(idproducto,idcompraitem,cicantidad){
                 //var row = $('#dg').datagrid('getSelected');
            
                     $.messager.confirm('Confirm','Seguro que desea eliminar el menu?', function(r){
                         if (r){
-                            $.post('accion/envio_datos.php?idproducto='+idproducto+'&idcompraitem='+idcompraitem,
+                            $.post('accion/eliminar_item_carrito.php?idproducto='+idproducto+'&idcompraitem='+idcompraitem+'&cicantidad='+cicantidad,
                                function(result){
-                               	 alert("Volvio Serviodr");  
+                          //     	 alert("Volvio Serviodr");  
 
                                 if (result.respuesta){
-                                   	 alert("se pudo enviar, idproducto:"+result.idproducto +" y su idcompraitem es"+result.idcompraitem);
+                                /*  $.messager.alert({  
+                                        title: 'Mensaje',
+                                        msg: "se elimino:"+result.respuesta+" y se actualizo stock:"+result.seactualizo
+                                  });*/
+                                  window.location.href = window.location.href;
+                                 
+                                   //	 alert("se pudo enviar, idproducto:"+result.idproducto +" y su idcompraitem es"+result.idcompraitem);
                                     //$('#dg').datagrid('reload');    // reload the  data
                                 } else {
                                     $.messager.show({    // show error message
