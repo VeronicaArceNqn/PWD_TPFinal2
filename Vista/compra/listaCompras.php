@@ -2,7 +2,7 @@
 $dir="";
 $titulo = "Supervisar compras";
 include_once $dir."../estructura/headerSeguro.php";
-include_once '../../configuracion.php';
+//include_once '../../configuracion.php';
 
 ?>
 
@@ -34,7 +34,6 @@ include_once '../../configuracion.php';
                     
                     foreach ($listacompra as $objCompra) {                         
                         $idcompra=$objCompra->getIdcompra();
-                      
                         $param["idcompra"] = $idcompra;
                         $param["cefechafin"]="null";
                         $param["idcompraet"] =0;
@@ -44,8 +43,8 @@ include_once '../../configuracion.php';
                         if(count($arreCE)==1)
                         {
                            $estado=$arreCE[0]->getObjcompraestadotipo()->getCetdescripcion();
-                        
-                       
+                           $idcompraestado=$arreCE[0]->getIdcompraestado();
+                           $idusuarioc=$arreCE[0]->getObjusuario()->getidusuario();
                            echo '<tr>
                            <th scope="row">'.$idcompra.'</th>';
                            echo '
@@ -55,7 +54,9 @@ include_once '../../configuracion.php';
                           
                            echo '
                            <td>'.$estado.'</td>';
-                           echo '<td><a href="" class="btn btn-success">Ver compra</a></td>';
+                           echo '<td>'?><button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick=" cargarCompra(<?php echo  $idcompra?>,<?php echo  $idcompraestado?>,<?php echo  $idusuarioc?>);">
+                           Ver compra
+                          </button><?php echo'</td>';
                          
                          
                               echo'</tr>';
@@ -76,11 +77,141 @@ include_once '../../configuracion.php';
                 
                 ?>
             
-        
+        <!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Compra </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <section class="shopping-cart dark">
+  <div class="container">
+   
+    <div id="contenido"class="content">
+    
+    </div>
+    
+</section>
+      </div>
+      <div class="modal-footer">
+
+      
+      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+    </div>
+  </div>
+</div>
 </div>
 </div>
 </div>
 <div>
+<script type="text/javascript">
+ 
+  
+  function  cargarCompra(idcompra,idcompraestado)
+  {
+  		$("#contenido").load('accion/cargar_compra_admin.php?idcompra='+idcompra+'&idcompraestado='+idcompraestado);
+  }
+  function cambiarEstado(mensaje,idcompra,idcompraestado,idcompraestadotipo,idusuario) {
+    alert("mensaje:"+mensaje+" idcompra:"+idcompra+ " idcompraestado:"+idcompraestado+" idcompraestadotipo:"+idcompraestadotipo);
+   /* $.messager.alert({
+            title: 'Error',
+            msg: result.errorMsg
+          });
+
+   /* var jqxhr = $.post('accion/agregar_estado.php?idcompra='+idcompra+"&idcompraestado="+idcompraestado+"&idcompraestadotipo="+idcompraestadotipo+"&idusuario="+idusuario, function() {
+        //alert( "success" );
+      })
+      .done(function(result) {
+        var result = eval('(' + result + ')');
+        if (!result.respuesta) {
+          $.messager.alert({
+            title: 'Error',
+            msg: result.errorMsg
+          });
+        } else {
+          $.messager.alert({
+            title: 'Mensaje',
+            msg: mensaje + result.respuesta+" se cambio estado true:"+result.seactualizo
+          });
+          //cargarCarrito();
+          window.location.href = window.location.href;
+        }
+      })
+      .fail(
+        function() {
+
+          $.messager.alert({
+            title: 'Error',
+            msg: "No se pudo ejecutar"
+          });
+
+        }
+      )
+      .always(function() {
+        // alert( "finished" );
+      });
+
+    */
+  }
+  function enviarDatos(){
+                //var row = $('#dg').datagrid('getSelected');
+           
+                    $.messager.confirm('Confirm','Seguro que desea eliminar el menu?', function(r){
+                        if (r){
+                            $.post('accion/envio_datos.php?idproducto='+3,
+                               function(result){
+                            //   	 alert("Volvio Serviodr");  
+
+                                if (result.respuesta){
+                                   	 alert("se pudo enviar, idproducto"+result.idproducto);
+                                    //$('#dg').datagrid('reload');    // reload the  data
+                                } else {
+                                    $.messager.show({    // show error message
+                                        title: 'Error',
+                                        msg: result.errorMsg
+                                  });
+                                }
+                            },'json');
+                        }
+                    });
+               
+            }
+            function eliminarItem(idproducto,idcompraitem,cicantidad){
+                //var row = $('#dg').datagrid('getSelected');
+           
+                    $.messager.confirm('Confirm','Seguro que desea eliminar el menu?', function(r){
+                        if (r){
+                            $.post('accion/eliminar_item_carrito.php?idproducto='+idproducto+'&idcompraitem='+idcompraitem+'&cicantidad='+cicantidad,
+                               function(result){
+                          //     	 alert("Volvio Serviodr");  
+
+                                if (result.respuesta){
+                                /*  $.messager.alert({  
+                                        title: 'Mensaje',
+                                        msg: "se elimino:"+result.respuesta+" y se actualizo stock:"+result.seactualizo
+                                  });*/
+                                  window.location.href = window.location.href;
+                                 
+                                   //	 alert("se pudo enviar, idproducto:"+result.idproducto +" y su idcompraitem es"+result.idcompraitem);
+                                    //$('#dg').datagrid('reload');    // reload the  data
+                                } else {
+                                    $.messager.show({    // show error message
+                                        title: 'Error',
+                                        msg: result.errorMsg
+                                  });
+                                }
+                            },'json');
+                        }
+                    });
+               
+            }
+</script>
 <?php
 include ("../../Vista/estructura/footer.php");
 ?>

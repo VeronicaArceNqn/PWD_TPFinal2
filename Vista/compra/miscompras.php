@@ -2,7 +2,7 @@
 $dir="";
 $titulo = "Mis compras";
 include_once $dir."../estructura/headerSeguro.php";
-include_once '../../configuracion.php';
+//include_once '../../configuracion.php';
 
 ?>
 
@@ -55,7 +55,7 @@ include_once '../../configuracion.php';
                           
                            echo '
                            <td>'.$estado.'</td>';
-                           echo '<td>'?><button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick=" cargarCarrito(<?php echo  $idcompra?>,<?php echo  $idcompraestado?>);">
+                           echo '<td>'?><button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick=" cargarCompra(<?php echo  $idcompra?>,<?php echo  $idcompraestado?>);">
                            Ver compra
                           </button><?php echo'</td>';
                          
@@ -101,8 +101,7 @@ include_once '../../configuracion.php';
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
-      </div>
+        </div>
     </div>
   </div>
 </div>
@@ -113,66 +112,10 @@ include_once '../../configuracion.php';
 <script type="text/javascript">
  
   
-  function  cargarCarrito(idcompra,idcompraestado)
+  function  cargarCompra(idcompra,idcompraestado)
   {
   		$("#contenido").load('accion/cargar_compra.php?idcompra='+idcompra+'&idcompraestado='+idcompraestado);
-  }/*
-      function agregarProducto() {
-    var idcompra=$("#idcompra").val();
-    alert(idcompra);
-    var urldatos= "";
-    if(parseInt($("#idcompra").val())==-1)
-    {
-      //alert("entro crear pedido")
-      urldatos= "accion/agregar_primerproducto.php";
-    }
-    else{
-    //  alert("entro agregar producto al carrito")
-      urldatos= "accion/agregar_producto.php";
-    }
-    alert(urldatos);
-    var jqxhr = $.post(urldatos, function() {
-        //alert( "success" );
-      })
-      .done(function(result) {
-        var result = eval('(' + result + ')');
-        if (!result.respuesta) {
-          $.messager.alert({
-            title: 'Error',
-            msg: result.errorMsg
-          });
-        } else {
-          var res;
-          if(result.seagrego)
-          {
-            res=",Se agrego el producto";
-          }
-          else 
-             res="No se pudo agregar el producto";
-          $.messager.alert({
-            title: 'Mensaje',
-            msg: "Se registro correctamente-> true:" + result.respuesta+""+res 
-          });
-          cargarCarrito();
-        }
-      })
-      .fail(function() {
-
-        $.messager.alert({
-          title: 'Error',
-          msg: "No se pudo ejecutar"
-        });
-
-      })
-      .always(function() {
-        // alert( "finished" );
-      });
-      
-    jqxhr.always(function() {
-      alert( "second finished" );
-    //});
-  //}
- */
+  }
   function cambiarEstado(mensaje,idcompraestadotipo,idusuario) {
     var jqxhr = $.post('accion/agregar_estado.php?idcompra='+$("#idcompra").val()+"&idcompraestado="+$("#idcompraestado").val()+"&idcompraestadotipo="+idcompraestadotipo+"&idusuario="+idusuario, function() {
         //alert( "success" );

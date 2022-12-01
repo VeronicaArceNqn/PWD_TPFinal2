@@ -34,7 +34,7 @@ if (count($items) > 0) {
                                         </div>
                                         <div class="col-md-3 quantity">
                                             <label for="quantity">Cantidad:</label>
-                                            <input id="quantity" type="number" value="<?php echo $item->getCicantidad(); ?>" class="form-control quantity-input" readonly>
+                                            <input id="quantity" type="number" value="<?php echo $item->getCicantidad(); ?>" class="form-control quantity-input">
                                         </div>
                                         <div class="col-md-2 price">
                                             <span><?php echo $item->getObjProducto()->getPrecio(); ?>$</span>
@@ -59,10 +59,10 @@ if (count($items) > 0) {
                 <div class="summary-item">
                     <p class="text-start fs-4">Total: <span class="text-start text-success fs-4"><?php echo $suma; ?>$</span></p>
                 </div>
-               <!-- <button type="button" class="btn btn-warning" onclick="cambiarEstado('La compra fue aceptada!',2,<?php echo $datos['idcompra']; ?>,<?php echo $datos['idcompraestado']; ?>)">Aceptar</button>
+                <button type="button" class="btn btn-warning" onclick="cambiarEstado('La compra fue aceptada!',2,<?php echo $datos['idcompra']; ?>,<?php echo $datos['idcompraestado']; ?>)">Aceptar</button>
       <button type="button" class="btn btn-success">Enviar</button>
       <button type="button" class="btn btn-danger">Cancelar</button>
--->
+ 
             </div>
                 </div>
             </div>
