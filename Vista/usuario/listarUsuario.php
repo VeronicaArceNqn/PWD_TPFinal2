@@ -47,7 +47,7 @@ include_once '../../configuracion.php';
                         echo '
                         <td>'.$objUsuario->getusdeshabilitado().'</td>';
                          if($objUsuario->getusdeshabilitado()==null)
-                        echo '<td><a href="editarUsuario.php?accion=editar&idusuario='.$objUsuario->getidusuario().'" class="btn btn-success">Dar rol</a></td>';
+                        echo '<td><a href="asignarRol.php?idusuario='.$objUsuario->getidusuario().'" class="btn btn-success">Dar rol</a></td>';
                         else
                         echo '<td></td>';
                         //echo '<td><a href="accion/eliminar_usuario.php?idusuario'.$objUsuario->getidusuario().'" class="btn btn-success">Deshabilitar</a></td>';
