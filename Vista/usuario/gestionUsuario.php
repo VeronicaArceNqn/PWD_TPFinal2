@@ -11,7 +11,7 @@ $List_Usuario = $objControl->buscar(null);
 $combo = '<select class="easyui-combobox"  id="idpadre"  name="idpadre" label="Submenu de?:" labelPosition="top" style="width:90%;">
 <option value="null"></option>';
 foreach ($List_Usuario as $objUsuario){
-    $combo .='<option value="'.$objUsuario->getIdusuario().'">'.$objUsuario->getUsnombre().':'.$objUsuario->getUsmail().'</option>';
+    $combo .='<option value="'.$objUsuario->getIdusuario().'">'.$objUsuario->getUsnombre().':'.$objUsuario->getUsmail().':'.$objUsuario->getusdeshabilitado().'</option>';
 }
 
 $combo .='</select>';
@@ -24,15 +24,15 @@ $combo .='</select>';
                 <th field="idusuario" width="8">ID</th>
                 <th field="usnombre" width="50">Nombre</th>
                 <th field="usmail" width="50">Correo</th>
-                <th field="medeshabilitado" width="25">Deshabilitado</th>
+                <th field="usdeshabilitado" width="25">Deshabilitado</th>
             </tr>
         </thead>
     </table>
         <div id="toolbar">
-            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newUsuario()">Nuevo Usuario </a>
-            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editUsuario()">Editar Usuario</a>
-            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyUsuario()">Baja Usuario</a>
-            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editrol()">Cambiar Rol</a>
+           <!-- <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newUsuario()">Nuevo Usuario </a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editUsuario()">Editar Usuario</a>-->
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="deshabilitarUsuario()">Deshabilitar Usuario</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editRol()">Cambiar Rol</a>
         </div>
             
         <div id="dlg" class="easyui-dialog" style="width:600px" data-options="closed:true,modal:true,border:'thin',buttons:'#dlg-buttons'">
@@ -67,7 +67,7 @@ $combo .='</select>';
 
     <script type="text/javascript">
             var url;
-            function newUsuario(){
+          /*  function newUsuario(){
                 $('#dlg').dialog('open').dialog('center').dialog('setTitle','Nuevo Usuario');
                 $('#fm').form('clear');
                 url = 'accion/alta_usuario.php';
@@ -80,7 +80,7 @@ $combo .='</select>';
                     $('#fm').form('load',row);
                     url = 'accion/edit_usuario.php';
                 }
-            }
+            }*/
             function saveUsuario(){
             	alert("Accion");
                 $('#fm').form('submit',{
@@ -110,12 +110,12 @@ $combo .='</select>';
                     }
                 });
             }
-            function destroyMenu(){
+            function deshabilitarUsuario(){
                 var row = $('#dg').datagrid('getSelected');
                 if (row){
-                    $.messager.confirm('Confirm','Seguro que desea eliminar el menu?', function(r){
+                    $.messager.confirm('Confirm','Seguro que desea deshabilitar el usuario?', function(r){
                         if (r){
-                            $.post('accion/eliminar_menu.php?idmenu='+row.idmenu,{idmenu:row.id},
+                            $.post('accion/eliminar_usuario.php?idusuario='+row.idusuario,{idusuario:row.id},
                                function(result){
                                	 alert("Volvio Serviodr");   
                                  if (result.respuesta){

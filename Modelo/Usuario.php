@@ -66,7 +66,7 @@ class Usuario extends BaseDatos
                 }
             }
         } else {
-            $this->setmensajeoperacion("Especies->listar: ".$this->getError());
+            $this->setmensajeoperacion("Usuario->listar: ".$this->getError());
         }
         return $resp;
     
@@ -84,28 +84,37 @@ class Usuario extends BaseDatos
                 $this->setmensajeoperacion("Especie->insertar: ".$this->getError());
             }
         } else {
-            $this->setmensajeoperacion("Especie->insertar: ".$this->getError());
+            $this->setmensajeoperacion("Usuario->insertar: ".$this->getError());
         }
         return $resp;
     }
     
     
-    public function modificar(){
+    public function modificar($tipo){
         $resp = false;
-        $sql="UPDATE usuario SET usnombre='".$this->getusnombre()."' ,uspass='".$this->getuspass()."',usmail='".$this->getusmail()."' ,usdeshabilitado='".$this->getusdeshabilitado()."' ".
-            " WHERE idusuario=".$this->getidusuario();
+        if($tipo == "borradoLogico"){
+            $fechaActual=Date("Y-m-d h:i:s");
+            $sql="UPDATE usuario SET usdeshabilitado='".$fechaActual."' WHERE idusuario=".$this->getidusuario();
+
+        }else{
+            $sql="UPDATE usuario SET usmail = '". $this->getusmail(). "' WHERE idusuario =".$this->getidusuario();
+        }    
         if ($this->Iniciar()) {
             
             if ($this->Ejecutar($sql)) {
                 $resp = true;
             } else {
-                $this->setmensajeoperacion("Especie->modificar: ".$this->getError());
+                $this->setmensajeoperacion("Usuario->modificar: ".$this->getError());
             }
         } else {
-            $this->setmensajeoperacion("Especie->modificar: ".$this->getError());
+            $this->setmensajeoperacion("Usuario->modificar: ".$this->getError());
         }
         return $resp;
     }
+
+    
+
+
     public function eliminar(){
         $resp = false;
         $sql="DELETE FROM usuario WHERE idusuario=".$this->getidusuario();
@@ -113,10 +122,10 @@ class Usuario extends BaseDatos
             if ($this->Ejecutar($sql)) {
                 return true;
             } else {
-                $this->setmensajeoperacion("Especie->eliminar: ".$this->getError());
+                $this->setmensajeoperacion("Usuario->eliminar: ".$this->getError());
             }
         } else {
-            $this->setmensajeoperacion("Especie->eliminar: ".$this->getError());
+            $this->setmensajeoperacion("Usuario->eliminar: ".$this->getError());
         }
         return $resp;
     }
@@ -143,7 +152,7 @@ class Usuario extends BaseDatos
             
         }
         else {
-           $this->setmensajeoperacion("Especie->listar: ".$this->getError());
+           $this->setmensajeoperacion("Usuario->listar: ".$this->getError());
         }
         }
         return $arreglo;

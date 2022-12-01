@@ -9,7 +9,7 @@ class ABMUsuario{
             }
         }
         if($datos['accion']=='borrar'){
-            if($this->baja($datos)){
+            if($this->bajaLogica($datos)){
                 $resp =true;
             }
         }
@@ -60,7 +60,7 @@ class ABMUsuario{
         if( isset($param['idusuario']) ){
             $obj = new Usuario();
             $obj->setear($param['idusuario'], null,null,null,null);
-        }
+        }        
         return $obj;
     }
     
@@ -71,10 +71,10 @@ class ABMUsuario{
      * @return boolean
      */
     
-    private function seteadosCamposClaves($param){
+    private function seteadosCamposClaves($param){        
         $resp = false;
         if (isset($param['idusuario']))
-            $resp = true;
+            $resp = true;            
         return $resp;
     }
     
@@ -94,9 +94,9 @@ class ABMUsuario{
     public function borrar_rol($param){
         $resp = false;
         if(isset($param['idusuario']) && isset($param['idrol'])){
-            $elObjtTabla = new UsuarioRol();
-            $elObjtTabla->setearConClave($param['idusuario'],$param['idrol']);
-            $resp = $elObjtTabla->eliminar();
+            $elObjtUsuario = new UsuarioRol();
+            $elObjtUsuario->setearConClave($param['idusuario'],$param['idrol']);
+            $resp = $elObjtUsuario->eliminar();
             
         }
        
@@ -107,9 +107,9 @@ class ABMUsuario{
     public function alta_rol($param){
         $resp = false;
         if(isset($param['idusuario']) && isset($param['idrol'])){
-            $elObjtTabla = new UsuarioRol();
-            $elObjtTabla->setearConClave($param['idusuario'],$param['idrol']);
-            $resp = $elObjtTabla->insertar();
+            $elObjtUsuario = new UsuarioRol();
+            $elObjtUsuario->setearConClave($param['idusuario'],$param['idrol']);
+            $resp = $elObjtUsuario->insertar();
            
 
         }
@@ -122,11 +122,11 @@ class ABMUsuario{
      * @param array $param
      * @return boolean
      */
-    public function baja($param){
+    public function bajaLogica($param){
         $resp = false;
         if ($this->seteadosCamposClaves($param)){
-            $elObjtTabla = $this->cargarObjetoConClave($param);
-            if ($elObjtTabla!=null and $elObjtTabla->eliminar()){
+            $elObjtUsuario = $this->cargarObjetoConClave($param);
+            if ($elObjtUsuario!=null and $elObjtUsuario->modificar("borradoLogico")){
                 $resp = true;
             }
         }
@@ -140,14 +140,15 @@ class ABMUsuario{
      * @return boolean
      */
     public function modificacion($param){
-        //echo "Estoy en modificacion";
+       // echo "Estoy en modificacion";
+       
         $resp = false;
         if ($this->seteadosCamposClaves($param)){
-            $elObjtTabla = $this->cargarObjeto($param);
-            if($elObjtTabla!=null and $elObjtTabla->modificar()){
+            $elObjtUsuario = $this->cargarObjeto($param);            
+            if($elObjtUsuario!=null and $elObjtUsuario->modificar()){
                 $resp = true;
             }
-        }
+        }       
         return $resp;
     }
 
