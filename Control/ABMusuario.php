@@ -145,7 +145,7 @@ class ABMUsuario{
         $resp = false;
         if ($this->seteadosCamposClaves($param)){
             $elObjtUsuario = $this->cargarObjeto($param);            
-            if($elObjtUsuario!=null and $elObjtUsuario->modificar()){
+            if($elObjtUsuario!=null and $elObjtUsuario->modificar("")){
                 $resp = true;
             }
         }       

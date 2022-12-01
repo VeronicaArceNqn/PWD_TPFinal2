@@ -124,6 +124,31 @@ class AbmMenu{
       return $resp;
      
     }
+    public function alta_rol($param){
+        $resp = false;
+        if(isset($param['idmenu']) && isset($param['idrol'])){
+            $elObjtMenu = new MenuRol();
+            $elObjtMenu->setearConClave($param['idmenu'],$param['idrol']);
+            $resp = $elObjtMenu->insertar();
+           
+
+        }
+       
+        return $resp;
+        
+    }
+    public function borrar_rol($param){
+        $resp = false;
+        if(isset($param['idmenu']) && isset($param['idrol'])){
+            $elObjtMenu = new MenuRol();
+            $elObjtMenu->setearConClave($param['idmenu'],$param['idrol']);
+            $resp = $elObjtMenu->eliminar();
+            
+        }
+       
+        return $resp;
+        
+    }
           /**
      * permite eliminar un objeto 
      * @param array $param
@@ -173,6 +198,20 @@ class AbmMenu{
             }
         }
         return $resp;
+    }
+
+    public function darRoles($param){
+        $where = " true ";
+        if ($param<>NULL){
+            if  (isset($param['idmenu']))
+                $where.=" and idmenu =".$param['idmenu'];
+            if  (isset($param['idrol']))
+                 $where.=" and idrol ='".$param['idrol']."'";
+        }
+        $obj = new MenuRol();
+        $arreglo = $obj->listar($where);
+        //echo "Van ".count($arreglo);
+        return $arreglo;
     }
     
     /**

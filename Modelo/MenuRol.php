@@ -52,6 +52,11 @@ class MenuRol{
         $this->setObjMenu($objMenu);
         $this->setObjRol($objRol);
       }
+      public function setearConClave($idmenu, $idrol)
+    {
+        $this->getobjrol()->setidrol($idrol);
+        $this->getobjmenu()->setidmenu($idmenu);
+    }
 
       public function cargar() {
         $resp = false;

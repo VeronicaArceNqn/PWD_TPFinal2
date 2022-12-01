@@ -1,24 +1,24 @@
 <?php 
 $dir="../";
-$titulo =" Editar Usuario ";
+$titulo =" Asignar menuRol ";
 include_once $dir."../Vista/estructura/headerSeguro.php";
 include_once '../../configuracion.php';
-$objAbmUsuario = new ABMusuario();
+$objAbmMenu = new AbmMenu();
 $datos =data_submitted();
 $obj = null;
 //print_r ($datos);
 //echo $datos['idusuario'];
 $msj="";
-if (isset($datos['idusuario'])){
-    $listaUsuario = $objAbmUsuario->buscar($datos);
-    //print_r($listaUsuario);
-    if (count($listaUsuario)==1){
-        $obj= $listaUsuario[0];
+if (isset($datos['idmenu'])){
+    $listaMenu = $objAbmMenu->buscar($datos);
+    //print_r($listaMenu);
+    if (count($listaMenu)==1){
+        $obj= $listaMenu[0];
 
         //print_r($obj);
     }
 }else{
-    $msj="No se envío ningún usuario";
+    $msj="No se envío ningún menu";
 }
 
 
@@ -32,15 +32,15 @@ if (isset($datos['idusuario'])){
        
         <form class="needs-validation" id="form1" name="form1" method="post" action="accionEditarUsuario.php">
             <div class="form-group mb-4">
-                <h5>Dar Rol</h5>
+                <h5>Dar Men&uacute;</h5>
                 <?php echo $msj;?>
-                <input type="text" class="form-control" id="idusuario" name="idusuario" placeholder="" value="<?php echo $obj->getIdusuario()?>" readonly required hidden>
-                <label for="nombreyApellio">Nombre y Apellido</label>
-                <input type="text" class="form-control" id="usnombre" name="usnombre" placeholder="" value="<?php echo $obj->getUsnombre()?>" readonly required>
+                <input type="text" class="form-control" id="idmenu" name="idmenu" placeholder="" value="<?php echo $obj->getIdmenu()?>" readonly required hidden>
+                <label for="menombre">ID Men&uacute;</label>
+                <input type="text" class="form-control" id="menombre" name="menombre" placeholder="" value="<?php echo $obj->getMenombre()?>" readonly required>
             </div>
             <div class="form-group mb-4">
-                <label for="email">Correo electrónico</label>
-                <input type="email" class="form-control" id="usmail" name="usmail" aria-describedby="emailHelp" placeholder="" value="<?php echo $obj->getUsmail()?>" readonly required>
+                <label for="medescripcion">Descripci&oacute;n</label>
+                <input type="text" class="form-control" id="medescripcion" name="medescripcion" aria-describedby="emailHelp" placeholder="" value="<?php echo $obj->getMedescripcion()?>" readonly required>
                 <!--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
             </div>
 
@@ -58,7 +58,7 @@ if (isset($datos['idusuario'])){
                     if( count($listaRol)>0){
                         foreach ($listaRol as $obj) {
                             ?>
-                            <a class="btn btn-success" role="button" href="javascript:void(0)" onclick="darRol(<?php echo $obj->getidrol();?>,<?php echo $datos['idusuario'];?>)">Dar Rol <?php echo $obj->getrodescripcion();?></a>
+                            <a class="btn btn-success" role="button" href="javascript:void(0)" onclick="darRol(<?php echo $obj->getidrol();?>,<?php echo $datos['idmenu'];?>)">Dar Rol <?php echo $obj->getrodescripcion();?></a>
                         <?php
                         }
                     }
@@ -71,7 +71,7 @@ if (isset($datos['idusuario'])){
                 
                 <?php
                    
-                   $listaTabla = $objAbmUsuario->darRoles($datos);
+                   $listaTabla = $objAbmMenu->darRoles($datos);
                    
         
                 ?>
@@ -93,7 +93,7 @@ if (isset($datos['idusuario'])){
                             echo '<td>'.$objTabla->getobjrol()->getrodescripcion().'</td>';
                             ?>
 
-                            <td><a class="btn btn-danger" role="button" href="javascript:void(0)" onclick="eliminarRol(<?php echo $objTabla->getobjrol()->getidrol();?>,<?php echo $objTabla->getobjusuario()->getidusuario();?>)">Quitar Rol </a></td>
+                            <td><a class="btn btn-danger" role="button" href="javascript:void(0)" onclick="eliminarRol(<?php echo $objTabla->getobjrol()->getidrol();?>,<?php echo $objTabla->getObjMenu()->getIdMenu();?>)">Quitar Rol </a></td>
                             
 
 
@@ -107,7 +107,7 @@ if (isset($datos['idusuario'])){
                     ?>
                             </tbody>
                         </table>
-                        <a class="btn btn-secondary" role="button" href="listarUsuario.php" >Volver </a>
+                        <a class="btn btn-secondary" role="button" href="permisosMenu.php" >Volver </a>
                     </div>
             </div>
            
@@ -117,9 +117,9 @@ if (isset($datos['idusuario'])){
             
         </form>
         <script>
-            function darRol(idrol,idusuario) {
-    var jqxhr = $.post('accion/dar_rol.php?idrol='+idrol+"&idusuario="+idusuario, function() {
-       // alert( "success" );
+            function darRol(idrol,idmenu) {
+    var jqxhr = $.post('accion/dar_rol.php?idrol='+idrol+"&idmenu="+idmenu, function() {
+        //alert( "success" );
       })
       .done(function(result) {
         var result = eval('(' + result + ')');
@@ -154,8 +154,8 @@ if (isset($datos['idusuario'])){
     
   }
 
-  function eliminarRol(idrol,idusuario) {
-    var jqxhr = $.post('accion/eliminar_rol.php?idrol='+idrol+"&idusuario="+idusuario, function() {
+  function eliminarRol(idrol,idmenu) {
+    var jqxhr = $.post('accion/eliminar_rol.php?idrol='+idrol+"&idmenu="+idmenu, function() {
         alert( "success" );
       })
       .done(function(result) {
