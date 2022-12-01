@@ -185,7 +185,7 @@ $objCntrlCE= new ABMcompraestado();
 $arreCE=$objCntrlCE->buscar($param);
 
 $idcompra=-1;
-$idcompraestado=0;
+$idcompraestado=-1;
 $items=[];
 //print_r($arreCE);
 if(count($arreCE)==1)

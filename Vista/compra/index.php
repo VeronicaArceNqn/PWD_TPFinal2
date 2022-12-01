@@ -7,12 +7,11 @@ $suma=0;
 
 ?> <section class="shopping-cart dark">
   <div class="container">
-    <div class="block-heading">
-      <h2>Carrito de compras</h2>
-     </div>
+   
     <div id="contenido"class="content">
     
     </div>
+    
 </section>
 <script type="text/javascript">
   cargarCarrito();
