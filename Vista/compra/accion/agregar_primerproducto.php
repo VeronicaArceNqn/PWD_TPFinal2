@@ -23,7 +23,7 @@ $param["cefechafin"] = "null";
 $objCntrlCE = new ABMcompraestado();
 $arreCE = $objCntrlCE->buscar($param);
 if (count($arreCE) == 1) {
-    $mensaje="Ya tiene una compra en confeccion";
+    $mensaje="Tiene productos en el carrito";
     $idcompra=$arreCE[0]->getObjCompra()->getIdcompra();
     $retorno["idcompra"]=$idcompra;
 } else {

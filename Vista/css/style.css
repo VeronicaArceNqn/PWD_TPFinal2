@@ -1,3 +1,5 @@
+
+
 .shopping-cart{
 	padding-bottom: 50px;
 	font-family: 'Montserrat', sans-serif;
@@ -109,6 +111,7 @@
 .shopping-cart .summary button{
 	margin-top: 20px;
 }
+    
 
 @media (min-width: 768px) {
 	.shopping-cart .items .product .info {

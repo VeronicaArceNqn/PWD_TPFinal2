@@ -1,27 +1,44 @@
-<link rel="stylesheet" type="text/css" href="../css/estiloproductos.css">
 <?php
-$titulo = ".: Productos :.";
+$titulo = ".: Inicio :.";
 $dir = "";
-include($dir . "../estructura/headerSeguro.php");
+include_once $dir . '../estructura/headerSeguro.php';
+$idusuario=$objTrans->getUsuario()->getidusuario();
 if (isset($_GET["tipo"])) {
-  $param["tipo"] = $_GET["tipo"];
+    $param["tipo"] = $_GET["tipo"];
 } else {
-  $param["tipo"] = "null";
+    $param = null;
 }
-//$idusuario=$objTrans->getUsuario()->getidusuario();
-
 ?>
-<input type="hidden" id=tipo value="<?php echo $param["tipo"];?>">
+
+<style type="text/css">
+
+</style>
+
+
+<div id="productos"class="container pt-2 pb-2">
 <?php
 
+$objCtrlProducto = new ABMproducto();
+$lista = $objCtrlProducto->buscar($param);
 ?>
+    <?php
+    foreach ($lista as $objProducto) {
+    ?>
+        <div class="card pt-2" style="width:300px">
+            <h5 class="card-title text-center"><?php echo $objProducto->getPronombre(); ?></h5>
+            <div class="contenedorimagen">
+                <img class="card-img-top" src="<?php echo $objProducto->getUrlimagen(); ?>" alt="Card image">
+            </div>
+            <div class="card-body text-center">
 
-
-
-<div id="productos" class="container pt-2 pb-2">
-
-  
-  
+                <h6 class="card-text txt-secondary"><?php echo $objProducto->getProdetalle(); ?></h6>
+                <h4 class="card-text text-primary font-weight-bold"><?php echo $objProducto->getPrecio(); ?>$</h4>
+                <h6 class="text-success font-weight-bold"><?php echo $objProducto->getProcantstock(); ?> disponibles</h6>
+                <a href="javascript:void(0)" class="btn btn-warning font-weight-bold" onclick="agregarProducto(<?php echo  $objProducto->getIdproducto(); ?>,<?php echo  $idusuario ?>)">Agregar</a>
+                
+            </div>
+        </div>
+    <?php } ?>
 
 </div>
 
@@ -29,15 +46,14 @@ if (isset($_GET["tipo"])) {
 
 </div>
 </div>
-
 <script type="text/javascript">
- cargarProductos(<?php echo $idusuario;?>,$("#tipo").val());
+  /*cargarProductos();
   
-  function cargarProductos(idusuario,tipo)
+  function cargarProductos()
   {
-   
-   $("#productos").load('accion/cargar_productos.php?tipo='+tipo+'&idusuario='+idusuario);
-  }
+    alert("entro a cargar productos");
+  		$("#productos").load('accion/cargar_productos.php?tipo=null');
+  }*/
          function agregarProducto(idproducto,idusuario) {
     var idcompra=$("#idcompra").val();
     //alert(idcompra);
@@ -68,16 +84,14 @@ if (isset($_GET["tipo"])) {
           if(result.seagrego)
           {
             res=",Se agrego el producto";
-            $("#productos").load('accion/cargar_productos.php?tipo="null"&idusuario='+idusuario);
           }
-          else {
+          else 
              res="No se pudo agregar el producto";
-            }
           $.messager.alert({
             title: 'Mensaje',
             msg: "Se registro correctamente-> true:" + result.respuesta+""+res 
           });
-          //cargarProductos($idusuario,$("tipo").val());
+          $("#productos").load();
         }
       })
       .fail(function() {

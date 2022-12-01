@@ -28,6 +28,7 @@ if ($resp && $permisosOk) {
 <head>
 	<meta charset="UTF-8">
 	<title><?php echo $titulo; ?></title>
+
 	<link rel="stylesheet" type="text/css" href="../css/style.css">
 	<link rel="stylesheet" type="text/css" href="../js/jquery-easyui-1.10.8/themes/bootstrap/easyui.css">
 	<link rel="icon" href="../css/images/icon-sis.png" type="image/x-icon">
