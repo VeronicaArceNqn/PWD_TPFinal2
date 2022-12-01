@@ -4,9 +4,9 @@ $data = data_submitted();
 
 if (isset($data['idusuario'])){
     $objC = new ABMUsuario();
-    $respuesta = $objC->baja($data);
+    $respuesta = $objC->bajaLogica($data);
     if (!$respuesta){
-        $mensaje = " La accion  ELIMINACION No pudo concretarse";
+        $mensaje = " La accion  DESHABILITACIÓN No pudo concretarse";
     }
 }
 
@@ -17,4 +17,6 @@ if (isset($mensaje)){
 
 }
     echo json_encode($retorno);
+?>
+
 ?>
