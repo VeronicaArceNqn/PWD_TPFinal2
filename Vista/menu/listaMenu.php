@@ -33,7 +33,7 @@ $combo .='</select>';
             <div id="toolbar">
             <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newMenu()">Nuevo Menu </a>
             <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editMenu()">Editar Menu</a>
-            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyMenu()">Deshabilitar Menu</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyMenu()">Baja Menu</a>
             </div>
             
             <div id="dlg" class="easyui-dialog" style="width:600px" data-options="closed:true,modal:true,border:'thin',buttons:'#dlg-buttons'">
@@ -116,11 +116,11 @@ $combo .='</select>';
             function destroyMenu(){
                 var row = $('#dg').datagrid('getSelected');
                 if (row){
-                    $.messager.confirm('Confirm','Seguro que desea deshabilitar el menu?', function(r){
+                    $.messager.confirm('Confirm','Seguro que desea eliminar el menu?', function(r){
                         if (r){
                             $.post('accion/eliminar_menu.php?idmenu='+row.idmenu,
                                function(result){
-                               	 //alert("Volvio Serviodr");   
+                               	 alert("Volvio Serviodr");   
                                  if (result.respuesta){
                                    	 
                                     $('#dg').datagrid('reload');    // reload the  data
