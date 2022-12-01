@@ -74,7 +74,7 @@ include_once '../../configuracion.php';
                 
                 ?>
             
-        
+            </div>    
 </div>
 
 </div>
@@ -82,4 +82,3 @@ include_once '../../configuracion.php';
 <?php
 include ("../../Vista/estructura/footer.php");
 ?>
-</div>

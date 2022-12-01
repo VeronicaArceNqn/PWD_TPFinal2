@@ -204,30 +204,37 @@ class ABMcompraestado
     public function buscar($param = null)
     {
         $where = " true ";
-        //echo "Este dato ingresa a Buscar en ABMusuario";
-
-        //print_r($param);
-        //echo "<br>";
-        //print_r ($param['idcompraestado']);
+      
         if ($param <> NULL) {
 
 
-            if (isset($param['idcompraestado']))
+            if (isset($param['idcompraestado'])) {
                 $where .= " and idcompraestado = " . $param['idcompraestado'];
-            if (isset($param['idcompra']))
+            }
+            if (isset($param['idcompra'])) {
                 $where .= " and idcompra =" . $param['idcompra'];
-            if (isset($param['idcompraestadotipo']))
-                $where .= " and idcompraestadotipo =" . $param['idcompraestadotipo'];
-            if (isset($param['cefechaini']))
+            }
+            //condicion para buscar idcompraestadotipo mayor a un valor
+            if (isset($param['idcompraet'])) {
+                $where .= " and idcompraestadotipo > " . $param['idcompraet'];
+            } else {
+                //sino buscamos por idcompraestadotipo igual a un valor
+                if (isset($param['idcompraestadotipo'])) {
+                    $where .= " and idcompraestadotipo =" . $param['idcompraestadotipo'];
+                }
+            }
+            if (isset($param['cefechaini'])) {
                 $where .= " and cefechaini ='" . $param['cefechaini'] . "'";
-            if (isset($param['cefechafin']))
+            }
+            if (isset($param['cefechafin'])) {
                 $where .= " and cefechafin is " . $param['cefechafin'] . "";
-
-            if (isset($param['idusuario']))
+            }
+            if (isset($param['idusuario'])) {
                 $where .= " and idusuario = " . $param['idusuario'];
+            }
         }
 
-        //echo "<br>";
+       // echo "<br>" . $where;
         $arreglo = CompraEstado::listar($where);
         //echo "Estoy en buscar \n";
         //print_r($arreglo);

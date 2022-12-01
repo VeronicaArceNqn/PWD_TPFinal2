@@ -1,7 +1,7 @@
 <?php
-$dir="../";
-$titulo = "Lista Usuarios";
-include_once $dir."../Vista/estructura/headerSeguro.php";
+$dir="";
+$titulo = "Mis compras";
+include_once $dir."../estructura/headerSeguro.php";
 include_once '../../configuracion.php';
 
 ?>
@@ -23,7 +23,7 @@ include_once '../../configuracion.php';
                     <tr>
                         <th scope="col">ID compra</th>
                         <th scope="col">Fecha</th>
-                       
+                        <th scope="col">Estado</th>
                         <th scope="col"></th>
                           <!--<th scope="col"></th>
                         -->                
@@ -33,18 +33,37 @@ include_once '../../configuracion.php';
                 <?php
                     
                     foreach ($listacompra as $objCompra) {                         
-                        echo '<tr>
-                        <th scope="row">'.$objCompra->getIdcompra().'</th>';
-                        echo '
-                        <td>'.$objCompra->getCofecha().'</td>';
-                       /* echo '
-                        <td>'.$objUsuario->getuspass().'</td>';*/
-                      
-                        echo '<td><a href="" class="btn btn-success">Ver compra</a></td>';
-                      
-                      
-                           echo'</tr>';
-                  
+                        $idcompra=$objCompra->getIdcompra();
+                        $param["idusuario"] =$idusuario;
+                        $param["idcompra"] = $idcompra;
+                        $param["cefechafin"]="null";
+                        $param["idcompraet"] =0;
+                       
+                        $objCntrlCE= new ABMcompraestado();
+                        $arreCE=$objCntrlCE->buscar($param);
+                        if(count($arreCE)==1)
+                        {
+                           $estado=$arreCE[0]->getObjcompraestadotipo()->getCetdescripcion();
+                        
+                       
+                           echo '<tr>
+                           <th scope="row">'.$idcompra.'</th>';
+                           echo '
+                           <td>'.$objCompra->getCofecha().'</td>';
+                          /* echo '
+                           <td>'.$objUsuario->getuspass().'</td>';*/
+                          
+                           echo '
+                           <td>'.$estado.'</td>';
+                           echo '<td><a href="" class="btn btn-success">Ver compra</a></td>';
+                         
+                         
+                              echo'</tr>';
+                     
+                        }
+                        
+                       
+                        
                      }
                     //fin foreach
                     echo '    </tbody>
@@ -52,14 +71,14 @@ include_once '../../configuracion.php';
                 }
                 else{
 
-                    echo "<h3>No hay personas registradas </h3>";
+                    echo "<h3>No tiene compras registradas </h3>";
                 }
                 
                 ?>
             
         
 </div>
-
+</div>
 </div>
 <div>
 <?php
