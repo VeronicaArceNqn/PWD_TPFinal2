@@ -24,6 +24,7 @@ include_once $dir."../estructura/headerSeguro.php";
                         <th scope="col">ID compra</th>
                         <th scope="col">Fecha</th>
                         <th scope="col">Estado</th>
+                        <th scope="col">Id usuario</th>
                         <th scope="col"></th>
                           <!--<th scope="col"></th>
                         -->                
@@ -49,13 +50,14 @@ include_once $dir."../estructura/headerSeguro.php";
                            <th scope="row">'.$idcompra.'</th>';
                            echo '
                            <td>'.$objCompra->getCofecha().'</td>';
-                          /* echo '
-                           <td>'.$objUsuario->getuspass().'</td>';*/
+                          
                           
                            echo '
                            <td>'.$estado.'</td>';
+                           echo '
+                           <td>'.$idusuarioc.'</td>';
                            echo '<td>'?><button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal" onclick=" cargarCompra(<?php echo  $idcompra?>,<?php echo  $idcompraestado?>,<?php echo  $idusuarioc?>);">
-                           Ver compra
+                           Revisar
                           </button><?php echo'</td>';
                          
                          
@@ -113,18 +115,15 @@ include_once $dir."../estructura/headerSeguro.php";
 <script type="text/javascript">
  
   
-  function  cargarCompra(idcompra,idcompraestado)
+  function  cargarCompra(idcompra,idcompraestado,idusuario)
   {
-  		$("#contenido").load('accion/cargar_compra_admin.php?idcompra='+idcompra+'&idcompraestado='+idcompraestado);
+  		$("#contenido").load('accion/cargar_compra_admin.php?idcompra='+idcompra+'&idcompraestado='+idcompraestado+"&idusuario="+idusuario);
   }
-  function cambiarEstado(mensaje,idcompra,idcompraestado,idcompraestadotipo,idusuario) {
-    alert("mensaje:"+mensaje+" idcompra:"+idcompra+ " idcompraestado:"+idcompraestado+" idcompraestadotipo:"+idcompraestadotipo);
-   /* $.messager.alert({
-            title: 'Error',
-            msg: result.errorMsg
-          });
-
-   /* var jqxhr = $.post('accion/agregar_estado.php?idcompra='+idcompra+"&idcompraestado="+idcompraestado+"&idcompraestadotipo="+idcompraestadotipo+"&idusuario="+idusuario, function() {
+  function cambiarEstado(mensaje,idcompraestadotipo,idcompra,idcompraestado,idusuario) {
+    //alert("mensaje:"+mensaje+" idcompra:"+idcompra+ " idcompraestado:"+idcompraestado+" idcompraestadotipo:"+idcompraestadotipo+" idusuario:"+idusuario);
+   
+    cargarCompra(idcompra,idcompraestado,idusuario);
+    var jqxhr = $.post('accion/agregar_estado.php?idcompra='+idcompra+"&idcompraestado="+idcompraestado+"&idcompraestadotipo="+idcompraestadotipo+"&idusuario="+idusuario, function() {
         //alert( "success" );
       })
       .done(function(result) {
@@ -139,7 +138,7 @@ include_once $dir."../estructura/headerSeguro.php";
             title: 'Mensaje',
             msg: mensaje + result.respuesta+" se cambio estado true:"+result.seactualizo
           });
-          //cargarCarrito();
+         // $("#contenido").load('accion/cargar_compra_admin.php?idcompra='+idcompra+'&idcompraestado='+idcompraestado+"&idusuario="+idusuario);
           window.location.href = window.location.href;
         }
       })
@@ -157,60 +156,8 @@ include_once $dir."../estructura/headerSeguro.php";
         // alert( "finished" );
       });
 
-    */
+    
   }
-  function enviarDatos(){
-                //var row = $('#dg').datagrid('getSelected');
-           
-                    $.messager.confirm('Confirm','Seguro que desea eliminar el menu?', function(r){
-                        if (r){
-                            $.post('accion/envio_datos.php?idproducto='+3,
-                               function(result){
-                            //   	 alert("Volvio Serviodr");  
-
-                                if (result.respuesta){
-                                   	 alert("se pudo enviar, idproducto"+result.idproducto);
-                                    //$('#dg').datagrid('reload');    // reload the  data
-                                } else {
-                                    $.messager.show({    // show error message
-                                        title: 'Error',
-                                        msg: result.errorMsg
-                                  });
-                                }
-                            },'json');
-                        }
-                    });
-               
-            }
-            function eliminarItem(idproducto,idcompraitem,cicantidad){
-                //var row = $('#dg').datagrid('getSelected');
-           
-                    $.messager.confirm('Confirm','Seguro que desea eliminar el menu?', function(r){
-                        if (r){
-                            $.post('accion/eliminar_item_carrito.php?idproducto='+idproducto+'&idcompraitem='+idcompraitem+'&cicantidad='+cicantidad,
-                               function(result){
-                          //     	 alert("Volvio Serviodr");  
-
-                                if (result.respuesta){
-                                /*  $.messager.alert({  
-                                        title: 'Mensaje',
-                                        msg: "se elimino:"+result.respuesta+" y se actualizo stock:"+result.seactualizo
-                                  });*/
-                                  window.location.href = window.location.href;
-                                 
-                                   //	 alert("se pudo enviar, idproducto:"+result.idproducto +" y su idcompraitem es"+result.idcompraitem);
-                                    //$('#dg').datagrid('reload');    // reload the  data
-                                } else {
-                                    $.messager.show({    // show error message
-                                        title: 'Error',
-                                        msg: result.errorMsg
-                                  });
-                                }
-                            },'json');
-                        }
-                    });
-               
-            }
 </script>
 <?php
 include ("../../Vista/estructura/footer.php");

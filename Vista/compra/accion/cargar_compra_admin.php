@@ -59,9 +59,9 @@ if (count($items) > 0) {
                 <div class="summary-item">
                     <p class="text-start fs-4">Total: <span class="text-start text-success fs-4"><?php echo $suma; ?>$</span></p>
                 </div>
-                <button type="button" class="btn btn-warning" onclick="cambiarEstado('La compra fue aceptada!',2,<?php echo $datos['idcompra']; ?>,<?php echo $datos['idcompraestado']; ?>)">Aceptar</button>
-      <button type="button" class="btn btn-success">Enviar</button>
-      <button type="button" class="btn btn-danger">Cancelar</button>
+                <button type="button" class="btn btn-warning" onclick="cambiarEstado('La compra fue aceptada!',2,<?php echo $datos['idcompra']; ?>,<?php echo $datos['idcompraestado']; ?>,<?php echo $datos['idusuario']; ?>)">Aceptar pedido</button>
+      <button type="button" class="btn btn-success"  onclick="cambiarEstado('La compra fue enviada!',3,<?php echo $datos['idcompra']; ?>,<?php echo $datos['idcompraestado']; ?>,<?php echo $datos['idusuario']; ?>)">Enviar pedido</button>
+      <button type="button" class="btn btn-danger"  onclick="cambiarEstado('La compra fue cancelada!',4,<?php echo $datos['idcompra']; ?>,<?php echo $datos['idcompraestado']; ?>,<?php echo $datos['idusuario']; ?>)">Cancelar pedido</button>
  
             </div>
                 </div>
