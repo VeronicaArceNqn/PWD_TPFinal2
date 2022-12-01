@@ -197,8 +197,8 @@ if(count($arreCE)==1)
 
 }
 	?>
-	<input type="text" id="idcompra" name="idcompra"value="<?php echo $idcompra;?>" readonly>
-	<input type="text" id="idcompraestado" name="idcompraestado"value="<?php echo $idcompraestado;?>" readonly>
+	<input type="hidden" id="idcompra" name="idcompra"value="<?php echo $idcompra;?>" readonly>
+	<input type="hidden" id="idcompraestado" name="idcompraestado"value="<?php echo $idcompraestado;?>" readonly>
 	<!--<div data-options="region:'west',split:true,title:'West'" style="width:150px;padding:10px;">west content</div>-->
 	<!--<div data-options="region:'east',split:false,collapsed:true,title:'Perfil'" style="width:200px;padding:10px;height: auto;"> Datos de usuario</div>-->
 

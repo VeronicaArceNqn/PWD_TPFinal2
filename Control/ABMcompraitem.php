@@ -9,9 +9,9 @@ class ABMcompraitem{
             }
         }
         if($datos['accion']=='borradoLogico'){
-            if($this->bajaLogica($datos)){
+            /*if($this->bajaLogica($datos)){
                 $resp =true;
-            }
+            }*/
         }
         if ($datos['accion'] == 'nuevo') {
             $objCompraitem=null;
@@ -116,11 +116,11 @@ class ABMcompraitem{
      * @return boolean
      */
     
-    public function bajaLogica($param){
+    public function baja($param){
         $resp = false;
         if ($this->seteadosCamposClaves($param)){
             $elObjcitem = $this->cargarObjetoConClave($param);
-            if($elObjcitem!=null and $elObjcitem->modificar("borradoLogico")){
+            if($elObjcitem!=null and $elObjcitem->eliminar()){
                 $resp = true;
             }
         }
