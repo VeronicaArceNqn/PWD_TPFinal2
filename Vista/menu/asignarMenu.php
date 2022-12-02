@@ -156,7 +156,7 @@ if (isset($datos['idmenu'])){
 
   function eliminarRol(idrol,idmenu) {
     var jqxhr = $.post('accion/eliminar_rol.php?idrol='+idrol+"&idmenu="+idmenu, function() {
-        alert( "success" );
+        //alert( "success" );
       })
       .done(function(result) {
         var result = eval('(' + result + ')');
