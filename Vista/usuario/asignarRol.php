@@ -67,48 +67,8 @@ if (isset($datos['idusuario'])){
                         </div>
                     </div>
 
-            <div class="form-group mb-4">
+            <div id="listaroles"class="form-group mb-4">
                 
-                <?php
-                   
-                   $listaTabla = $objAbmUsuario->darRoles($datos);
-                   
-        
-                ?>
-                                    <div class="table-responsive">
-                        <table class="table table-striped table-sm">
-                            <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">Nombre</th>
-                                <th scope="col">Acciones</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                    
-                    <?php
-                    if( count($listaTabla)>0){
-                        foreach ($listaTabla as $objTabla) {
-                            echo '<tr><td>'.$objTabla->getobjrol()->getidrol().'</td>';
-                            echo '<td>'.$objTabla->getobjrol()->getrodescripcion().'</td>';
-                            ?>
-
-                            <td><a class="btn btn-danger" role="button" href="javascript:void(0)" onclick="eliminarRol(<?php echo $objTabla->getobjrol()->getidrol();?>,<?php echo $objTabla->getobjusuario()->getidusuario();?>)">Quitar Rol </a></td>
-                            
-
-
-                        </tr>
-                        <?php
-
-                        
-                        }
-                    }
-
-                    ?>
-                            </tbody>
-                        </table>
-                        <a class="btn btn-secondary" role="button" href="listarUsuario.php" >Volver </a>
-                    </div>
             </div>
            
             <!--
@@ -116,7 +76,16 @@ if (isset($datos['idusuario'])){
 
             
         </form>
-        <script>
+        <script type="text/javascript">
+          $(document).ready(function(){
+         cargarRoles();
+          });
+
+          function cargarRoles()
+          {
+            $("#listaroles").load('accion/listar_rol.php');
+         
+          }
             function darRol(idrol,idusuario) {
     var jqxhr = $.post('accion/dar_rol.php?idrol='+idrol+"&idusuario="+idusuario, function() {
        // alert( "success" );
@@ -133,8 +102,8 @@ if (isset($datos['idusuario'])){
             title: 'Mensaje',
             msg: " se asignó nuevo rol true:"+result.respuesta
           });
-          //cargarCarrito();
-          window.location.href = window.location.href;
+          cargarRoles();
+         //window.location.href = window.location.href;
         }
       })
       .fail(
@@ -156,7 +125,7 @@ if (isset($datos['idusuario'])){
 
   function eliminarRol(idrol,idusuario) {
     var jqxhr = $.post('accion/eliminar_rol.php?idrol='+idrol+"&idusuario="+idusuario, function() {
-        alert( "success" );
+     //   alert( "success" );
       })
       .done(function(result) {
         var result = eval('(' + result + ')');
@@ -170,8 +139,8 @@ if (isset($datos['idusuario'])){
             title: 'Mensaje',
             msg: " se eliminó el rol true:"+result.respuesta
           });
-          //cargarCarrito();
-          window.location.href = window.location.href;
+          cargarRoles();
+          //window.location.href = window.location.href;
         }
       })
       .fail(

@@ -2,14 +2,14 @@
 include_once("../../configuracion.php");
 $dir = "";
 $mensajeError = "no se pudo concretar";
-$objTrans = new Session();
+$objSesion = new Session();
 
 $urlcompleto = $_SERVER['PHP_SELF'];
 $urlMenu = (explode('/', $urlcompleto, 4));
 // urlMenu[3] guarda los datos de la página
 
-$resp = $objTrans->validar();
-$permisosOk = $objTrans->tengoPermisos($urlMenu[3]);
+$resp = $objSesion->validar();
+$permisosOk = $objSesion->tengoPermisos($urlMenu[3]);
 $puedeEntrar=false;
 if ($resp && $permisosOk) {
 	$puedeEntrar=true;
@@ -60,7 +60,7 @@ if ($resp && $permisosOk) {
 		<?php 
 		   
                 
-           $objUsuroles=$objTrans->getRol();
+           $objUsuroles=$objSesion->getRol();
 		      
 		   foreach($objUsuroles as $objusurol){
                $idrol =  $objusurol->getobjrol()->getidrol();
@@ -120,8 +120,8 @@ if ($resp && $permisosOk) {
 			    //    echo "<br><br><br><br>";
                
 				}
-				$idusuario=$objTrans->getUsuario()->getIdusuario();
-				$nombre=$objTrans->getUsuario()->getUsnombre();
+				$idusuario=$objSesion->getUsuario()->getIdusuario();
+				$nombre=$objSesion->getUsuario()->getUsnombre();
          ?>
 		<!--<div id="mm1" style="width:150px;">
 			</div>
