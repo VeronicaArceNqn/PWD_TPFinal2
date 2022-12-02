@@ -29,8 +29,11 @@ include($dir . "../estructura/header.php");
           });
 
         } else {
-          alert("se registro correctamente")
-
+          //alert("se registro correctamente")
+          $.messager.alert({
+            title: 'Bienvenido',
+            msg: "se registro correctamente"
+          });
           $('#ff').form('clear');
           //$('#dlg').dialog('close');        // close the dialog
           //$('#dg').datagrid('reload');    // reload 
