@@ -24,7 +24,10 @@ include_once $dir."../estructura/headerSeguro.php";
   }
   function cambiarEstado(mensaje,idcompraestadotipo,idcompra,idcompraestado,idusuario) {
     //alert("mensaje:"+mensaje+" idcompra:"+idcompra+ " idcompraestado:"+idcompraestado+" idcompraestadotipo:"+idcompraestadotipo+" idusuario:"+idusuario);
-   
+   //Creación de la instancia 
+
+//Ocultar modal
+
     var jqxhr = $.post('accion/agregar_estado.php?idcompra='+idcompra+"&idcompraestado="+idcompraestado+"&idcompraestadotipo="+idcompraestadotipo+"&idusuario="+idusuario, function() {
         //alert( "success" );
       })
@@ -40,7 +43,9 @@ include_once $dir."../estructura/headerSeguro.php";
             title: 'Mensaje',
             msg: mensaje + result.respuesta+" se cambio estado true:"+result.seactualizo
           });
-           listarCompras();
+        //  $("#exampleModal").modal("dismiss");
+          // listarCompras();
+           
         }
       })
       .fail(
