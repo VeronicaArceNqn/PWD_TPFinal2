@@ -83,7 +83,7 @@ if (isset($datos['idusuario'])){
 
           function cargarRoles()
           {
-            $("#listaroles").load('accion/listar_rol.php');
+            $("#listaroles").load('accion/listar_rol.php?idusuario='+$("#idusuario").val());
          
           }
             function darRol(idrol,idusuario) {

@@ -2,9 +2,8 @@
                 <?php
                    include_once '../../../configuracion.php';
                    $objAbmUsuario = new ABMusuario();
-                   $objSesion=new Session();
-                   $idusuario=$objSesion->getUsuario()->getIdusuario();
-                   $datos["idusuario"]=$idusuario;
+              
+                 $datos = data_submitted();
                    $listaTabla = $objAbmUsuario->darRoles($datos);
                    
         
