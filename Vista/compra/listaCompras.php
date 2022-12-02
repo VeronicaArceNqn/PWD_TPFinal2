@@ -27,7 +27,9 @@ include_once $dir."../estructura/headerSeguro.php";
    //Creación de la instancia 
 
 //Ocultar modal
-
+var genericModalEl = document.getElementById('exampleModal')
+        var modal = bootstrap.Modal.getInstance(genericModalEl)
+      
     var jqxhr = $.post('accion/agregar_estado.php?idcompra='+idcompra+"&idcompraestado="+idcompraestado+"&idcompraestadotipo="+idcompraestadotipo+"&idusuario="+idusuario, function() {
         //alert( "success" );
       })
@@ -39,12 +41,13 @@ include_once $dir."../estructura/headerSeguro.php";
             msg: result.errorMsg
           });
         } else {
-          $.messager.alert({
+          $.messager.show({
             title: 'Mensaje',
             msg: mensaje + result.respuesta+" se cambio estado true:"+result.seactualizo
           });
+          modal.hide()
         //  $("#exampleModal").modal("dismiss");
-          // listarCompras();
+           listarCompras();
            
         }
       })
