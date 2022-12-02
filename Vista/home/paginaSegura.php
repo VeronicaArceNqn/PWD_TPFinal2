@@ -31,8 +31,9 @@ if (isset($_GET["tipo"])) {
 </div>
 
 <script type="text/javascript">
+  $(document).ready(function () {
  cargarProductos(<?php echo $idusuario;?>,$("#tipo").val());
-  
+  });
   function cargarProductos(idusuario,tipo)
   {
    
