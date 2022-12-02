@@ -173,7 +173,36 @@ class ABMcompraitem{
     
         return $arreglo;
        }
-      
+       public function devolverProductos($data)
+       {
+          //con el idcompra, obtenemos los items o productos comprados(objetos CompraItem) 
+          $arrproductos=$this->buscar($data);
+            /*recorremos todos los objetos CompraItem, para eliminar cada item o producto
+             y devolver la cantidad a su stock*/ 
+           $resultado=[];
+
+             foreach($arrproductos as $objCI)
+           { 
+             $idcompraitem=$objCI->getIdcompraitem();
+             $objProducto=$objCI->getObjProducto();
+             $idproducto=$objProducto->getIdproducto();
+             $cicantidad=$objCI->getCicantidad();
+             
+             $procantstock=$objProducto->getProcantstock();
+             //datos del producto 
+             $data["idproducto"]=$idproducto;
+             $data["procantstock"]=$procantstock+$cicantidad;
+             //actualizamos el stock del producto
+             $objCtrlProducto=new ABMproducto();
+             $res=$objCtrlProducto->modificacion($data);
+             ////////////////////////
+             $datos["idcompraitem"]=$idcompraitem;
+             //eliminamos el item
+             $seborro=$this->baja($datos);        
+             $resultado[]=$res&&$seborro;  
+           }
+         return $resultado;
+       }   
    
 }
 
