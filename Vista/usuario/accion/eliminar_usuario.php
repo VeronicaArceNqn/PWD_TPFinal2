@@ -18,5 +18,3 @@ if (isset($mensaje)){
 }
     echo json_encode($retorno);
 ?>
-
-?>
