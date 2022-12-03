@@ -1,20 +1,22 @@
 <?php
-class ABMcompraitem{
+class ABMcompraitem
+{
     //Espera como parámetro un arrego asociativo donde las claves coinciden con los nombres de las variables instancias del objeto
-    public function abm($datos){
+    public function abm($datos)
+    {
         $resp = false;
-        if($datos['accion']=='editar'){
-            if($this->modificacion($datos)){
+        if ($datos['accion'] == 'editar') {
+            if ($this->modificacion($datos)) {
                 $resp = true;
             }
         }
-        if($datos['accion']=='borradoLogico'){
+        if ($datos['accion'] == 'borradoLogico') {
             /*if($this->bajaLogica($datos)){
                 $resp =true;
             }*/
         }
         if ($datos['accion'] == 'nuevo') {
-            $objCompraitem=null;
+            $objCompraitem = null;
             if (isset($datos['idcompraitem'])) {
                 $arraycompraitem = ['idcompraitem' => $datos['idcompraitem']];
                 //print_r($arraycompraitem);
@@ -27,18 +29,17 @@ class ABMcompraitem{
                 //print_r($datos);
                 //print_r($mensajeResultado['Resultado']);
                 //if ($mensajeResultado==null) {
-                    if (isset($datos['accion'])) {
-                        //echo $datos['accion'];
-                       // print_r($datos);
-                        if ($this->alta($datos)) {
-                            $resp = true;
-                        }
+                if (isset($datos['accion'])) {
+                    //echo $datos['accion'];
+                    // print_r($datos);
+                    if ($this->alta($datos)) {
+                        $resp = true;
                     }
-                    /*} else {
+                }
+                /*} else {
                         echo $mensajeResultado['Mensaje'];
                     }*/
-            }
-            else {
+            } else {
                 echo "El correo electrónico ya esta registrado";
             }
         }
@@ -46,19 +47,17 @@ class ABMcompraitem{
 
 
         return $resp;
-
-        }
-     /**
+    }
+    /**
      * Espera como parametro un arreglo asociativo donde las claves coinciden con los nombres de las variables instancias del objeto
-    *@param array $param
-    *@return CompraItem
-    */
-    private function cargarObjeto($param){
+     *@param array $param
+     *@return CompraItem
+     */
+    private function cargarObjeto($param)
+    {
         $obj = null;
-
         if (array_key_exists('idcompraitem', $param) and array_key_exists('idproducto', $param) and array_key_exists('idcompra', $param) and array_key_exists('cicantidad', $param) ){
             $obj = new CompraItem();
-            
             $objProducto = new Producto();
             $objProducto->setIdproducto($param['idproducto']);
             $objProducto->cargar();
@@ -68,19 +67,48 @@ class ABMcompraitem{
             $objCompra->cargar();
 
             $obj->setear($param['idcompraitem'], $objProducto, $objCompra, $param['cicantidad']);
+
+        }else{
+        if (array_key_exists('idcompraitem', $param)) {
+            $obj = new CompraItem();
+            $obj->setIdcompraitem($param['idcompraitem']);
+            $obj->cargar();
+           }
+            if (array_key_exists('idproducto', $param)) {
+
+                $objProducto = new Producto();
+                $objProducto->setIdproducto($param['idproducto']);
+                $objProducto->cargar();
+                $obj->setObjProducto($objProducto);
+            }
+            if (array_key_exists('idcompra', $param)) {
+                $objCompra = new Compra();
+                $objCompra->setIdcompra($param['idcompra']);
+                $objCompra->cargar();
+                $obj->setObjCompra($objCompra);
+            }
+
+            if (array_key_exists('cicantidad', $param)) {
+
+
+
+
+                $obj->setCicantidad($param["cicantidad"]);
+            }
         }
         //print_r($obj);
         return $obj;
     }
-    
-     /**
+
+    /**
      * Espera como parametro un arreglo asociativo donde las claves coinciden con los nombres de las variables instancias del objeto que son claves
      * @param array $param
      * @return CompraItem
      */
-    private function cargarObjetoConClave($param){
+    private function cargarObjetoConClave($param)
+    {
         $obj = null;
-        if(isset($param['idcompraitem'])){
+        if (isset($param['idcompraitem'])) {
             $obj = new CompraItem();
             $obj->setear($param['idcompraitem'], null, null, null);
         }
@@ -92,51 +120,55 @@ class ABMcompraitem{
      * @return boolean
      */
 
-     private function seteadosCamposClaves($param){
+    private function seteadosCamposClaves($param)
+    {
         $resp = false;
         if (isset($param['idcompraitem']))
             $resp = true;
         //echo "SeteadosCamposClaves". $resp;
         return $resp;
-     }
-     public function alta($param){
+    }
+    public function alta($param)
+    {
         //print_r($param);
         $resp = false;
-        $param['idcompraitem']=null;
+        $param['idcompraitem'] = null;
 
         $elObjcitem = $this->cargarObjeto($param);
-        if ($elObjcitem!=null and $elObjcitem->insertar()){
+        if ($elObjcitem != null and $elObjcitem->insertar()) {
             $resp = true;
         }
         return $resp;
-     }
-      /**
+    }
+    /**
      * permite eliminar un objeto 
      * @param array $param
      * @return boolean
      */
-    
-    public function baja($param){
+
+    public function baja($param)
+    {
         $resp = false;
-        if ($this->seteadosCamposClaves($param)){
+        if ($this->seteadosCamposClaves($param)) {
             $elObjcitem = $this->cargarObjetoConClave($param);
-            if($elObjcitem!=null and $elObjcitem->eliminar()){
+            if ($elObjcitem != null and $elObjcitem->eliminar()) {
                 $resp = true;
             }
         }
         return $resp;
     }
-     /**
+    /**
      * permite modificar un objeto
      * @param array $param
      * @return boolean
      */
-    public function modificacion($param){
+    public function modificacion($param)
+    {
         $resp = false;
-        if($this->seteadosCamposClaves ($param)){
+        if ($this->seteadosCamposClaves($param)) {
             $elObjcitem = $this->cargarObjeto($param);
             //print_r($param);
-            if($elObjcitem!=null and $elObjcitem->modificar()){
+            if ($elObjcitem != null and $elObjcitem->modificar()) {
                 $resp = true;
             }
         }
@@ -147,65 +179,115 @@ class ABMcompraitem{
      * @param array $param
      * @return array
      */
-    public function buscar($param){
+    public function buscar($param)
+    {
         $where = " true ";
         //echo "Este dato ingresa a Buscar en ABMusuario";
-        
+
         //print_r($param);
         //echo "<br>";
         //print_r ($param['usmail']);
-        if($param<>NULL){
-            if(isset($param['idcompraitem'])) 
-                $where.=" and idcompraitem = ".$param['idcompraitem'];
-            if(isset($param['idproducto'])) 
-                $where.=" and idproducto =".$param['idproducto'];
-            if(isset($param['idcompra'])) 
-                $where.=" and idcompra =".$param['idcompra'];
-            if(isset($param['cicantidad'])) 
-                $where.=" and cicantidad =".$param['cicantidad'];  
-            
+        if ($param <> NULL) {
+            if (isset($param['idcompraitem']))
+                $where .= " and idcompraitem = " . $param['idcompraitem'];
+            if (isset($param['idproducto']))
+                $where .= " and idproducto =" . $param['idproducto'];
+            if (isset($param['idcompra']))
+                $where .= " and idcompra =" . $param['idcompra'];
+            if (isset($param['cicantidad']))
+                $where .= " and cicantidad =" . $param['cicantidad'];
         }
         //print_r($where);
         //echo "<br>";
         $arreglo = CompraItem::listar($where);
         //echo "Estoy en buscar \n";
         //print_r($arreglo);
-    
+
         return $arreglo;
-       }
-       public function devolverProductos($data)
-       {
-          //con el idcompra, obtenemos los items o productos comprados(objetos CompraItem) 
-          $arrproductos=$this->buscar($data);
-            /*recorremos todos los objetos CompraItem, para eliminar cada item o producto
-             y devolver la cantidad a su stock*/ 
-           $resultado=[];
+    }
+    public function agregarProducto($param)
+    {
+        $resultado=false;
 
-             foreach($arrproductos as $objCI)
-           { 
-             $idcompraitem=$objCI->getIdcompraitem();
-             $objProducto=$objCI->getObjProducto();
-             $idproducto=$objProducto->getIdproducto();
-             $cicantidad=$objCI->getCicantidad();
-             
-             $procantstock=$objProducto->getProcantstock();
-             //datos del producto 
-             $data["idproducto"]=$idproducto;
-             $data["procantstock"]=$procantstock+$cicantidad;
-             //actualizamos el stock del producto
-             $objCtrlProducto=new ABMproducto();
-             $res=$objCtrlProducto->modificacion($data);
-             ////////////////////////
-             $datos["idcompraitem"]=$idcompraitem;
-             //eliminamos el item
-             $seborro=$this->baja($datos);        
-             $resultado[]=$res&&$seborro;  
-           }
-         return $resultado;
-       }   
-   
+        
+        $cntrlProducto = new ABMproducto();
+        $datosProd["idproducto"] = $param["idproducto"];
+        $arreProducto = $cntrlProducto->buscar($datosProd);
+        $objProducto = null;
+        $resultado=[];
+        if (count($arreProducto) == 1) {
+            $objProducto = $arreProducto[0];
+        }
+        if ($objProducto != null) {
+            
+            //obtenemos su stock    
+            $cantStock = $objProducto->getProcantstock();
+            //si la cantidad es menor o igual a la cantidad stock del producto
+            if ($param["cicantidad"] <= $cantStock) {
+
+              
+                //verificamos si el item ya esta agregado en el carrito(compra)
+                $datositemc["idcompra"] = $param["idcompra"];
+                $datositemc["idproducto"] = $param["idproducto"];
+                $cantStock = $cantStock - $param["cicantidad"];
+                $arreitemBuscado = $this->buscar($datositemc);
+                
+                if (count($arreitemBuscado) == 1) {
+                 
+                   $idcompraitem=$arreitemBuscado[0]->getIdcompraitem();
+                   //se modifica la cantidad el item al carrito
+                  
+                   $datositemc["idcompraitem"] = $idcompraitem;
+                    
+                   $datositemc["cicantidad"] = $param["cicantidad"];
+                   $seagrego = $this->modificacion($datositemc);
+                 
+            }    else {
+                    //se agrega el item al carrito
+                    $datositemc["idcompra"] = $param["idcompra"];
+                    $datositemc["idproducto"] = $datosProd["idproducto"];
+                    $datositemc["cicantidad"] = $param["cicantidad"];
+                    $seagrego = $this->alta($datositemc);
+                }
+                $resultado["seagrego"]=$seagrego;
+                $data["idproducto"] =  $datosProd["idproducto"];
+                $data["procantstock"] = $cantStock;
+                //se actualiza el stock
+                $res=$cntrlProducto->modificacion($data);
+                $resultado["seactualizo"]=$res;
+                
+            }
+        }
+        return $resultado;
+    }
+    public function devolverProductos($data)
+    {
+        //con el idcompra, obtenemos los items o productos comprados(objetos CompraItem) 
+        $arrproductos = $this->buscar($data);
+        /*recorremos todos los objetos CompraItem, para eliminar cada item o producto
+             y devolver la cantidad a su stock*/
+        $resultado = array();
+
+        foreach ($arrproductos as $objCI) {
+            $idcompraitem = $objCI->getIdcompraitem();
+            $objProducto = $objCI->getObjProducto();
+            $idproducto = $objProducto->getIdproducto();
+            $cicantidad = $objCI->getCicantidad();
+
+            $procantstock = $objProducto->getProcantstock();
+            //datos del producto 
+            $data["idproducto"] = $idproducto;
+            $data["procantstock"] = $procantstock + $cicantidad;
+            //actualizamos el stock del producto
+            $objCtrlProducto = new ABMproducto();
+            $res = $objCtrlProducto->modificacion($data);
+            ////////////////////////
+            $datos["idcompraitem"] = $idcompraitem;
+            //eliminamos el item
+            $result = $this->baja($datos);
+            $resultado[]["sedevolvio"] = $res;
+            $resultado[]["seborro"] = $result;
+        }
+        return $resultado;
+    }
 }
-
-
-
-?>

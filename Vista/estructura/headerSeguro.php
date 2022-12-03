@@ -182,16 +182,16 @@ $param["idusuario"]=$idusuario;
 $param["idcompraestadotipo"] = 0;
 $param["cefechafin"]="null";
 $objCntrlCE= new ABMcompraestado();
-$arreCE=$objCntrlCE->buscar($param);
+$objEstado=$objCntrlCE->verificarEstado($param);
 
 $idcompra=-1;
 $idcompraestado=-1;
 $items=[];
 //print_r($arreCE);
-if(count($arreCE)==1)
+if($objEstado!=null)
 {
-  $idcompra=$arreCE[0]->getObjCompra()->getIdcompra();
-  $idcompraestado=$arreCE[0]->getIdcompraestado();
+  $idcompra=$objEstado->getObjCompra()->getIdcompra();
+  $idcompraestado=$objEstado->getIdcompraestado();
  
   //print_r($items);
 

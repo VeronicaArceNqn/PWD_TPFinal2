@@ -18,7 +18,7 @@ if (isset($data['idcompra'])) {
     $objCtrlProd = new ABMproducto();
     $arrayAsoc["idproducto"] = $data["idproducto"];
     $arreProd = $objCtrlProd->buscar($arrayAsoc);
-      //  print_r($arreProd);
+        print_r($arreProd);
         //si lo encuentra
         if (count($arreProd) == 1) {
             $respuesta=true;

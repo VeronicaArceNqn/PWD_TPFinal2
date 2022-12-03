@@ -24,63 +24,7 @@ $suma = 0;
   function cargarCarrito() {
     $("#contenido").load('accion/cargar_carrito.php?idcompra=' + $("#idcompra").val() + '&idcompraestado=' + $("#idcompraestado").val() + '&idusuario=' + <?php echo $idusuario; ?>);
   }
-  /*
-        function agregarProducto() {
-      var idcompra=$("#idcompra").val();
-      alert(idcompra);
-      var urldatos= "";
-      if(parseInt($("#idcompra").val())==-1)
-      {
-        //alert("entro crear pedido")
-        urldatos= "accion/agregar_primerproducto.php";
-      }
-      else{
-      //  alert("entro agregar producto al carrito")
-        urldatos= "accion/agregar_producto.php";
-      }
-      alert(urldatos);
-      var jqxhr = $.post(urldatos, function() {
-          //alert( "success" );
-        })
-        .done(function(result) {
-          var result = eval('(' + result + ')');
-          if (!result.respuesta) {
-            $.messager.alert({
-              title: 'Error',
-              msg: result.errorMsg
-            });
-          } else {
-            var res;
-            if(result.seagrego)
-            {
-              res=",Se agrego el producto";
-            }
-            else 
-               res="No se pudo agregar el producto";
-            $.messager.alert({
-              title: 'Mensaje',
-              msg: "Se registro correctamente-> true:" + result.respuesta+""+res 
-            });
-            cargarCarrito();
-          }
-        })
-        .fail(function() {
-
-          $.messager.alert({
-            title: 'Error',
-            msg: "No se pudo ejecutar"
-          });
-
-        })
-        .always(function() {
-          // alert( "finished" );
-        });
-        
-      jqxhr.always(function() {
-        alert( "second finished" );
-      //});
-    //}
-   */
+  
   function cambiarEstado(mensaje, idcompraestadotipo, idusuario) {
     var jqxhr = $.post('accion/agregar_estado.php?idcompra=' + $("#idcompra").val() + "&idcompraestado=" + $("#idcompraestado").val() + "&idcompraestadotipo=" + idcompraestadotipo + "&idusuario=" + idusuario, function() {
         //alert( "success" );

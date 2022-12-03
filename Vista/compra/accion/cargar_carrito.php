@@ -34,7 +34,7 @@ if (count($items) > 0) {
                                         </div>
                                         <div class="col-md-3 quantity">
                                             <label for="quantity">Cantidad:</label>
-                                            <input id="quantity" type="number" value="<?php echo $item->getCicantidad(); ?>" class="form-control quantity-input">
+                                            <input id="quantity" type="number" value="<?php echo $item->getCicantidad(); ?>" class="form-control quantity-input" onchange="alert(this.value);">
                                         </div>
                                         <div class="col-md-2 price">
                                             <span><?php echo $item->getObjProducto()->getPrecio(); ?>$</span>

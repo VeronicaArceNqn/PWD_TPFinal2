@@ -241,4 +241,14 @@ class ABMcompraestado
 
         return $arreglo;
     }
+    public function verificarEstado($param)
+    {
+        $objCompraEstado=null;
+        $arreCompraEstado=$this->buscar($param);
+        if(count($arreCompraEstado)==1)
+        {
+            $objCompraEstado=$arreCompraEstado[0];
+        }
+        return $objCompraEstado;
+    }
 }
