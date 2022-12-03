@@ -50,7 +50,7 @@ $combo .='</select>';
                 <!--div style="margin-bottom:10px">
 
                     //<?php 
-                      //  echo $combo;
+                        echo $combo;
                     //?>
                 
                 </div>
@@ -92,7 +92,7 @@ $combo .='</select>';
                     success: function(result){
                         var result = eval('('+result+')');
 
-                        alert("Volvio Servidor"); 
+                        //alert("Volvio Servidor"); 
                         //recorremos el array resultante
                        /* $.each(result, function(key, value){
             alert(key + ": " + value);
@@ -117,7 +117,7 @@ $combo .='</select>';
                         if (r){
                             $.post('accion/eliminar_usuario.php?idusuario='+row.idusuario,{idusuario:row.id},
                                function(result){
-                               	 alert("Volvio Serviodr");   
+                               	 //alert("Volvio Serviodr");   
                                  if (result.respuesta){
                                    	 
                                     $('#dg').datagrid('reload');    // reload the  data
