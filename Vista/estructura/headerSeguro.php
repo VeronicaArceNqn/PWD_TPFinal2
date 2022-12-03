@@ -84,12 +84,8 @@ if ($resp && $permisosOk) {
 					//obtiene el idpadre
 					$idpadre=$objMenu->getIdmenu();
 				
-							
-				   }
-				   
-
-				
-				 
+					}
+				   				 
 					 $objCtrlMenu = new ABMmenu();
 		              $param['idpadre']=$idpadre;
 				      //filtramos la lista de menus por idpadre
@@ -107,7 +103,10 @@ if ($resp && $permisosOk) {
 					   else{
 						//convertimos los nombres de los menus a mayuscula
 						$nombre=mb_strtoupper($objMenu->getMenombre(),'utf-8');
-                          if($objMenu->getMedescripcion()!="#")
+
+						$menuHabilitado = $objMenu->getMedeshabilitado();
+
+                          if($objMenu->getMedescripcion()!="#" && $menuHabilitado==null)
 						{echo '<a href="'.$objMenu->getMedescripcion().'" class="easyui-linkbutton" style="padding:5px; background-color:#0d6efd;color:white;" data-options="plain:true">'.$nombre.'</a>'; 
 						
 					    }
