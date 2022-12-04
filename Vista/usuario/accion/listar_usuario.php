@@ -43,7 +43,7 @@ if(count($listaUsuario)>0){
                  if($objUsuario->getusdeshabilitado()==null){
                     echo '<td><a href="asignarRol.php?idusuario='.$objUsuario->getidusuario().'" class="btn btn-success">Dar rol</a> ';  
                     ?>
-                    <a href="javascript:void(0)" class="btn btn-dark" role="button" onclick="desHabUsuario(<?php echo $objUsuario->getidusuario(); ?>)">Deshabilitar</a></td>;
+                    <a href="javascript:void(0)" class="btn btn-dark" role="button" onclick="desHabUsuario(<?php echo $objUsuario->getidusuario(); ?>)">Deshabilitar</a></td>
                     <?php
                  }else{
                     echo '<td></td>';
