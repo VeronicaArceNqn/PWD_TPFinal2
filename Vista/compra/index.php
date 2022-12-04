@@ -43,8 +43,8 @@ $suma = 0;
             title: 'Mensaje',
             msg: mensaje + result.respuesta + " se cambio estado true:" + result.seactualizo
           });*/
-          cargarCarrito();
-          //window.location.href = window.location.href;
+         // cargarCarrito();
+        window.location.href = window.location.href;
         }
       })
       .fail(
