@@ -37,10 +37,12 @@ $suma = 0;
             msg: result.errorMsg
           });
         } else {
+          alert(mensaje);
+          /*
           $.messager.alert({
             title: 'Mensaje',
             msg: mensaje + result.respuesta + " se cambio estado true:" + result.seactualizo
-          });
+          });*/
           cargarCarrito();
           //window.location.href = window.location.href;
         }
@@ -101,7 +103,7 @@ $suma = 0;
                       msg: "se elimino:"+result.respuesta+" y se actualizo stock:"+result.seactualizo
                 });*/
          //     window.location.href = window.location.href;
-              cargarCarrito();
+         cargarCarrito();
           
               //	 alert("se pudo enviar, idproducto:"+result.idproducto +" y su idcompraitem es"+result.idcompraitem);
               //$('#dg').datagrid('reload');    // reload the  data

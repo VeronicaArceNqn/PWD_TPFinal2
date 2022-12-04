@@ -2,7 +2,7 @@
 include_once("../../configuracion.php");
 $dir = "";
 $mensajeError = "no se pudo concretar";
-$objSesion = new Session();
+$objSesion= new Session();
 
 $urlcompleto = $_SERVER['PHP_SELF'];
 $urlMenu = (explode('/', $urlcompleto, 4));
@@ -186,7 +186,7 @@ $objEstado=$objCntrlCE->verificarEstado($param);
 $idcompra=-1;
 $idcompraestado=-1;
 $items=[];
-//print_r($arreCE);
+//print_r($objEstado);
 if($objEstado!=null)
 {
   $idcompra=$objEstado->getObjCompra()->getIdcompra();

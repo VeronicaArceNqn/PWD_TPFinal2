@@ -12,9 +12,7 @@ if (isset($_GET["tipo"])) {
 
 ?>
 <input type="hidden" id=tipo value="<?php echo $param["tipo"];?>">
-<?php
 
-?>
 
 
 
@@ -29,7 +27,6 @@ if (isset($_GET["tipo"])) {
 
 </div>
 </div>
-
 <script type="text/javascript">
   $(document).ready(function () {
  cargarProductos(<?php echo $idusuario;?>,$("#tipo").val());
@@ -39,17 +36,18 @@ if (isset($_GET["tipo"])) {
    
    $("#productos").load('accion/cargar_productos.php?tipo='+tipo+'&idusuario='+idusuario);
   }
-         function agregarProducto(idproducto,idusuario) {
+       
+  function agregarProducto(idproducto,idusuario) {
     var idcompra=$("#idcompra").val();
-    //alert(idcompra);
+    alert(idcompra);
     var urldatos= "";
     if(parseInt($("#idcompra").val())==-1)
     {
-      //alert("entro crear pedido")
+      alert("entro crear pedido")
       urldatos= "../compra/accion/agregar_primerproducto.php?idproducto="+idproducto+"&idusuario="+idusuario+"&cicantidad=1";
     }
     else{
-    //  alert("entro agregar producto al carrito")
+      alert("entro agregar producto al carrito")
       urldatos= "../compra/accion/agregar_producto.php?idproducto="+idproducto+"&cicantidad=1&idcompra="+$("#idcompra").val();
     }
     //alert(urldatos);
@@ -58,26 +56,30 @@ if (isset($_GET["tipo"])) {
       })
       .done(function(result) {
         var result = eval('(' + result + ')');
+        alert(result.respuesta);
         if (!result.respuesta) {
+          alert(result.errorMsg);
+          /*
          $.messager.alert({
             title: 'Error',
             msg: result.errorMsg
-          });
+          });*/
           $("#idcompra").val(result.idcompra);
         } else {
           var res;
           if(result.seagrego)
           {
             res=",Se agrego el producto";
-            $("#productos").load('accion/cargar_productos.php?tipo="null"&idusuario='+idusuario);
+            $("#productos").load('accion/cargar_productos.php?idusuario='+idusuario+'&tipo=null');
           }
           else {
              res="No se pudo agregar el producto";
             }
-          $.messager.alert({
+            alert("Se registro correctamente-> true:" + result.respuesta+""+res);
+          /*$.messager.alert({
             title: 'Mensaje',
             msg: "Se registro correctamente-> true:" + result.respuesta+""+res 
-          });
+          });*/
           //cargarProductos($idusuario,$("tipo").val());
         }
       })
@@ -135,6 +137,7 @@ if (isset($_GET["tipo"])) {
   }
 
 </script>
+
 <?php
 
 include($dir . "../estructura/footer.php");

@@ -251,4 +251,34 @@ class ABMcompraestado
         }
         return $objCompraEstado;
     }
+    public function cambiarEstado($datos)
+    {
+        $hoy = date("Y-m-d H:i:s");
+        $datos["cefechaini"]=$hoy;
+        $datos["cefechafin"]="null";
+       
+       $seagrego=false;
+       $seactualizo=false;
+       
+       
+       if (isset($datos["idcompra"])){
+           
+           
+          
+           $param["idcompraestado"]=$datos["idcompraestado"];  
+             
+           //agregamos el nuevo estado 
+           $seagrego = $this->alta($datos); 
+           //para actualizar asignamos la fecha fin del estado anterior 
+           //print_r($seactualizo);
+           $seactualizo = $this->modificacion($param);     
+             
+          
+       }       
+       $resultado["seagrego"]=$seagrego;
+       $resultado["seactualizo"]=$seactualizo;
+
+       return $resultado;
+
+    }
 }
