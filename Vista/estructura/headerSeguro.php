@@ -98,7 +98,7 @@ if ($resp && $permisosOk) {
 						$nombre=mb_strtoupper($objMenu->getMenombre(),'utf-8');
 
 						$menuHabilitado = $objMenu->getMedeshabilitado();
-                        //generamos los links de los enlaces del menu que no son padres
+                        //generamos los links de los enlaces del menu que tengan una url
                           if($objMenu->getMedescripcion()!="#" && $menuHabilitado==null)
 						{
 							if($objMenu->getMenombre()=="Compra")
