@@ -19,6 +19,8 @@ if (isset($datos['idmenu'])){
     }
 }else{
     $msj="No se envío ningún menu";
+
+    echo("<script>location.href = 'permisosMenu.php';</script>");
 }
 
 
