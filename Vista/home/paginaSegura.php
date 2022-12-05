@@ -9,9 +9,10 @@ if (isset($_GET["tipo"])) {
 } else {
   $param["tipo"] = "null";
 }
-//$idusuario=$objTrans->getUsuario()->getidusuario();
+
 
 ?>
+
 <input type="hidden" id=tipo value="<?php echo $param["tipo"];?>">
 
 
@@ -26,8 +27,8 @@ if (isset($_GET["tipo"])) {
 
 
 
-</div>
-</div>
+
+
 <script type="text/javascript">
 
 $(document).ready(function () {
@@ -56,7 +57,7 @@ $(document).ready(function () {
             } else {
           
               $.messager.show({
-                title: 'Mensaje',
+                title: 'Se agregó al carrito!',
                 msg: "Se registro correctamente"
               });
               cargarProductos();

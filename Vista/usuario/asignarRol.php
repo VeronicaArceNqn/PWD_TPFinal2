@@ -19,6 +19,8 @@ if (isset($datos['idusuario'])){
     }
 }else{
     $msj="No se envío ningún usuario";
+
+    echo("<script>location.href = 'listarUsuario.php';</script>");
 }
 
 
@@ -30,12 +32,12 @@ if (isset($datos['idusuario'])){
     <div class="card-body py-5 px-md-5">
 
        
-        <form class="needs-validation" id="form1" name="form1" method="post" action="accionEditarUsuario.php">
+        <form class="needs-validation" id="form1" name="form1" method="post">
             <div class="form-group mb-4">
                 <h5>Dar Rol</h5>
                 <?php echo $msj;?>
                 <input type="text" class="form-control" id="idusuario" name="idusuario" placeholder="" value="<?php echo $obj->getIdusuario()?>" readonly required hidden>
-                <label for="nombreyApellio">Nombre y Apellido</label>
+                <label for="nombreyApellio">Nombre usuario</label>
                 <input type="text" class="form-control" id="usnombre" name="usnombre" placeholder="" value="<?php echo $obj->getUsnombre()?>" readonly required>
             </div>
             <div class="form-group mb-4">

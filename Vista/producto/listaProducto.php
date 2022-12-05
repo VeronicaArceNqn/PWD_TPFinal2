@@ -26,8 +26,8 @@ include_once $dir."../estructura/headerSeguro.php";
             <div id="toolbar">
             <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newProducto()">Nuevo Producto </a>
             <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editProducto()">Editar Producto</a>
-            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyProducto()">Baja Producto</a>
-            </div>
+            <!--<a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-remove" plain="true" onclick="destroyProducto()">Baja Producto</a>
+--></div>
             
             <div id="dlg" class="easyui-dialog" style="width:600px" data-options="closed:true,modal:true,border:'thin',buttons:'#dlg-buttons'">
             <form id="fm" method="post" novalidate style="margin:0;padding:20px 50px">
@@ -35,7 +35,7 @@ include_once $dir."../estructura/headerSeguro.php";
             <div style="margin-bottom:10px">
             
                       
-            <input name="idproducto" id="idproducto"  class="easyui-textbox" label="ID producto:" style="width:100%;" readonly>
+            <input name="idproducto" id="idproducto"  class="easyui-textbox" label="ID producto:" style="width:100%;" value="" readonly>
             </div>
             <div style="margin-bottom:10px">
             
@@ -45,14 +45,12 @@ include_once $dir."../estructura/headerSeguro.php";
 
 
             <div style="margin-bottom:10px">
-            <input name="tipo" id="tipo"  class="easyui-textbox" required="true" label="Tipo:" style="width:100%">
-       
-            <!--     <select id="tipo" name="tipo" class="easyui-combobox"label="Elegir Tipo:"style="width:90%;">
+             <select id="tipo" name="tipo" class="easyui-combobox"label="Elegir Tipo:"style="width:90%;">
     <option value="Camaras" selected>Camaras</option>
     <option value="Equipos">Equipos</option>
     <option value="Accesorios">Accesorios</option>
    </select>
--->
+
             </div>
             <div style="margin-bottom:10px">
             <input name="precio" id="precio"  class="easyui-numberbox" required="true" label="Precio:" style="width:100%">
@@ -67,46 +65,35 @@ include_once $dir."../estructura/headerSeguro.php";
             </div>
             <div style="margin-bottom:10px">
             <input  name="urlimagen" id="urlimagen"  class="easyui-textbox" required="true" label="URL Imagen:" style="width:100%">
-            <!--
-            <select id="urlimagen" class="easyui-combobox" name="urlimagen"label="Elegir Imagen:" style="width:200px;">
-    <option value="https://ibb.co/ZRrtpJP">Imagen 1</option>
-    <option value="https://ibb.co/SdbL8XT">Imagen 2</option>
-    <option value="https://ibb.co/QbfVLsz">Imagen 3</option>
-    <option value="https://ibb.co/ZRrtpJP">Imagen 4</option>
-    <option value="https://ibb.co/Q6nvLvT">Imagen 5</option>
-    <option value="https://ibb.co/JvjrhNt">Imagen 6</option>
-    <option value="https://ibb.co/bN6mSGs">Imagen 7</option>
-    <option value="https://ibb.co/8dY03Fw">Imagen 8</option>
-    <option value="https://ibb.co/bzX48zT">Imagen 9</option>
-    <option value="https://ibb.co/1sMQY1s">Imagen 10</option>
-</select>-->
-             
+                 
             </div>
              
             </form>
             </div>
             <div id="dlg-buttons">
-            <a href="javascript:void(0)" class="easyui-linkbutton c6" iconCls="icon-ok" onclick="saveProduct()" style="width:90px">Aceptar</a>
+            <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveProduct()" style="width:90px">Aceptar</a>
             <a href="javascript:void(0)" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')" style="width:90px">Cancelar</a>
+            </div>
             </div>
             <script type="text/javascript">
             var urlDatos;
             function newProducto(){
-                $('#dlg').dialog('open').dialog('center').dialog('setTitle','Nuevo Menu');
-                $('#fm').form('clear');
+                $('#dlg').dialog('open').dialog('center').dialog('setTitle','Nuevo Producto');
+               // $('#fm').form('clear');
                 urlDatos = 'accion/alta_producto.php';
             }
             
             function editProducto(){
                 var row = $('#dg').datagrid('getSelected');
                 if (row){
-                    $('#dlg').dialog('open').dialog('center').dialog('setTitle','Editar Menu');
+                    $('#dlg').dialog('open').dialog('center').dialog('setTitle','Editar Producto');
                     $('#fm').form('load',row);
                     urlDatos = 'accion/edit_producto.php'
+                    
                 }
             }
             function saveProduct(){
-            	//alert(" Accion");
+            	alert(urlDatos);
                 $('#fm').form('submit',{
                     url: urlDatos,
                     onSubmit: function(){
@@ -133,6 +120,7 @@ include_once $dir."../estructura/headerSeguro.php";
                         }
                     }
                 });
+                
             }
             
             function destroyProducto(){
@@ -140,7 +128,7 @@ include_once $dir."../estructura/headerSeguro.php";
                 if (row){
                     $.messager.confirm('Confirm','Seguro que desea eliminar el producto?', function(r){
                         if (r){
-                            $.post('accion/eliminar_producto.php?idmenu='+row.idproducto,{idproducto:row.id},
+                            $.post('accion/eliminar_producto.php?idproducto='+row.idproducto,{idproducto:row.id},
                                function(result){
                                	 alert("Volvio Serviodr");   
                                  if (result.respuesta){
@@ -158,7 +146,7 @@ include_once $dir."../estructura/headerSeguro.php";
                 }
             }
             </script>
-</div>
+
 	<!-- Cuerpo del formulario-->
 
 	<!-- -->

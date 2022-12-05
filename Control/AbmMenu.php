@@ -1,57 +1,7 @@
 <?php
 class AbmMenu{
-    //Espera como parametro un arreglo asociativo donde las claves coinciden con los nombres de las variables instancias del objeto
-
-    public function abm($datos){
-        $resp = false;
-        if($datos['accion']=='editar'){
-            if($this->modificacion($datos)){
-                $resp = true;
-            }else {
-                //echo "El nombre de menu no está registrado";
-            }
-        }
-        if($datos['accion']=='borradoLogico'){
-           if($this->bajaLogica($datos)){
-                $resp =true;
-            }
-         
-        }
-        if ($datos['accion'] == 'nuevo') {
-            $objUsuario=null;
-            if (isset($datos['menombre'])) {
-                $arraymail = ['menombre' => $datos['menombre']];
-                //print_r($arraymail);
-                $objUsuario = $this->buscar($arraymail);
-                //echo "<br>objUsuario me devuelve de buscar : <br>";
-                //print_r($objUsuario);
-            }
-            if ($objUsuario == null) {
-                // $mensajeResultado = $this->verificarUsuarioMail($datos);
-                //print_r($datos);
-                //print_r($mensajeResultado['Resultado']);
-                //if ($mensajeResultado==null) {
-                    if (isset($datos['accion'])) {
-                        //echo $datos['accion'];
-                       // print_r($datos);
-                        if ($this->alta($datos)) {
-                            $resp = true;
-                        }
-                    }
-                    /*} else {
-                        echo $mensajeResultado['Mensaje'];
-                    }*/
-            }
-            else {
-                echo "El nombre de menu ya esta registrado";
-            }
-        }
-
-
-
-        return $resp;
-
-        }
+ 
+ 
     /**
      * Espera como parametro un arreglo asociativo donde las claves coinciden con los nombres de las variables instancias del objeto
      * @param array $param

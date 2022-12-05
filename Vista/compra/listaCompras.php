@@ -11,6 +11,7 @@ include_once $dir."../estructura/headerSeguro.php";
     <div id="compras"class="row text-muted m-0">
  
    <div>
+   </div>
 <script type="text/javascript">
    $(document).ready(function(){
     listarCompras();

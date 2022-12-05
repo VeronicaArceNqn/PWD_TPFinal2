@@ -1,52 +1,7 @@
 <?php
 class ABMproducto
 {
-    //Espera como parámetro un arrego asociativo donde las claves coinciden con los nombres de las variables instancias del objeto
-    public function abm($datos)
-    {
-        $resp = false;
-        if ($datos['accion'] == 'editar') {
-            if ($this->modificacion($datos)) {
-                $resp = true;
-            }
-        }/*
-        if($datos['accion']=='borradoLogico'){
-            if($this->bajaLogica($datos)){
-                $resp =true;
-            }
-        }*/
-        if ($datos['accion'] == 'nuevo') {
-            $objProducto = null;
-            if (isset($datos['pronombre'])) {
-                $arraymail = ['pronombre' => $datos['pronombre']];
-
-                //echo "<br>objProducto me devuelve de buscar : <br>";
-                //print_r($objProducto);
-            }
-            if ($objProducto == null) {
-                // $mensajeResultado = $this->verificarUsuarioMail($datos);
-                //print_r($datos);
-                //print_r($mensajeResultado['Resultado']);
-                //if ($mensajeResultado==null) {
-                if (isset($datos['accion'])) {
-                    //echo $datos['accion'];
-                    //print_r($datos);
-                    if ($this->alta($datos)) {
-                        $resp = true;
-                    }
-                }
-                /*} else {
-                        echo $mensajeResultado['Mensaje'];
-                    }*/
-            } else {
-                echo "El Producto ya esta registrado";
-            }
-        }
-
-
-
-        return $resp;
-    }
+    
     /**
      * Espera como parametro un arreglo asociativo donde las claves coinciden con los nombres de las variables instancias del objeto
      *@param array $param
@@ -55,28 +10,32 @@ class ABMproducto
     private function cargarObjeto($param)
     {
         $obj = null;
-
-        if (array_key_exists('idproducto', $param)) {
+        if (array_key_exists('idproducto', $param) and (array_key_exists('pronombre', $param)) and array_key_exists('prodetalle', $param) and array_key_exists('procantstock', $param) and array_key_exists('tipo', $param) and (array_key_exists('precio', $param)) and (array_key_exists('urlimagen', $param))) {
             $obj = new Producto();
-            $obj->setIdproducto($param["idproducto"]);
-            $obj->cargar();
-            if (array_key_exists('pronombre', $param))
-                $obj->setPronombre($param['pronombre']);
+            $obj->setear($param["idproducto"],$param['pronombre'],$param['prodetalle'],$param['procantstock'],$param['tipo'],$param['precio'],$param["urlimagen"]);
+        } else {
+            if (array_key_exists('idproducto', $param)) {
+                $obj = new Producto();
+                $obj->setIdproducto($param["idproducto"]);
+                $obj->cargar();
+                if (array_key_exists('pronombre', $param))
+                    $obj->setPronombre($param['pronombre']);
 
-            if (array_key_exists('prodetalle', $param))
-                $obj->setProdetalle($param['prodetalle']);
+                if (array_key_exists('prodetalle', $param))
+                    $obj->setProdetalle($param['prodetalle']);
 
-            if (array_key_exists('procantstock', $param))
-                $obj->setProcantstock($param['procantstock']);
+                if (array_key_exists('procantstock', $param))
+                    $obj->setProcantstock($param['procantstock']);
 
-            if (array_key_exists('tipo', $param))
-                $obj->setTipo($param['tipo']);
+                if (array_key_exists('tipo', $param))
+                    $obj->setTipo($param['tipo']);
 
-            if (array_key_exists('precio', $param))
-                $obj->setPrecio($param['precio']);
+                if (array_key_exists('precio', $param))
+                    $obj->setPrecio($param['precio']);
 
-            if (array_key_exists('urlimagen', $param))
-                $obj->setUrlimagen($param["urlimagen"]);
+                if (array_key_exists('urlimagen', $param))
+                    $obj->setUrlimagen($param["urlimagen"]);
+            }
         }
         return $obj;
     }
@@ -112,8 +71,9 @@ class ABMproducto
     public function alta($param)
     {
         $resp = false;
+        /*if (array_key_exists('idproducto', $param)) {
         $param['idproducto'] = null;
-
+        }*/
         $elObjProducto = $this->cargarObjeto($param);
         if ($elObjProducto != null and $elObjProducto->insertar()) {
             $resp = true;
@@ -125,7 +85,7 @@ class ABMproducto
      * @param array $param
      * @return boolean
      */
-
+    //consideramos poner stock en 0
     /*public function bajaLogica($param){
         $resp = false;
         if ($this->seteadosCamposClaves($param)){
@@ -146,7 +106,7 @@ class ABMproducto
         $resp = false;
         if ($this->seteadosCamposClaves($param)) {
             $elObjProducto = $this->cargarObjeto($param);
-         //   print_r($elObjProducto);
+            //   print_r($elObjProducto);
             if ($elObjProducto != null and $elObjProducto->modificar()) {
                 $resp = true;
             }
@@ -181,37 +141,23 @@ class ABMproducto
         $where = " true ";
 
         if ($param <> NULL) {
-            if (isset($param['idproducto'])){
+            if (isset($param['idproducto'])) {
                 $where .= " and idproducto = " . $param['idproducto'];
             }
-                if (isset($param['pronombre']))
+            if (isset($param['pronombre']))
                 $where .= " and pronombre ='" . $param['pronombre'] . "'";
             if (isset($param['prodetalle']))
                 $where .= " and prodetalle ='" . $param['prodetalle'] . "'";
             if (isset($param['tipo']))
                 $where .= " and tipo ='" . $param['tipo'] . "'";
-        }
+            if (isset($param['enstock'])){
+                $where .= " and procantstock > 0";
+               }
+            }
 
         $arreglo = Producto::listar($where);
 
         return $arreglo;
     }
-    /**
-     * Busca un objeto producto, 
-     * @param array $param
-     * @return Producto 
-     */
-    /*public function verificarUsuarioMail($datos)
-    {
-        $objUsuario = NULL;
-        $listaUsuario = $this->buscar($datos);
-        //print_r($datos);
-        //print_r($listaUsuario);
-        if (count($listaUsuario)==1){
-            $objUsuario= $listaUsuario[0];
-        }
-        echo "retorno de verificar usuario : ";
-        print_r($objUsuario);
-        return $objUsuario;
-    }*/
+    
 }

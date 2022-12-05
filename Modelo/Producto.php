@@ -113,6 +113,7 @@ class Producto extends BaseDatos{
 
         //$usdeshab="null";
         $sql="INSERT INTO producto(pronombre, prodetalle, procantstock,tipo, precio,urlimagen) VALUES ('".$this->getPronombre()."','".$this->getProdetalle()."',".$this->getProcantstock().", '".$this->getTipo()."',".$this->getPrecio().",'".$this->getUrlimagen()."');";
+        echo $sql;
         if ($base->Iniciar()) {
             if ($elid = $base->Ejecutar($sql)){
                 $this->setIdproducto($elid);
@@ -165,8 +166,8 @@ class Producto extends BaseDatos{
             if ($res>0){
                 while ($row = $base->Registro()){
                     $obj = new Producto();
-                    $obj->buscar($row['idproducto']);
-                   // $obj->setear($row['idusuario'], $row['usnombre'], $row['uspass'],$row['usmail']);
+                   // $obj->buscar($row['idproducto']);
+                    $obj->setear($row['idproducto'], $row['pronombre'], $row['prodetalle'], $row['procantstock'], $row['tipo'], $row['precio'],$row['urlimagen']);
                     array_push($arreglo, $obj);
                 }
             }

@@ -97,7 +97,7 @@ $dir="";
                   <li><a class="dropdown-item" href="#">Another action</a></li>
                 
           </li>
-          <!--<li class="nav-item dropdown">
+          <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="" id="navbarDropdown" role="button" data-mdb-toggle="dropdown" aria-expanded="false">Usuario</a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
             <li>

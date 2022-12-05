@@ -6,10 +6,9 @@ include_once "../../../configuracion.php";
 $data = data_submitted();
 $objSesion = new Session();
 
-// urlMenu[3] guarda los datos de la página
 $idusuario=$objSesion->getUsuario()->getidusuario();
 
-//$data["tipo"]="Accesorios";
+
 $objCtrlProducto = new ABMproducto();
 $param=null;
 
@@ -17,7 +16,10 @@ $param=null;
 if(isset($data["tipo"])&&$data["tipo"]!="null")
 {
      $param["tipo"]=$data["tipo"];
+ 
 }
+//pasamos este parametro para mostrar solo productos con stock
+$param["enstock"]=0; 
 $lista = $objCtrlProducto->buscar($param);
 
 
