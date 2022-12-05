@@ -173,31 +173,7 @@ if ($resp && $permisosOk) {
 		</div>
 
 	</div>
-	<?php 
-	
-	
 
-$param["idusuario"]=$idusuario;
-$param["idcompraestadotipo"] = 0;
-$param["cefechafin"]="null";
-$objCntrlCE= new ABMcompraestado();
-$objEstado=$objCntrlCE->verificarEstado($param);
-
-$idcompra=-1;
-$idcompraestado=-1;
-$items=[];
-//print_r($objEstado);
-if($objEstado!=null)
-{
-  $idcompra=$objEstado->getObjCompra()->getIdcompra();
-  $idcompraestado=$objEstado->getIdcompraestado();
- 
-  //print_r($items);
-
-}
-	?>
-	<input type="hidden" id="idcompra" name="idcompra"value="<?php echo $idcompra;?>" readonly>
-	<input type="hidden" id="idcompraestado" name="idcompraestado"value="<?php echo $idcompraestado;?>" readonly>
 	<!--<div data-options="region:'west',split:true,title:'West'" style="width:150px;padding:10px;">west content</div>-->
 	<!--<div data-options="region:'east',split:false,collapsed:true,title:'Perfil'" style="width:200px;padding:10px;height: auto;"> Datos de usuario</div>-->
 

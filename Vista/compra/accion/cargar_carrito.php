@@ -8,7 +8,24 @@ $objCntrlCI = new ABMcompraitem();
 $suma = 0;
 $objSesion = new Session();
 $idusuario =$objSesion->getUsuario()->getIdusuario();
-$items = $objCntrlCI->buscar($datos);
+$param["idusuario"] = $idusuario;
+$param["idcompraestadotipo"] = 0;
+$param["cefechafin"] = "null";
+$objCntrlCE = new ABMcompraestado();
+//verificamos si hay una compra con estado en confección
+$objEstado = $objCntrlCE->verificarEstado($param);
+$idcompra=-1;
+$idcompraestado=-1;
+$items=[];
+if($objEstado!=null)
+{
+  
+  $idcompra=$objEstado->getObjCompra()->getIdcompra();
+  $datos["idcompra"]=$idcompra;
+  $idcompraestado=$objEstado->getIdcompraestado();
+  $items = $objCntrlCI->buscar($datos);
+}
+
 if (count($items) > 0) {
 
     foreach ($items as $item) {
@@ -56,9 +73,9 @@ if (count($items) > 0) {
             <div class="summary">
                 <h2 class="text-start fs-4" class="">Resumen</h2>
                 <!--<label>ID Compra:</label>-->
-              <!--  <h3 class="text-start">ID Compra:<?php echo $datos["idcompra"]; ?></h3>
-                <h3 class="text-start">ID Estado compra:<?php echo $datos["idcompraestado"]; ?></h3>
---><div class="summary-item">
+               <h3 class="text-start">ID Compra:&nbsp;<?php echo $idcompra; ?></h3>
+                <h3 class="text-start">ID Estado compra:&nbsp;<?php echo $idcompraestado; ?></h3>
+<div class="summary-item">
                     <p class="text-start fs-4">Total: <span class="text-start text-success fs-4"><?php echo $suma; ?>$</span></p>
                 </div>
 

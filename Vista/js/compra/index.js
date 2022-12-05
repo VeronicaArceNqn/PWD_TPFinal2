@@ -7,7 +7,7 @@ $(document).ready(function() {
 
 function cargarCarrito() {
 
-  $("#contenido").load('accion/cargar_carrito.php?idcompra=' + $("#idcompra").val() + '&idcompraestado=' + $("#idcompraestado").val());
+  $("#contenido").load('accion/cargar_carrito.php');
 }
 
 function comprar(mensaje, idcompraestadotipo) {
@@ -28,8 +28,8 @@ function comprar(mensaje, idcompraestadotipo) {
           title: 'Mensaje',
           msg: mensaje 
         });
-      //  cargarCarrito();
-      window.location.href = window.location.href;
+        cargarCarrito();
+ 
       }
     }, 'json')
     .fail(
