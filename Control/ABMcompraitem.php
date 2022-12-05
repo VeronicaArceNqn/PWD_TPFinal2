@@ -56,7 +56,7 @@ class ABMcompraitem
     private function cargarObjeto($param)
     {
         $obj = null;
-        if (array_key_exists('idcompraitem', $param) and array_key_exists('idproducto', $param) and array_key_exists('idcompra', $param) and array_key_exists('cicantidad', $param) ){
+        if (array_key_exists('idcompraitem', $param) and array_key_exists('idproducto', $param) and array_key_exists('idcompra', $param) and array_key_exists('cicantidad', $param)) {
             $obj = new CompraItem();
             $objProducto = new Producto();
             $objProducto->setIdproducto($param['idproducto']);
@@ -67,13 +67,12 @@ class ABMcompraitem
             $objCompra->cargar();
 
             $obj->setear($param['idcompraitem'], $objProducto, $objCompra, $param['cicantidad']);
-
-        }else{
-        if (array_key_exists('idcompraitem', $param)) {
-            $obj = new CompraItem();
-            $obj->setIdcompraitem($param['idcompraitem']);
-            $obj->cargar();
-           }
+        } else {
+            if (array_key_exists('idcompraitem', $param)) {
+                $obj = new CompraItem();
+                $obj->setIdcompraitem($param['idcompraitem']);
+                $obj->cargar();
+            }
             if (array_key_exists('idproducto', $param)) {
 
                 $objProducto = new Producto();
@@ -207,55 +206,53 @@ class ABMcompraitem
     }
     public function agregarProducto($param)
     {
-        $resultado=false;
 
-        
+
+
         $cntrlProducto = new ABMproducto();
         $datosProd["idproducto"] = $param["idproducto"];
         $arreProducto = $cntrlProducto->buscar($datosProd);
         $objProducto = null;
-        $resultado=[];
+        $resultado = [];
         if (count($arreProducto) == 1) {
             $objProducto = $arreProducto[0];
         }
         if ($objProducto != null) {
-            
+
             //obtenemos su stock    
             $cantStock = $objProducto->getProcantstock();
             //si la cantidad es menor o igual a la cantidad stock del producto
             if ($param["cicantidad"] <= $cantStock) {
 
-              
+
                 //verificamos si el item ya esta agregado en el carrito(compra)
                 $datositemc["idcompra"] = $param["idcompra"];
                 $datositemc["idproducto"] = $param["idproducto"];
                 $cantStock = $cantStock - $param["cicantidad"];
                 $arreitemBuscado = $this->buscar($datositemc);
-                
+
                 if (count($arreitemBuscado) == 1) {
-                 
-                   $idcompraitem=$arreitemBuscado[0]->getIdcompraitem();
-                   //se modifica la cantidad el item al carrito
-                  
-                   $datositemc["idcompraitem"] = $idcompraitem;
-                    
-                   $datositemc["cicantidad"] = $param["cicantidad"];
-                   $seagrego = $this->modificacion($datositemc);
-                 
-            }    else {
+
+                    $idcompraitem = $arreitemBuscado[0]->getIdcompraitem();
+                    //se modifica la cantidad el item al carrito
+                    $cicantidad = $arreitemBuscado[0]->getCicantidad();
+                    $datositemc["idcompraitem"] = $idcompraitem;
+                    //incrementamos +1 cicantidad, la cantidad es enviada desde compra/index.php por defecto es 1 
+                    $datositemc["cicantidad"] = $cicantidad + $param["cicantidad"];
+                    $seagrego = $this->modificacion($datositemc);
+                } else {
                     //se agrega el item al carrito
                     $datositemc["idcompra"] = $param["idcompra"];
                     $datositemc["idproducto"] = $datosProd["idproducto"];
                     $datositemc["cicantidad"] = $param["cicantidad"];
                     $seagrego = $this->alta($datositemc);
                 }
-                $resultado["seagrego"]=$seagrego;
+                $resultado["seagrego"] = $seagrego;
                 $data["idproducto"] =  $datosProd["idproducto"];
                 $data["procantstock"] = $cantStock;
                 //se actualiza el stock
-                $res=$cntrlProducto->modificacion($data);
-                $resultado["seactualizo"]=$res;
-                
+                $res = $cntrlProducto->modificacion($data);
+                $resultado["seactualizo"] = $res;
             }
         }
         return $resultado;
@@ -283,10 +280,58 @@ class ABMcompraitem
             $res = $objCtrlProducto->modificacion($data);
             ////////////////////////
             $datos["idcompraitem"] = $idcompraitem;
-            //eliminamos el item
-            $result = $this->baja($datos);
+            //si eliminamos el item
+            // $result = $this->baja($datos);
+            
+            //sino solo se actualiza el stock
+            $resultado[]["seborro"] = true;
             $resultado[]["sedevolvio"] = $res;
-            $resultado[]["seborro"] = $result;
+        }
+        return $resultado;
+    }
+    function cambiarCantidadItem($param)
+    {
+        $datos["idcompraitem"] = $param["idcompraitem"];
+        $objCompraItem = $this->buscar($datos);
+        $cicantidadactual = $objCompraItem[0]->getCicantidad();
+        $resultado = false;
+        if ($cicantidadactual == $param["cicantidad"]) {
+            $cant = $param["cicantidad"];
+            $resultado = true;
+        } else {
+            if ($cicantidadactual < $param["cicantidad"]) {
+                $cant = $param["cicantidad"] - $cicantidadactual;
+
+                $operacion = "resta";
+            } else {
+
+                $cant = $cicantidadactual - $param["cicantidad"];
+                $operacion = "suma";
+            }
+            $idproducto = $objCompraItem[0]->getObjProducto()->getIdproducto();
+            $cantStock = $objCompraItem[0]->getObjProducto()->getProcantstock();
+            if ($cant <= $cantStock) {
+                $data["idproducto"] = $idproducto;
+                //se le agrega al stock
+                if ($operacion == "suma") {
+                    $data["procantstock"] = $cantStock + $cant;
+                }
+                //se descuenta al stock
+                if ($operacion == "resta") {
+                    $data["procantstock"] = $cantStock - $cant;
+                }
+
+                //actualizamos el stock del producto
+                $objCtrlProducto = new ABMproducto();
+                $res = $objCtrlProducto->modificacion($data);
+                if ($res)
+                  {
+                      $resultado = $this->modificacion($param);
+                  }
+
+            } else {
+                $resultado = false;
+            }
         }
         return $resultado;
     }

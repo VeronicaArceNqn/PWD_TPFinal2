@@ -1,11 +1,11 @@
 <?php
 include_once "../../../configuracion.php";
-//$datos=data_submitted();
-$cantidad = 1;
-$idproducto = 7;
+$valores=data_submitted();
+//$cantidad = 1;
+//$idproducto = 5;
 
-//$cantidad = $datos["cicantidad"];
-//$idproducto = $datos["idproducto"];
+$cantidad = $valores["cicantidad"];
+$idproducto = $valores["idproducto"];
 //verificamos si hay una compra en confeccion
 $objSesion = new Session();
 $idusuario =$objSesion->getUsuario()->getIdusuario();
@@ -31,8 +31,8 @@ if ($objEstado != null) {
     $arre = $objControlCI->agregarProducto($data);
     $retorno["seagrego"]= $arre["seagrego"];
     $retorno["seactualizo"]= $arre["seactualizo"];
-    //echo"Ya hay una compra en confeccion y se agrego el producto<br>";
-    // print_r($arre);
+   // echo"Ya hay una compra en confeccion y se agrego el producto<br>";
+   //  print_r($arre);
 } else {
     $hoy = date("Y-m-d H:i:s");
     $data["cofecha"] = $hoy;
@@ -59,7 +59,7 @@ if ($objEstado != null) {
     $retorno["seactualizo"]= $arre["seactualizo"];
     $retorno["seagrego"]= $arre["seagrego"];
     
-    // echo "Se crea la compra en confeccion<br>";
-    //print_r($objEstado);
+     //echo "Se crea la compra en confeccion<br>";
+   // print_r($objEstado);
 }
 echo json_encode($retorno);

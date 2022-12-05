@@ -22,11 +22,11 @@ $suma = 0;
   );
 
   function cargarCarrito() {
-    $("#contenido").load('accion/cargar_carrito.php?idcompra=' + $("#idcompra").val() + '&idcompraestado=' + $("#idcompraestado").val() + '&idusuario=' + <?php echo $idusuario; ?>);
+    $("#contenido").load('accion/cargar_carrito.php?idcompra=' + $("#idcompra").val() + '&idcompraestado=' + $("#idcompraestado").val());
   }
   
-  function cambiarEstado(mensaje, idcompraestadotipo, idusuario) {
-    var jqxhr = $.post('accion/agregar_estado.php?idcompra=' + $("#idcompra").val() + "&idcompraestado=" + $("#idcompraestado").val() + "&idcompraestadotipo=" + idcompraestadotipo + "&idusuario=" + idusuario, function() {
+  function comprar(mensaje, idcompraestadotipo) {
+    var jqxhr = $.post('accion/confirmar_compra.php?idcompraestadotipo=' + idcompraestadotipo , function() {
         //alert( "success" );
       })
       .done(function(result) {
@@ -37,12 +37,12 @@ $suma = 0;
             msg: result.errorMsg
           });
         } else {
-          alert(mensaje);
-          /*
+          
+          
           $.messager.alert({
             title: 'Mensaje',
             msg: mensaje + result.respuesta + " se cambio estado true:" + result.seactualizo
-          });*/
+          });
          // cargarCarrito();
         window.location.href = window.location.href;
         }
@@ -87,6 +87,7 @@ $suma = 0;
     });
 
   }
+ 
 
   function eliminarItem(idproducto, idcompraitem, cicantidad) {
     //var row = $('#dg').datagrid('getSelected');
@@ -116,6 +117,33 @@ $suma = 0;
           }, 'json');
       }
     });
+
+  }
+  function cambiarCantidad(idcompraitem, cicantidad) {
+   
+         var cant=parseInt(cicantidad);
+  
+        $.post('accion/cambiar_cantidad.php?idcompraitem=' + idcompraitem + '&cicantidad=' + cant,
+          function(result) {
+            //     	 alert("Volvio Serviodr");  
+
+            if (result==1) {
+              /*  $.messager.alert({  
+                      title: 'Mensaje',
+                      msg: "se elimino:"+result.respuesta+" y se actualizo stock:"+result.seactualizo
+                });*/
+         //     window.location.href = window.location.href;
+         cargarCarrito();
+       
+            } else {
+              cargarCarrito();
+              $.messager.show({ // show error message
+                title: 'Error',
+                msg: "Se detecto un problema"
+              });
+            }
+          }, 'json');
+  
 
   }
 </script>

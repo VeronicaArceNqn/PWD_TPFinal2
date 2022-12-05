@@ -6,20 +6,33 @@ include_once "../../../configuracion.php";
 $datos=data_submitted();
 $objSesion=new Session(); 
 $idusuario=$objSesion->getUsuario()->getIdusuario();
-$datos["idusuario"]=$idusuario;
+
 $respuesta=[];
 
-if (isset($datos["idcompra"])){
-    
-      
+$param["idusuario"]=$idusuario;
+$param["idcompraestadotipo"] = 0;
+$param["cefechafin"]="null";
+$objCntrlCE= new ABMcompraestado();
+$objEstado=$objCntrlCE->verificarEstado($param);
+
+$idcompra=-1;
+$idcompraestado=-1;
+
+if($objEstado!=null)
+{
+  $idcompra=$objEstado->getObjCompra()->getIdcompra();
+  $idcompraestado=$objEstado->getIdcompraestado();
+
+
+}
+if ($idcompra!=-1){
+    $datos["idusuario"]=$idusuario;
+    $datos["idcompraestado"]=$idcompraestado;  
+    $datos["idcompra"]=$idcompra;  
     $objCtrlCE=new ABMcompraestado();  
-    $objCtrlCI=new ABMcompraitem();  
+
     $respuesta= $objCtrlCE->cambiarEstado($datos); 
-    if($datos["idcompraestadotipo"]==4)
-    {
-       $data["idcompra"]=$datos["idcompra"];
-       $objCtrlCI->devolverProductos($data);
-    }
+ 
       
    
 

@@ -1,4 +1,5 @@
 <link rel="stylesheet" type="text/css" href="../css/estiloproductos.css">
+
 <?php
 $titulo = ".: Productos :.";
 $dir = "";
@@ -28,113 +29,58 @@ if (isset($_GET["tipo"])) {
 </div>
 </div>
 <script type="text/javascript">
-  $(document).ready(function () {
- cargarProductos(<?php echo $idusuario;?>,$("#tipo").val());
-  });
-  function cargarProductos(idusuario,tipo)
-  {
-   
-   $("#productos").load('accion/cargar_productos.php?tipo='+tipo+'&idusuario='+idusuario);
-  }
-       
-  function agregarProducto(idproducto,idusuario) {
-    var idcompra=$("#idcompra").val();
-    alert(idcompra);
-    var urldatos= "";
-    if(parseInt($("#idcompra").val())==-1)
-    {
-      alert("entro crear pedido")
-      urldatos= "../compra/accion/agregar_primerproducto.php?idproducto="+idproducto+"&idusuario="+idusuario+"&cicantidad=1";
-    }
-    else{
-      alert("entro agregar producto al carrito")
-      urldatos= "../compra/accion/agregar_producto.php?idproducto="+idproducto+"&cicantidad=1&idcompra="+$("#idcompra").val();
-    }
-    //alert(urldatos);
-    var jqxhr = $.post(urldatos, function() {
-        //alert( "success" );
-      })
-      .done(function(result) {
-        var result = eval('(' + result + ')');
-        alert(result.respuesta);
-        if (!result.respuesta) {
-          alert(result.errorMsg);
-          /*
-         $.messager.alert({
-            title: 'Error',
-            msg: result.errorMsg
-          });*/
-          $("#idcompra").val(result.idcompra);
-        } else {
-          var res;
-          if(result.seagrego)
-          {
-            res=",Se agrego el producto";
-            $("#productos").load('accion/cargar_productos.php?idusuario='+idusuario+'&tipo=null');
-          }
-          else {
-             res="No se pudo agregar el producto";
+
+$(document).ready(function () {
+    cargarProductos();
+     });
+     function cargarProductos()
+     {
+      
+      $("#productos").load('accion/cargar_productos.php?tipo='+$("#tipo").val());
+     }
+     function agregarItem(idproducto,cant)
+     { 
+      //  alert("idproducto="+idproducto+" cantidad="+cant);
+      
+       var urldatos="../compra/accion/agregar_item.php?idproducto="+idproducto+"&cicantidad="+cant;
+        var jqxhr = $.post(urldatos, function() {
+            //alert( "success" );
+          })
+          .done(function(result) {
+            var result = eval('(' + result + ')');
+            if (!result.seactualizo||!result.seagrego) {
+              $.messager.show({
+               title: 'Error',
+               msg: "No se pudo agregar correctamente"
+             });
+            } else {
+          
+              $.messager.show({
+                title: 'Mensaje',
+                msg: "Se registro correctamente"
+              });
+              cargarProductos();
+              //cargarProductos($("tipo").val());
             }
-            alert("Se registro correctamente-> true:" + result.respuesta+""+res);
-          /*$.messager.alert({
-            title: 'Mensaje',
-            msg: "Se registro correctamente-> true:" + result.respuesta+""+res 
-          });*/
-          //cargarProductos($idusuario,$("tipo").val());
-        }
-      })
-      .fail(function() {
-
-        $.messager.alert({
-          title: 'Error',
-          msg: "No se pudo ejecutar"
-        });
-
-      })
-      .always(function() {
-        // alert( "finished" );
-      });
-      /*
-    jqxhr.always(function() {
-      alert( "second finished" );
-    });*/
-  }
-
- function enviarDatos() {
-    var jqx = $.post("../compra/accion/envio_datos.php?idproducto=7&cicantidad=6", function() {
-        //alert( "success" );
-      })
-      .done(function(result) {
-        var result = eval('(' + result + ')');
-        if (!result.respuesta) {
-          $.messager.alert({
-            title: 'Error',
-            msg: result.errorMsg
-          });
-        } else {
-          $.messager.alert({
-            title: 'Mensaje',
-            msg: "true:" + result.respuesta+" idproducto="+result.idproducto+" cantidad"+result.cicantidad
-          });
-
-        }
-      })
-      .fail(
-        function() {
-
-          $.messager.alert({
-            title: 'Error',
-            msg: "No se pudo ejecutar"
-          });
-
-        }
-      )
-      .always(function() {
-        // alert( "finished" );
-      });
-
+          })
+          .fail(function() {
     
-  }
+            $.messager.alert({
+              title: 'Error',
+              msg: "No se pudo ejecutar"
+            });
+    
+          })
+          .always(function() {
+            // alert( "finished" );
+          });
+          
+        jqxhr.always(function() {
+        //  alert( "second finished" );
+        });
+      }
+
+   
 
 </script>
 

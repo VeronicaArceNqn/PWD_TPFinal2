@@ -6,7 +6,8 @@ include_once "../../../configuracion.php";
 $datos = data_submitted();
 $objCntrlCI = new ABMcompraitem();
 $suma = 0;
-
+$objSesion = new Session();
+$idusuario =$objSesion->getUsuario()->getIdusuario();
 $items = $objCntrlCI->buscar($datos);
 if (count($items) > 0) {
 
@@ -34,7 +35,8 @@ if (count($items) > 0) {
                                         </div>
                                         <div class="col-md-3 quantity">
                                             <label for="quantity">Cantidad:</label>
-                                            <input id="quantity" type="number" value="<?php echo $item->getCicantidad(); ?>" class="form-control quantity-input" onchange="alert(this.value);">
+                                            <input id="quantity" type="number" value="<?php echo $item->getCicantidad(); ?>" class="form-control quantity-input"  onchange="cambiarCantidad(<?php echo  $item->getIdcompraitem(); ?>,this.value);" min="1" max="<?php echo $item->getObjProducto()->getProcantstock()+$item->getCicantidad(); ?>"
+                                             required>
                                         </div>
                                         <div class="col-md-2 price">
                                             <span><?php echo $item->getObjProducto()->getPrecio(); ?>$</span>
@@ -61,7 +63,7 @@ if (count($items) > 0) {
                 </div>
 
 
-                <button type="button" onclick="cambiarEstado('La compra se realizo correctamente!',1,<?php echo $datos['idusuario']; ?>)" class="btn btn-primary btn-lg btn-block">Comprar</button>
+                <button type="button" onclick="comprar('La compra se realizo correctamente!',1)" class="btn btn-primary btn-lg btn-block">Comprar</button>
                 <!--
               <button type="button" onclick="cambiarEstado()" class="btn btn-warning btn-lg btn-block">Cambiar estado</button>
               <button type="button" onclick="enviarDatos()" class="btn btn-warning btn-lg btn-block">Enviar datos</button>

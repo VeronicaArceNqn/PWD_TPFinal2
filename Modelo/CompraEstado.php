@@ -226,10 +226,13 @@ public function cargar() {
           $objusuario=new Usuario();
           $objusuario->setidusuario($row['idusuario']);
           $objusuario->cargar();
-       
+         
           if($row['cefechafin']==null)
           {
             $fechafin="null";
+          }
+          else{
+            $fechafin=$row['cefechafin'];
           }
           $obj->setear($row['idcompraestado'], $objcompra, $objcompraesttipo, $row['cefechaini'], $fechafin,$objusuario);
      

@@ -8,13 +8,13 @@ $objSesion = new Session();
 
 // urlMenu[3] guarda los datos de la página
 $idusuario=$objSesion->getUsuario()->getidusuario();
-$resp = $objSesion->validar();
+
 //$data["tipo"]="Accesorios";
 $objCtrlProducto = new ABMproducto();
 $param=null;
 
 //$data["tipo"]=null;
-if($data["tipo"]!="null")
+if(isset($data["tipo"])&&$data["tipo"]!="null")
 {
      $param["tipo"]=$data["tipo"];
 }
@@ -34,7 +34,7 @@ foreach ($lista as $objProducto) {
             <h6 class="card-text txt-secondary"><?php echo $objProducto->getProdetalle(); ?></h6>
             <h4 class="card-text text-primary font-weight-bold"><?php echo $objProducto->getPrecio(); ?>$</h4>
             <h6 class="text-success font-weight-bold"><?php echo $objProducto->getProcantstock(); ?> disponibles</h6>
-            <a href="javascript:void(0)" class="btn btn-warning font-weight-bold" onclick="agregarProducto(<?php echo  $objProducto->getIdproducto(); ?>,<?php echo  $idusuario;?>)">Agregar</a>
+            <a href="javascript:void(0)" class="btn btn-warning font-weight-bold" onclick="agregarItem(<?php echo  $objProducto->getIdproducto(); ?>,1)">Agregar</a>
             
         </div>
     </div>
