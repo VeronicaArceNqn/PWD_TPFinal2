@@ -98,7 +98,7 @@ if ($resp && $permisosOk) {
 						$nombre=mb_strtoupper($objMenu->getMenombre(),'utf-8');
 
 						$menuHabilitado = $objMenu->getMedeshabilitado();
-                        //generamos los links de los menusa que no son padres
+                        //generamos los links de los enlaces del menu que no son padres
                           if($objMenu->getMedescripcion()!="#" && $menuHabilitado==null)
 						{
 							if($objMenu->getMenombre()=="Compra")
@@ -141,32 +141,8 @@ if ($resp && $permisosOk) {
 
 
 	<div data-options="region:'center',title:''" style="height:auto;">
-	<script type="text/javascript">
-		
-  function cerrarSesion(){
-                //var row = $('#dg').datagrid('getSelected');
-           
-                    $.messager.confirm('Confirm','Esta seguro de cerrar sesión?', function(r){
-                        if (r){
-                            $.post('../login/accion/cerrarSesion.php',
-                               function(result){
-                             //  	 alert("Volvio Serviodr");  
+	<script type="text/javascript" src="../js/headerSeguro.js">
 
-                                if (result.respuesta){
-                                   	
-									location.href = '../login/index.php?msg='+result.Msg;
-									
-                                } else {
-                                    $.messager.show({    // show error message
-                                        title: 'Error',
-                                        msg: result.errorMsg
-                                  });
-                                }
-                            },'json');
-                        }
-                    });
-               
-            }
 
  
  
