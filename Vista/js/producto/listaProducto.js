@@ -1,7 +1,7 @@
 var urlDatos;
 function newProducto(){
     $('#dlg').dialog('open').dialog('center').dialog('setTitle','Nuevo Producto');
-   // $('#fm').form('clear');
+    $('#fm').form('clear');
     urlDatos = 'accion/alta_producto.php';
 }
 
