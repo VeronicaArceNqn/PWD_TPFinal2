@@ -22,35 +22,47 @@ $datos["idusuario"]=$idusuario;
 
 ?>
 <link rel="stylesheet" href="../Vista/css/bootstrap/4.5.2/bootstrap.min.css">
- <div class="card mb-3">
- <div class="row g-0 d-flex align-items-center">
-    <div class="col-lg-4">
-    <div class="card-body py-5 px-md-5">
 
-       
-        <form class="needs-validation" id="form1" name="form1" method="post" action="accionEditarUsuario.php">
-            <div class="form-group mb-4">
-                <h5>Mis datos</h5>
-                <input type="text" class="form-control" id="idusuario" name="idusuario" placeholder="" value="<?php echo $obj->getIdusuario()?>" readonly required hidden>
-                <label for="nombreyApellio">Nombre usuario</label>
-                <input type="text" class="form-control" id="usnombre" name="usnombre" placeholder="" value="<?php echo $obj->getUsnombre()?>" readonly required>
-            </div>
-            <div class="form-group mb-4">
-                <label for="email">Correo electrónico</label>
-                <input type="email" class="form-control" id="usmail" name="usmail" aria-describedby="emailHelp" placeholder="" value="<?php echo $obj->getUsmail()?>" readonly required>
-                <!--<small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>-->
-            </div>
-        
+ <div class="d-flex justify-content-center align-items-center">
+  <div class="container pt-4">
+    <div class="row d-flex justify-content-center">
+      <div class="col-12 col-md-8 col-lg-6">
+        <div class="card bg-white">
+          <div class="card-body p-5">
+            <form id="ff" class="mb-3 mt-md-4">
+              <h5 class="fw-bold mb-2 text-uppercase text-center">Mis datos</h5>
+              <div class="mb-3">
+                <label for="usnombre" class="form-label ">Nombre</label>
+                <input type="text" class="form-control" id="usnombre" name="usnombre" value="<?php echo $obj->getusnombre()?>"readonly>
+              </div>
+              <div class="mb-3">
+                <label for="uspass" class="form-label ">Email</label>
+                <input type="email" class="form-control" id="usmail" name="usmail" value="<?php echo $obj->getusmail()?>" readonly>
+              </div>
+              <div class="mb-3">
+                <label for="password" class="form-label ">Password</label>
+                <input type="hidden" class="form-control" id="uspass" name="uspass">
+                <input type="hidden" class="form-control" id="usdeshabilitado" name="usdeshabilitado" value="<?php echo $obj->getusdeshabilitado()?>">
+                <input type="password" class="form-control" id="password" name="password" placeholder="Ingrese nueva contraseña" value="*******" readonly>
+              </div>
 
-            
-        </form>
-   
-       
+              <div class="d-grid">
+                <button id="btnEditar"class="btn btn-dark" type="button" onclick="editar();">Presione aqui para editar</button>
+                <button id="btnEnviar" class="btn btn-success" type="button" onclick="actualizar();" hidden>Enviar</button>
+              </div>
+            </form>
+           
+
+          </div>
+        </div>
+      </div>
     </div>
-    </div>
- </div>
+  </div>
+</div>
+<script type="text/javascript" src="../js/usuario/perfil.js">
 
- </div>
+
+</script>
  <?php
 include ("../../Vista/estructura/footer.php");
 ?>

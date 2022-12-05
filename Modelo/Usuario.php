@@ -97,7 +97,7 @@ class Usuario extends BaseDatos
             $sql="UPDATE usuario SET usdeshabilitado='".$fechaActual."' WHERE idusuario=".$this->getidusuario();
 
         }else{
-            $sql="UPDATE usuario SET usmail = '". $this->getusmail(). "' WHERE idusuario =".$this->getidusuario();
+            $sql="UPDATE usuario SET usmail = '". $this->getusmail(). "', uspass='". $this->getuspass(). "' WHERE idusuario =".$this->getidusuario();
         }    
         if ($this->Iniciar()) {
             

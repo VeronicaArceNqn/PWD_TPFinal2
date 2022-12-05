@@ -1,6 +1,11 @@
 <?php
 include_once "../../../configuracion.php";
 $data = data_submitted();
+$objSesion = new Session();
+
+$idusuario =$objSesion->getUsuario()->getIdusuario();
+$data["idusuario"]=$idusuario;
+
 $respuesta = false;
 if (isset($data['idusuario'])){
     $objC = new ABMUsuario();
