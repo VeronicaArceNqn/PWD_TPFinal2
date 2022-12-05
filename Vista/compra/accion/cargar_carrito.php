@@ -56,9 +56,9 @@ if (count($items) > 0) {
             <div class="summary">
                 <h2 class="text-start fs-4" class="">Resumen</h2>
                 <!--<label>ID Compra:</label>-->
-                <h3 class="text-start">ID Compra:<?php echo $datos["idcompra"]; ?></h3>
+              <!--  <h3 class="text-start">ID Compra:<?php echo $datos["idcompra"]; ?></h3>
                 <h3 class="text-start">ID Estado compra:<?php echo $datos["idcompraestado"]; ?></h3>
-                <div class="summary-item">
+--><div class="summary-item">
                     <p class="text-start fs-4">Total: <span class="text-start text-success fs-4"><?php echo $suma; ?>$</span></p>
                 </div>
 

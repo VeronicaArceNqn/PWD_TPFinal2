@@ -52,53 +52,9 @@ $datos = data_submitted();
     </div>
 
 <a href="../home/index.php">Volver</a>
-
-<script type="text/javascript">
-  function iniciarSesion() {
-    var password = document.getElementById("password").value;
-    ;
-    var passhash = CryptoJS.MD5(password).toString();
-   
-    document.getElementById("uspass").value = passhash;
-    document.getElementById("password").value = "";
-    //document.getElementById("usmail").value ="";  
-
-    $('#ff').form('submit', {
-      //url:'accion/alta_usuario.php',
-      url: 'accion/accionSesion.php',
-      onSubmit: function() {
-        return $(this).form('validate');
-      },
-      success: function(result) {
-        var result = eval('(' + result + ')');
-      
-        if (!result.respuesta) {
-          $.messager.show({
-            title: 'Error',
-            msg: result.errorMsg
-          });
-          location.href = '../login/index.php?msg='+result.errorMsg;
-        } else {
-          $.messager.show({
-            title: 'Mensaje',
-            msg: "se registro correctamente"
-          });
-          location.href = '../home/paginaSegura.php';
-
-          $('#ff').form('clear');
-          //$('#dlg').dialog('close');        // close the dialog
-          //$('#dg').datagrid('reload');    // reload 
-        }
-      }
-    });
-  }
-
-  function clearForm() {
-    $('#ff').form('clear');
-  }
- 
-</script>
-</div>
+<script type="text/javascript" src="../js/login/index.js">
+  </script>
+ </div>
 </div>
 
 <?php

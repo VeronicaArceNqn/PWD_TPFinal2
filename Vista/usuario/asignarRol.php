@@ -2,6 +2,7 @@
 $dir="../";
 $titulo =" Editar Usuario ";
 include_once $dir."../Vista/estructura/headerSeguro.php";
+
 include_once '../../configuracion.php';
 $objAbmUsuario = new ABMusuario();
 $datos =data_submitted();
@@ -25,7 +26,8 @@ if (isset($datos['idusuario'])){
 
 
 ?>
-<link rel="stylesheet" href="../Vista/css/bootstrap/4.5.2/bootstrap.min.css">
+<script type="text/javascript" src="../js/usuario/asignarRol.js">
+  </script>
  <div class="card mb-3">
  <div class="row g-0 d-flex align-items-center">
     <div class="col-lg-6">
@@ -78,94 +80,7 @@ if (isset($datos['idusuario'])){
 
             
         </form>
-        <script type="text/javascript">
-          $(document).ready(function(){
-         cargarRoles();
-          });
-
-          function cargarRoles()
-          {
-            $("#listaroles").load('accion/listar_rol.php?idusuario='+$("#idusuario").val());
-         
-          }
-            function darRol(idrol,idusuario) {
-    var jqxhr = $.post('accion/dar_rol.php?idrol='+idrol+"&idusuario="+idusuario, function() {
-       // alert( "success" );
-      })
-      .done(function(result) {
-        var result = eval('(' + result + ')');
-        if (!result.respuesta) {
-          $.messager.alert({
-            title: 'Error',
-            msg: result.errorMsg
-          });
-        } else {
-          $.messager.alert({
-            title: 'Mensaje',
-            msg: " se asignó nuevo rol true:"+result.respuesta
-          });
-          cargarRoles();
-         //window.location.href = window.location.href;
-        }
-      })
-      .fail(
-        function() {
-
-          $.messager.alert({
-            title: 'Error',
-            msg: "No se pudo ejecutar"
-          });
-
-        }
-      )
-      .always(function() {
-        // alert( "finished" );
-      });
-
     
-  }
-
-  function eliminarRol(idrol,idusuario) {
-    var jqxhr = $.post('accion/eliminar_rol.php?idrol='+idrol+"&idusuario="+idusuario, function() {
-     //   alert( "success" );
-      })
-      .done(function(result) {
-        var result = eval('(' + result + ')');
-        if (!result.respuesta) {
-          $.messager.alert({
-            title: 'Error',
-            msg: result.errorMsg
-          });
-        } else {
-          $.messager.alert({
-            title: 'Mensaje',
-            msg: " se eliminó el rol true:"+result.respuesta
-          });
-          cargarRoles();
-          //window.location.href = window.location.href;
-        }
-      })
-      .fail(
-        function() {
-
-          $.messager.alert({
-            title: 'Error',
-            msg: "No se pudo ejecutar"
-          });
-
-        }
-      )
-      .always(function() {
-        // alert( "finished" );
-      });
-
-    
-  }
-
-
-
-        </script>
-       
     </div>
     </div>
  </div>

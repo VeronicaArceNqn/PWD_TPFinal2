@@ -13,7 +13,8 @@ $suma = 0;
     </div>
 
 </section>
-<script type="text/javascript">
+<script type="text/javascript" src="../js/compra/index.js"></script>
+<!--<script type="text/javascript">
   $(document).ready(function() {
       cargarCarrito();
 
@@ -63,31 +64,6 @@ $suma = 0;
 
 
   }
-
-  function enviarDatos() {
-    //var row = $('#dg').datagrid('getSelected');
-
-    $.messager.confirm('Confirm', 'Seguro que desea eliminar el menu?', function(r) {
-      if (r) {
-        $.post('accion/envio_datos.php?idproducto=' + 3,
-          function(result) {
-            //   	 alert("Volvio Serviodr");  
-
-            if (result.respuesta) {
-              alert("se pudo enviar, idproducto" + result.idproducto);
-              //$('#dg').datagrid('reload');    // reload the  data
-            } else {
-              $.messager.show({ // show error message
-                title: 'Error',
-                msg: result.errorMsg
-              });
-            }
-          }, 'json');
-      }
-    });
-
-  }
- 
 
   function eliminarItem(idproducto, idcompraitem, cicantidad) {
     //var row = $('#dg').datagrid('getSelected');
@@ -146,6 +122,6 @@ $suma = 0;
   
 
   }
-</script>
+</script>-->
 <?php
 include($dir . "../estructura/footer.php"); ?>
